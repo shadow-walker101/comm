@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'intranet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -81,7 +82,7 @@ DATABASES = {
         'USER': 'uxdrjhkw',
         'PASSWORD': 'CtbAfJsOPd5JD9i41BucIbbOe_XJ_cpr',
         'HOST': 'rajje.db.elephantsql.com',
-        'PORT': '5432',
+        'PORT': '5432'
     }
 }
 
