@@ -1,8 +1,8 @@
-nav>a {
-  font-family: "open sans", Roboto, "helvetica neue", Helvetica, sans-serif;
-  color: #42a949;
+.pawame {
+  font-family: 'Sniglet', cursive;
+  font-size: 23px;
 }
 
-.center-search {
+/* .center-search {
   margin-left: 40%;
-}
+} */
