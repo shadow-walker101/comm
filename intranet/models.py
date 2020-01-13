@@ -16,7 +16,7 @@ class MyUserManager(BaseUserManager):
         )
         
         user.set_password(password)
-        use.save(using=self._db)
+        user.save(using=self._db)
         return user
     
     def create_superuser(self, email, user_type, departments, username, password=None):
@@ -57,6 +57,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'user_type']
+    
+    objects = MyUserManager()
     
     def __str__(self):
         return self.username
