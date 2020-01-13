@@ -5,3 +5,5 @@ from django.shortcuts import render
 
 def updates(request):
     return render(request, 'updates.html')
+def notifications(request):
+    return render(request, 'notifications.html')
