@@ -48,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         (5, 'Information Technology'),
     )
     
-    email = models.EmailField(max_length=,100, unique=True)
+    email = models.EmailField(max_length=100, unique=True)
     username = models.CharField(max_length=200)
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPES_CHOICES)
     is_active = models.BooleanField(default=True) 
