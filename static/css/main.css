@@ -7,6 +7,14 @@
   color: black;
 }
 
-.links h5{
+.links h5 {
   border-bottom: solid 2px green;
+}
+
+.post-content {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.post-date {
+  font-family: 'Lora', serif;
 }
