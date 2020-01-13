@@ -5,3 +5,8 @@ from django.shortcuts import render
 
 def updates(request):
     return render(request, 'updates.html')
+
+
+
+def employees(request):
+    return render(request, 'employees.html')
