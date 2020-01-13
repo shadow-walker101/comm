@@ -12,12 +12,22 @@ class MyUserManager(BaseUserManager):
             email=self.normalize_email(email),
             username=username,
             user_type=user_type,
-            departments=departments
+            departments=departments,
         )
         
         user.set_password(password)
         use.save(using=self._db)
         return user
+    
+    def create_superuser(self, email, user_type, departments, username, password=None):
+        user = self.create_user(
+            
+            email,
+            user_type=user_type,
+            departments=departments,
+            username=username,
+            password=password,
+        )
     
 
 class User(AbstractBaseUser, PermissionsMixin):
