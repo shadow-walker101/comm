@@ -1,10 +1,26 @@
 from django.db import models
-from django.contrib.auth.base_user import(BaseUserManager, AbstractBaseUser, Pe)
+from django.contrib.auth.models import(BaseUserManager, AbstractBaseUser, PermissionsMixin)
 
 class MyUserManager(BaseUserManager):
-    pass
+    def create_user(self, email, user_type, departments, username, password=None):
+        
+    
+        if not email:
+            raise ValueError('Users must have an email address')
+        
+        user = self.models(
+            email=self.normalize_email(email),
+            username=username,
+            user_type=user_type,
+            departments=departments
+        )
+        
+        user.set_password(password)
+        use.save(using=self._db)
+        return user
+    
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     USER_TYPES_CHOICES = (
         
         (1, 'SuperAdmin'),
