@@ -3,6 +3,6 @@
   font-size: 23px;
 }
 
-.titles {
-  border: solid 1px green;
+.links a{
+  text-decoration-color: black;
 }

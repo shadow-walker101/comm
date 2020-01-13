@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<div class="container">
+
+<div class="container links">
   <div class="row">
     <div class="col-md-2">
       <h4 class="font-weight-bold mt-1">
@@ -8,58 +10,111 @@
       </h4>
     </div>
     <div class="col-md-2 offset-md-8">
-      <button type="button" class="btn btn-sm pull-right btn-dark-green">Add Employee</button>
+      <a href="#">
+        <button type="button" class="btn btn-sm btn-dark-green">Add Employee</button>
+      </a>
     </div>
   </div>
 
-  <div class="row mt-5 mx-auto">
-    <div class="col-md-2">
-      <h5 class="font-weight-bold text-center pb-2 titles">HR</h5>
-      <div class="avatar mx-auto white mx-auto text-center"><img
-          src="https://mdbootstrap.com/img/Photos/Avatars/img%20(22).jpg" height="120px" width="120px"
+  <!-- Departments with admin pics and titles -->
+  <div class="row mt-5">
+    <div class="col-md-2 offset-1">
+      <h5 class="font-weight-bold text-center pb-2">HR</h5>
+      <div class="avatar mx-auto white mx-auto text-center">
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(22).jpg" height="120px" width="120px"
           alt="avatar mx-auto white" class="rounded-circle img-fluid">
-        <h5 class="font-weight-light pt-1">Samantha <br> <b>Admin</b></h5>
+        <a href="#">
+          <h5 class="font-weight-light pt-1">Samantha <br> <b>Admin</b> </h5>
+        </a>
       </div>
     </div>
     <div class="col-md-2">
       <h5 class="font-weight-bold text-center pb-2">Finance</h5>
-      <div class="avatar mx-auto white text-center"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(25).jpg"
+      <div class="avatar mx-auto white text-center"><img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-13.jpg"
           height="120px" width="120px" alt="avatar mx-auto white" class="rounded-circle img-fluid">
-        <h5 class="font-weight-light pt-1">Stacy <br> <b>Admin</b></h5>
+        <a href="#">
+          <h5 class="font-weight-light pt-1">Dr. Seuss <br> <b>Admin</b> </h5>
+        </a>
       </div>
     </div>
     <div class="col-md-2">
       <h5 class="font-weight-bold text-center pb-2">Inventory</h5>
       <div class="avatar mx-auto white text-center"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(24).jpg"
           height="120px" width="120px" alt="avatar mx-auto white" class="rounded-circle img-fluid">
-        <h5 class="font-weight-light pt-1">Suzie <br> <b>Admin</b></h5>
+        <a href="#">
+          <h5 class="font-weight-light pt-1">Suzie <br> <b>Admin</b> </h5>
+        </a>
       </div>
     </div>
     <div class="col-md-2">
       <h5 class="font-weight-bold text-center pb-2">Marketing</h5>
       <div class="avatar mx-auto white text-center"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(20).jpg"
           height="120px" width="120px" alt="avatar mx-auto white" class="rounded-circle img-fluid">
-        <h5 class="font-weight-light pt-1">Someone <br> <b>Admin</b></h5>
+        <a href="#">
+          <h5 class="font-weight-light pt-1">Stella <br> <b>Admin</b> </h5>
+        </a>
       </div>
     </div>
     <div class="col-md-2">
       <h5 class="font-weight-bold text-center pb-2">IT</h5>
-      <div class="avatar mx-auto white text-center"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(26).jpg"
+      <div class="avatar mx-auto white text-center"><img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-15.jpg"
           height="120px" width="120px" alt="avatar mx-auto white" class="rounded-circle img-fluid">
-        <h5 class="font-weight-light pt-1">Stella <br> <b>Admin</b></h5>
+        <a href="#">
+          <h5 class="font-weight-light pt-1">Psy <br> <b>Admin</b> </h5>
+        </a>
       </div>
     </div>
   </div>
+  <hr>
 
-  <!-- <div class="avatar mx-auto white">
-    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(24).jpg"
-      alt="avatar mx-auto white" class="rounded-circle img-fluid">
-  <div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg"
-        alt="avatar mx-auto white" class="rounded-circle img-fluid">
-  <div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg"
+  <div class="row mt-2">
+    <div class="col-md-2 offset-1">
+      <div class="avatar mx-auto white mx-auto text-center">
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" height="90px" width="90px"
           alt="avatar mx-auto white" class="rounded-circle img-fluid">
-  <div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg"
-            alt="avatar mx-auto white" class="rounded-circle img-fluid">
-  <div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg"
-              alt="avatar mx-auto white" class="rounded-circle img-fluid"> -->
-  {% endblock %}
+        <a href="#">
+          <h5 class="font-weight-light pt-1">Employee 1</h5>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="avatar mx-auto white mx-auto text-center">
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-7.jpg" height="90px" width="90px"
+          alt="avatar mx-auto white" class="rounded-circle img-fluid">
+        <a href="#">
+          <h5 class="font-weight-light pt-1">Employee 1</h5>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="avatar mx-auto white mx-auto text-center">
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" height="90px" width="90px"
+          alt="avatar mx-auto white" class="rounded-circle img-fluid">
+        <a href="#">
+          <h5 class="font-weight-light pt-1">Employee 1</h5>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="avatar mx-auto white mx-auto text-center">
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-9.jpg" height="90px" width="90px"
+          alt="avatar mx-auto white" class="rounded-circle img-fluid">
+        <a href="#">
+          <h5 class="font-weight-light pt-1">Employee 1</h5>
+        </a>
+
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="avatar mx-auto white mx-auto text-center">
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-1.jpg" height="90px" width="90px"
+          alt="avatar mx-auto white" class="rounded-circle img-fluid">
+        <a href="#">
+          <h5 class="font-weight-light pt-1">Employee 1</h5>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
