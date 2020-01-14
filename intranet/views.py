@@ -16,9 +16,13 @@ def departments(request):
 def human_resource(request):
     template='human_resource.html'
     return render(request,template)
-def human_resource(request):
-    template='human_resource.html'
+def finance(request):
+    template='finance.html'
     return render(request,template)
+def inventory(request):
+    template='inventory.html'
+    return render(request,template)
+    
     
 
 
