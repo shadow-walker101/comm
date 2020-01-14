@@ -15,7 +15,7 @@ def marketing(request):
 def human_resource(request):
     template='human_resource.html'
     return render(request,template)
-
+@user_passes_test(lambda u:u.is_active and u.department=3,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
 def finance(request):
     template='finance.html'
     return render(request,template)
