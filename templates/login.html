@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3 text-center">
+        <h3>PAWAME</h3>
+        <p>Delivering more than just energy</p>
+        <h5>OUR PURPOSE</h5>
+        <p>To provide energy access as a gateway to financial empowerment and limitless opportunity in Sub-Saharan Africa.</p>
+    </div>
+    <div class="col-md-3">
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" height="90px" width="90px"
+            alt="avatar mx-auto white" class="rounded-circle img-fluid">
+        <form action="POST">
+                <fieldset class="form-group">
+                        <label for="username" class="bmd-label-floating">Username</label>
+                        <input type="text" class="form-control" id="username">
+                </fieldset>
+                <fieldset class="form-group">
+                        <label for="password" class="bmd-label-floating">Password</label>
+                        <input type="password" class="form-control" id="password">
+                </fieldset>
+                <input class="btn btn-success" type="submit" value="Submit">
+        </form>
+
+    </div>
+
+</div>
+{% endblock %}
