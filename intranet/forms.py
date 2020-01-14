@@ -8,4 +8,6 @@ email=forms.EmailField(max_length=200)
 
 class meta:
     model=User
-    fields=('username','email','user_type','department','employee_id')
+    fields=('username','email','user_type','departments','employee_id')
+
+class LoginForm()
