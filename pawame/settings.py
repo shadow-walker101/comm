@@ -11,16 +11,49 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import dj_database_url
+from decouple import config, Csv
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+MODE=config("MODE", default="dev")
+SECRET_KEY=config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
+# development
+if config('MODE')=="dev":
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.postgresql',
+           'NAME': config('DB_NAME'),
+           'USER': config('DB_USER'),
+           'PASSWORD': config('DB_PASSWORD'),
+           'HOST': config('DB_HOST'),
+           'PORT': '',
+       }
+       
+   }
+# production
+else:
+   DATABASES = {
+       'default': dj_database_url.config(
+           default=config('DATABASE_URL')
+       )
+   }
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+
+SITE_ID=1
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'q37+d0i4+*8aqj#cx3nr$ig&__&+61)-^vo@im41^8k2)=5*r6'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,7 +64,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'intranet',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +72,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
-]
 
 MIDDLEWARE = [
     
@@ -78,16 +110,6 @@ WSGI_APPLICATION = 'pawame.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-
-        'ENGINE': 'django.db.backends.postgresql'
-        'NAME': 'pawame',
-        'USER': 'moringa',
-        'PASSWORD': 'pawame',
-       
-    }
-}
 
 
 # Password validation
@@ -125,17 +147,15 @@ USE_TZ = True
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
 # Static files (CSS, JavaScript, Images)
+AUTH_USER_MODEL = 'intranet.User'
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -143,5 +163,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
