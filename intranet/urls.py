@@ -5,8 +5,16 @@ from .import views
 
 
 urlpatterns = [
+    path('', views.updates, name='updates'),
+    path('notifications', views.notifications, name='notifications'),
+    path('departments', views.departments, name='departments'),
+    path('employees', views.employees, name='employees'),
 
-    path('', views.notifications, name='notifications'),
-    path('updates', views.updates, name='updates'),
-    path('employees', views.employees, name='employees')
+    path('inventory', views.inventory, name='inventory'),
+    path('finance', views.finance, name='finance'),
+    path('marketing', views.marketing, name='marketing'),
+    path('information', views.information, name='information'),
+
+    path('employeeProfile', views.employeeProfile, name='employeeProfile')
 ]
+
