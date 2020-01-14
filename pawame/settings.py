@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'intranet.apps.IntranetConfig',
 ]
 
 MIDDLEWARE = [
+    
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -77,12 +80,11 @@ WSGI_APPLICATION = 'pawame.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'uxdrjhkw',
-        'USER': 'uxdrjhkw',
-        'PASSWORD': 'CtbAfJsOPd5JD9i41BucIbbOe_XJ_cpr',
-        'HOST': 'rajje.db.elephantsql.com',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.postgresql'
+        'NAME': 'pawame',
+        'USER': 'moringa',
+        'PASSWORD': 'pawame',
+       
     }
 }
 
@@ -119,11 +121,16 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+# custom authentications
+AUTH_USER_MODEL = 'intranet.User'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
