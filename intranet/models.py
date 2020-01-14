@@ -2,29 +2,30 @@ from django.db import models
 from django.contrib.auth.models import(BaseUserManager, AbstractBaseUser, PermissionsMixin)
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, email, user_type, departments, username, password=None):
+    def create_user(self, email, user_type, department, username, password=None):
         
     
         if not email:
             raise ValueError('Users must have an email address')
         
-        user = self.models(
+        user = self.model(
             email=self.normalize_email(email),
             username=username,
             user_type=user_type,
-            departments=departments,
+            department=department,
         )
         
         user.set_password(password)
+        user.is_admin = True
         user.save(using=self._db)
         return user
     
-    def create_superuser(self, email, user_type, departments, username, password=None):
+    def create_superuser(self, email, user_type, username, password=None):
         user = self.create_user(
             
             email,
             user_type=user_type,
-            departments=departments,
+            department=None,
             username=username,
             password=password,
         )
@@ -53,10 +54,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPES_CHOICES)
     is_active = models.BooleanField(default=True) 
     is_admin = models.BooleanField(default=False)
-    departments = models.PositiveSmallIntegerField(choices=DEPARTMENTS)   
+    department = models.PositiveSmallIntegerField(choices=DEPARTMENTS, null=True)   
     
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'user_type']
+    REQUIRED_FIELDS = ['username', 'user_type',]
+    
+    objects = MyUserManager()
     
     def __str__(self):
         return self.username
