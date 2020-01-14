@@ -80,6 +80,7 @@ WSGI_APPLICATION = 'pawame.wsgi.application'
 
 DATABASES = {
     'default': {
+
         'ENGINE': 'django.db.backends.postgresql'
         'NAME': 'pawame',
         'USER': 'moringa',
