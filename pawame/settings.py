@@ -64,10 +64,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-<<<<<<< HEAD
-=======
     
->>>>>>> 41e239089f6dd1a36112377b8f80b6fdbf2cd304
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -112,18 +109,6 @@ WSGI_APPLICATION='pawame.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-<<<<<<< HEAD
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pawame',
-        'USER': 'moringaschool',
-        'PASSWORD': 'pawame',
-       
-    }
-}
-=======
->>>>>>> 41e239089f6dd1a36112377b8f80b6fdbf2cd304
 
 
 # Password validation
