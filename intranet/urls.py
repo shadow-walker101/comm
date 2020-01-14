@@ -5,8 +5,8 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.departments, name='departments'),
-]
 
-if settings.DEBUG:
-    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    path('', views.departments, name='departments'),
+    path('updates', views.updates, name='updates'),
+    path('employees', views.employees, name='employees')
+]
