@@ -1,18 +1,22 @@
 from django.shortcuts import render
 
 # Create your views here.
+
+
 def departments(request):
     return render(request, 'department.html')
-
 
 
 def updates(request):
     return render(request, 'updates.html')
 
 
-
 def employees(request):
     return render(request, 'employees.html')
 
+
 def notifications(request):
-    return render(request, 'notifications.html
+    return render(request, 'notifications.html')
+
+def employeeProfile(request):
+    return render(request, 'employeeProfile.html')
