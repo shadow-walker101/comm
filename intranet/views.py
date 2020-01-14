@@ -1,4 +1,13 @@
 from django.shortcuts import render
+from django.contrib.auth import login,authenticate
+from .models import *
+from django.contrib.auth.decorators import login_required,user_passes_test
+from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import REDIRECT_FIELD_NAME
+
+
+
 
 # Create your views here.
 def departments(request):
@@ -15,4 +24,4 @@ def employees(request):
     return render(request, 'employees.html')
 
 def notifications(request):
-    return render(request, 'notifications.html
+    return render(request, 'notifications.html')

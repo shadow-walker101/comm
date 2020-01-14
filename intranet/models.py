@@ -2,31 +2,16 @@ from django.db import models
 from django.contrib.auth.models import(BaseUserManager, AbstractBaseUser, PermissionsMixin)
 
 class MyUserManager(BaseUserManager):
-<<<<<<< HEAD
-    def create_user(self, email, user_type, departments, username, password=None):
-=======
+
     def create_user(self, email, user_type, department, username, password=None):
->>>>>>> 5b97cd56e541c834bd3750a577a09e48ae8751a0
-        
+
     
         if not email:
             raise ValueError('Users must have an email address')
         
-<<<<<<< HEAD
-        user = self.models(
-            email=self.normalize_email(email),
-            username=username,
-            user_type=user_type,
-            departments=departments,
-        )
-        
-        user.set_password(password)
-        use.save(using=self._db)
-        return user
-    
-    def create_superuser(self, email, user_type, departments, username, password=None):
-=======
+
         user = self.model(
+
             email=self.normalize_email(email),
             username=username,
             user_type=user_type,
@@ -38,17 +23,29 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
     
+
     def create_superuser(self, email, user_type, username, password=None):
->>>>>>> 5b97cd56e541c834bd3750a577a09e48ae8751a0
+
+        user = self.models(
+
+            email=self.normalize_email(email),
+            username=username,
+            user_type=user_type,
+            department=department,
+        )
+        
+        user.set_password(password)
+        use.save(using=self._db)
+        return user
+    
+    def create_superuser(self, email, user_type, department, username, password=None):
+
+
         user = self.create_user(
             
             email,
             user_type=user_type,
-<<<<<<< HEAD
-            departments=departments,
-=======
             department=None,
->>>>>>> 5b97cd56e541c834bd3750a577a09e48ae8751a0
             username=username,
             password=password,
         )
@@ -68,38 +65,22 @@ class User(AbstractBaseUser, PermissionsMixin):
         (1, 'Human Resource'),
         (2, 'Inventory' ),
         (3, 'Finance'),
-<<<<<<< HEAD
-        (4, 'Marketing'),-
-        (5, 'Information Technology'),
-    )
-    
-    email = models.EmailField(max_length=,100, unique=True)
-    username = models.CharField(max_length=200)
-    employee_id=models.IntegerField()
-    user_type = models.PositiveSmallIntegerField(choices=USER_TYPES_CHOICES)
-    is_active = models.BooleanField(default=True) 
-    is_admin = models.BooleanField(default=False)
-    departments = models.PositiveSmallIntegerField(choices=DEPARTMENTS)   
-    
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'user_type']
-=======
         (4, 'Marketing'),
         (5, 'Information Technology'),
     )
-    
     email = models.EmailField(max_length=100, unique=True)
     username = models.CharField(max_length=200)
+    employee_id = models.IntegerField()
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPES_CHOICES)
     is_active = models.BooleanField(default=True) 
     is_admin = models.BooleanField(default=False)
-    department = models.PositiveSmallIntegerField(choices=DEPARTMENTS, null=True)   
+    department = models.PositiveSmallIntegerField(choices=DEPARTMENTS)   
     
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'user_type',]
-    
+    REQUIRED_FIELDS = ['username', 'user_type']
+
     objects = MyUserManager()
->>>>>>> 5b97cd56e541c834bd3750a577a09e48ae8751a0
+
     
     def __str__(self):
         return self.username
@@ -112,11 +93,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @property
     def is_staff(self):
-<<<<<<< HEAD
+
         return self.is_admin
-=======
-        return self.is_admin
-    
+
     def save_image(self):
         self.save()
         
@@ -157,6 +136,11 @@ class Comments(models.Model):
         self.save()
     
     def __str__(self):
+      return self.comment
+
         
-        return self.comment
->>>>>>> 5b97cd56e541c834bd3750a577a09e48ae8751a0
+
+
+
+
+
