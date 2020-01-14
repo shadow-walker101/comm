@@ -23,7 +23,7 @@ def finance(request):
 def inventory(request):
     template='inventory.html'
     return render(request,template)
-def inforamtion_technology(request):
+def information_technology(request):
     template='information_technology.html'
     return render(request,template)
     
