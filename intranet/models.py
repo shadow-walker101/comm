@@ -73,3 +73,46 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def is_staff(self):
         return self.is_admin
+    
+    def save_image(self):
+        self.save()
+        
+    def delete_image(self):
+        self.delete()
+    
+class Profile(models.Model):
+    image = models.ImageField(upload_to='photos/')
+    first_name =  models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    user =  models.OneToOneField(User, on_delete=models.CASCADE)
+    
+    def save_profile(self):
+        self.save()
+    
+    def __str__(self):
+        return self.first_name
+    
+class Updates(models.Model):
+    title =  models.CharField(max_length=50)
+    update = models.TextField()
+    time_stamp = models.DateTimeField(auto_now=True) 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  
+    
+class Comments(models.Model):
+    comment = models.CharField(max_length=100,blank=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    update = models.ForeignKey(Updates,on_delete=models.CASCADE)
+    date_posted = models.DateTimeField(auto_now_add=True)
+    
+    
+    @classmethod
+    def get_comments(cls,id):
+        comments = cls.objects.filter(update__id=id)
+        return comments
+    
+    def save_comment(self):
+        self.save()
+    
+    def __str__(self):
+        
+        return self.comment
