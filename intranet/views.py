@@ -8,7 +8,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 
 
 def departments(request):
-    return render(request, 'department.html')
+    return render(request, 'human_resource.html')
 
 def updates(request):
     return render(request, 'updates.html')
@@ -26,3 +26,4 @@ def employeeProfile(request):
 
 def notifications(request):
     return render(request, 'notifications.html')
+
