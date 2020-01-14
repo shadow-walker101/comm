@@ -1,7 +1,8 @@
 .pawame {
-  font-family: 'Sniglet', cursive;
-  font-size: 23px;
-}
+    font-family: 'Sniglet', cursive;
+    font-size: 23px;
+  }
+
 
 .links a {
   color: black;
@@ -10,3 +11,4 @@
 .links h5{
   border-bottom: solid 2px green;
 }
+
