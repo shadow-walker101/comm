@@ -3,7 +3,7 @@ from django.contrib.auth.models import(BaseUserManager, AbstractBaseUser, Permis
 
 class MyUserManager(BaseUserManager):
 
-    def create_user(self, email, user_type, department, username, password=None):
+    def create_user(self, email, user_type, department,username, password=None):
 
     
         if not email:
@@ -70,7 +70,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     email = models.EmailField(max_length=100, unique=True)
     username = models.CharField(max_length=200)
-    employee_id = models.IntegerField(default=0)
+    employee_id = models.IntegerField(blank=True,default="none")
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPES_CHOICES)
     is_active = models.BooleanField(default=True) 
     is_admin = models.BooleanField(default=False)

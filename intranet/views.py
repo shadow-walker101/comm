@@ -16,11 +16,15 @@ def departments(request):
 
 
 def updates(request):
+
     return render(request, 'updates.html')
 
 
 
 def employees(request):
+    template="employees.html"
+    return render(request,template)
+    
     return render(request, 'employees.html')
 
 def notifications(request):
