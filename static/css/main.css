@@ -1,6 +1,7 @@
 .pawame {
   font-family: 'Sniglet', cursive;
   font-size: 23px;
+  color: #0B920D;
 }
 
 .links a {
@@ -8,7 +9,7 @@
 }
 
 .links h5 {
-  border-bottom: solid 2px green;
+  border-bottom: solid 2px #0B920D;
 }
 
 .post-content {
@@ -19,6 +20,6 @@
   font-family: 'Lora', serif;
 }
 
-.major{
+.major {
   font-size: 35px;
 }
