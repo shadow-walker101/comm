@@ -17,3 +17,6 @@ def employees(request):
 
 def notifications(request):
     return render(request, 'notifications.html')
+
+def login(request):
+    return render(request, 'login.html')
