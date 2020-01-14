@@ -10,8 +10,9 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 
 
 # Create your views here.
-def departments(request):
-    return render(request, 'department.html')
+def marketing(request):
+    template='marketing.html'
+    return render(request, template)
 
 def human_resource(request):
     template='human_resource.html'
@@ -21,6 +22,9 @@ def finance(request):
     return render(request,template)
 def inventory(request):
     template='inventory.html'
+    return render(request,template)
+def inforamtion_technology(request):
+    template='information_technology.html'
     return render(request,template)
     
     
