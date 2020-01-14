@@ -14,7 +14,14 @@ def departments(request):
     return render(request, 'department.html')
 
 def human_resource(request):
-    return render(request,'human_resource.html')
+    template='human_resource.html'
+    return render(request,template)
+def human_resource(request):
+    template='human_resource.html'
+    return render(request,template)
+    
+
+
 
 
 def updates(request):
