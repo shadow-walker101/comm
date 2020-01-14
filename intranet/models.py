@@ -70,7 +70,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     email = models.EmailField(max_length=100, unique=True)
     username = models.CharField(max_length=200)
-    employee_id = models.IntegerField(default='none')
+    employee_id = models.IntegerField(default=0)
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPES_CHOICES)
     is_active = models.BooleanField(default=True) 
     is_admin = models.BooleanField(default=False)
