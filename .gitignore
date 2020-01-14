@@ -1,5 +1,7 @@
 venv/
-.vscode/
+virtual/
+vscode/
 *pyc
 __pycache__
-db.sqlite3
+.env
+/.vscode

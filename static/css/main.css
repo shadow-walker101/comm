@@ -1,12 +1,37 @@
 .pawame {
-  font-family: 'Sniglet', cursive;
-  font-size: 23px;
-}
+
+    font-family: 'Sniglet', cursive;
+    font-size: 23px;
+    color: #0B920D;
+  }
+
+
 
 .links a {
   color: black;
 }
 
-.links h5{
-  border-bottom: solid 2px green;
+
+
+
+.links h5 {
+  border-bottom: solid 2px #0B920D;
+}
+
+.post-content {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.post-date {
+  font-family: 'Lora', serif;
+}
+
+.major {
+  font-size: 35px;
+}
+
+#bg{
+  background-image: url(https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?cs=srgb&dl=person-s-left-hand-holding-green-leaf-plant-886521.jpg&fm=jpg);
+  background-size: cover;
+
 }

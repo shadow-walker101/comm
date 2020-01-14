@@ -5,6 +5,11 @@ from . import views
 
 
 urlpatterns = [
-    path('updates', views.updates, name='updates'),
+
+    path('notifications',views.notifications,name='notifications'),
+
+    path('', views.updates, name='updates'),
+    path('departments', views.departments, name='departments'),
     path('employees', views.employees, name='employees'),
+    path('login', views.login, name='login'),
 ]
