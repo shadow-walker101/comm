@@ -3,11 +3,13 @@ from django.contrib.auth.models import(BaseUserManager, AbstractBaseUser, Permis
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, user_type, department, username, password=None):
-        
+
+   
     
         if not email:
             raise ValueError('Users must have an email address')
         
+
         user = self.model(
             email=self.normalize_email(email),
             username=username,
@@ -21,11 +23,28 @@ class MyUserManager(BaseUserManager):
         return user
     
     def create_superuser(self, email, user_type, username, password=None):
+
+        user = self.models(
+            email=self.normalize_email(email),
+            username=username,
+            user_type=user_type,
+            departments=departments,
+        )
+        
+        user.set_password(password)
+        use.save(using=self._db)
+        return user
+    
+    def create_superuser(self, email, user_type, departments, username, password=None):
+
         user = self.create_user(
             
             email,
             user_type=user_type,
+
             department=None,
+
+            
             username=username,
             password=password,
         )
@@ -61,6 +80,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     objects = MyUserManager()
     
+    
     def __str__(self):
         return self.username
     
@@ -72,6 +92,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @property
     def is_staff(self):
+
         return self.is_admin
     
     def save_image(self):
@@ -114,5 +135,7 @@ class Comments(models.Model):
         self.save()
     
     def __str__(self):
+      return self.comment
+
         
-        return self.comment
+
