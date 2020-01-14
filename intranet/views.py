@@ -13,6 +13,8 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 def departments(request):
     return render(request, 'department.html')
 
+def human_resource(request):
+    return render(request,'human_resource.html')
 
 
 def updates(request):
