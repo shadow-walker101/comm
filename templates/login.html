@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-3 text-center">
+<div class="container">
+<div class="row d-flex justify-content-center" id="login">
+    <div class="col-md-3 text-center mt-4" id="bg">
+        <div class="mt-5 pb-5">
         <h3>PAWAME</h3>
         <p>Delivering more than just energy</p>
+        </div>
+        <div class="mt-5">
         <h5>OUR PURPOSE</h5>
         <p>To provide energy access as a gateway to financial empowerment and limitless opportunity in Sub-Saharan
             Africa.</p>
     </div>
+    </div>
     <div class="col-md-3">
-        <form class="text-center border border-light p-5" action="#!">
+        <form class="text-center  p-5" action="#!">
 
 
             <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" height="90px" width="90px"
@@ -33,5 +38,6 @@
 
     </div>
 
+</div>
 </div>
 {% endblock %}
