@@ -15,10 +15,14 @@ def updates(request):
 
 @login_required(login_url='accounts/login')
 def employees(request):
-    if request.user.user_type == 1 | 2:
+    if request.user.user_type == 1 or request.user.user_type == 2:
         return render(request, 'employees.html')
     else:
-        return render(request, 'updates.html')
+        return render(request, 'employeeProfile.html')
+
+@login_required(login_url='accounts/login')
+def employeeProfile(request):
+    return render(request, 'employeeProfile.html')
 
 def notifications(request):
     return render(request, 'notifications.html')

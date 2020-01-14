@@ -19,6 +19,7 @@
 
   <!-- Departments with admin pics and titles -->
   <div class="row mt-5">
+  {% if request.user.user_type == 1 or request.user.department == 1 %}
     <div class="col-md-2 offset-md-1">
       <h5 class="font-weight-bold text-center pb-2">HR</h5>
       <div class="avatar mx-auto white text-center">
@@ -39,6 +40,7 @@
         </div>
       </div>
     </div>
+  {% elif request.user.user_type == 1 or request.user.department == 3 %}
     <div class="col-md-2">
       <h5 class="font-weight-bold text-center pb-2">Finance</h5>
       <div class="avatar mx-auto white text-center"><img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-13.jpg"
@@ -58,6 +60,7 @@
         </div>
       </div>
     </div>
+  {% elif request.user.user_type == 1 or request.user.department == 2 %}
     <div class="col-md-2">
       <h5 class="font-weight-bold text-center pb-2">Inventory</h5>
       <div class="avatar mx-auto white text-center"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(24).jpg"
@@ -77,6 +80,7 @@
         </div>
       </div>
     </div>
+  {% elif request.user.user_type == 1 or request.user.department == 4 %}
     <div class="col-md-2">
       <h5 class="font-weight-bold text-center pb-2">Marketing</h5>
       <div class="avatar mx-auto white text-center"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(20).jpg"
@@ -96,6 +100,7 @@
         </div>
       </div>
     </div>
+  {% elif request.user.user_type == 1 or request.user.department == 5 %}
     <div class="col-md-2">
       <h5 class="font-weight-bold text-center pb-2">IT</h5>
       <div class="avatar mx-auto white text-center"><img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-15.jpg"
@@ -115,6 +120,7 @@
         </div>
       </div>
     </div>
+  {% endif %}
   </div>
 
 </div>
