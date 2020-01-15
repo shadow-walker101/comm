@@ -23,8 +23,4 @@ $('#my-summernote').summernote({
         ['font', ['bold', 'underline', 'clear']]
       ]
     },
-    print: {
-      //'stylesheetUrl': 'url_of_stylesheet_for_printing'
-    }
   });
-  $('#my-summernote2').summernote({airMode: true,placeholder:'Try the airmode'});
