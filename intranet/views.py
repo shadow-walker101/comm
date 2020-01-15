@@ -20,57 +20,55 @@ def login (request):
             login(request, user)
             return redirect('updates')
         
+def updates(request):
+    updates = Updates.objects.filter(department=1).all()
+    return render(request, 'updates.html' ,{'updates':updates})
 
 def marketing(request):
     template='marketing.html'
-    return render(request, template)
+    updates = Updates.objects.filter(department=5).all()
+    return render(request, template,{'updates':updates})
 
-# @user_passes_test(lambda u: u.is_active and u.department==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
+# @user_passes_test(lambda u: u.is_active and u.department==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='accounts/login')
 def human_resource(request):
     template='human_resource.html'
-    return render(request,template)
+    updates = Updates.objects.filter(department=2).all()
+    return render(request,template, {'updates':updates})
 
-
-def updates(request):
-    return render(request, 'updates.html')
-
-# @user_passes_test(lambda u:u.is_active and u.department==3,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
+# @user_passes_test(lambda u:u.is_active and u.department==3,redirect_field_name=REDIRECT_FIELD_NAME,login_url='accounts/login')
 def finance(request):
     template='finance.html'
-    return render(request,template)
+    updates = Updates.objects.filter(department=6).all()
+    return render(request,template,{'update':updates})
 
-# @user_passes_test(lambda u:u.is_active and u.department==2,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
+# @user_passes_test(lambda u:u.is_active and u.department==2,redirect_field_name=REDIRECT_FIELD_NAME,login_url='accounts/login')
 def inventory(request):
     template='inventory.html'
-    return render(request,template)
+    updates = Updates.objects.filter(department=4).all()
+    return render(request,template,{'update':updates})
 
 
-# @user_passes_test(lambda u:u.is_active and u.department==5,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
+# @user_passes_test(lambda u:u.is_active and u.department==5,redirect_field_name=REDIRECT_FIELD_NAME,login_url='accounts/login')
 def information_technology(request):
     template='information_technology.html'
-    return render(request,template)
-def updates(request):
-    template='updates.html'
-    return render(request,template)
-
+    updates = Updates.objects.filter(department=3).all()
+    return render(request,template,{'update':updates})
 
 @login_required(login_url='accounts/login')
-
 def employees(request):
     template='employees.html'
     return render(request, template)
 
 
 def notifications(request):
-
-    return render(request, 'notifications.html')
+    template='notifications.html'
+    return render(request, template)
+    
 
 def employeeProfile(request):
     return render(request, 'employeeProfile.html')
 
-    template='notifications.html'
-    return render(request, template)
-
+@login_required(login_url='accounts/login')
 def postUpdate(request):
     current_user =  request.user
     if current_user.user_type == 1 or current_user.user_type==2:
