@@ -1,4 +1,13 @@
 venv/
+<<<<<<< HEAD
+virtual/
 vscode/
 *pyc
 __pycache__
+.env
+=======
+.vscode/
+*pyc
+__pycache__
+db.sqlite3
+>>>>>>> Development
