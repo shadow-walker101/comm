@@ -11,3 +11,8 @@ class meta:
     fields=('username','email','user_type','departments','employee_id')
 
 class LoginForm()
+
+class PostUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Updates
+        exclude = ['user', 'time_stamp']
