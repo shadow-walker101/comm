@@ -78,12 +78,16 @@ class Updates(models.Model):
         (3,'Information Technology'),
         (4,'Finance'),
         (5,'Marketing'),
+        (6,'General'),
 
     )
+
     title =  models.CharField(max_length=50)
     update = models.TextField()
-    time_stamp = models.DateTimeField(auto_now=True) 
+    time_stamp = models.DateTimeField(auto_now=True)
+    update_type = models.PositiveSmallIntegerField(choices=update_types) 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
     
 
