@@ -28,16 +28,6 @@ DEBUG = True
 
 
 
-DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'pawame',
-            'USER': 'moringa',
-           
-           'PASSWORD':'pawame',
-       }
-       
-   }
 
            
           
