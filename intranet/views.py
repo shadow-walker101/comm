@@ -20,9 +20,6 @@ def login (request):
             return redirect('updates')
         
 
-def departments(request):
-    return render(request, 'department.html')
-@user_passes_test(lambda u: u.is_active and u.department==4,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
 def marketing(request):
     template='marketing.html'
     return render(request, template)
@@ -51,26 +48,27 @@ def inventory(request):
 def information_technology(request):
     template='information_technology'
     return render(request,template)
-  
 def updates(request):
     template='updates.html'
     return render(request,template)
 
 
-
 @login_required(login_url='accounts/login')
+
 def employees(request):
-   tempalate='employees.html'
-   return render(request, templates)
+    template='employees.html'
+    return render(request, template)
+
 
 def notifications(request):
-    template='notifications.html'
-    return render(request, template)
-  
-@login_required(login_url='accounts/login')
+
+    return render(request, 'notifications.html')
+
 def employeeProfile(request):
     return render(request, 'employeeProfile.html')
 
+    template='notifications.html'
+    return render(request, template)
 
 
 
