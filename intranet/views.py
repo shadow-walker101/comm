@@ -58,19 +58,15 @@ def updates(request):
 
 @login_required(login_url='accounts/login')
 def employees(request):
-
-    template="employees.html"
-    return render(request,template)
-    
-    return render(request, 'employees.html')
-
-def notifications(request):
-    return render(request, 'notifications.html')
-
     if request.user.user_type == 1 or request.user.user_type == 2:
         return render(request, 'employees.html')
     else:
         return render(request, 'employeeProfile.html')
+    
+
+def notifications(request):
+    return render(request, 'notifications.html')
+
 
 @login_required(login_url='accounts/login')
 def employeeProfile(request):
