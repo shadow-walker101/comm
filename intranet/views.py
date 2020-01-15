@@ -51,27 +51,26 @@ def inventory(request):
 def information_technology(request):
     template='information_technology'
     return render(request,template)
+  
 def updates(request):
     template='updates.html'
     return render(request,template)
 
 
+
 @login_required(login_url='accounts/login')
-
 def employees(request):
-    template='employees.html'
-    return render(request, template)
-
+   tempalate='employees.html'
+   return render(request, templates)
 
 def notifications(request):
-
-    return render(request, 'notifications.html')
-
+    template='notifications.html'
+    return render(request, template)
+  
+@login_required(login_url='accounts/login')
 def employeeProfile(request):
     return render(request, 'employeeProfile.html')
 
-    template='notifications.html'
-    return render(request, template)
 
 
 
