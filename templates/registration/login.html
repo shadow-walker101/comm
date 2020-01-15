@@ -35,26 +35,17 @@
             </div>
             <div class="col-md-3">
                 <form class="text-center  p-5" method="post">
+                    <a href="/admin" class="btn btn-blue btn-rounded">Admin</a>
                     <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" height="90px" width="90px"
                         alt="avatar mx-auto white" class="rounded-circle img-fluid">
-
                     <div class="md-form">
                         {%csrf_token%}
                         {{form.username|as_crispy_field}}
-
-
-
                     </div>
-
                     <div class="md-form">
-
                         {{form.password|as_crispy_field}}
-
                     </div>
-
                     <button type="submit" class="btn btn-green btn-rounded">Log in</button>
-
-
                 </form>
 
             </div>

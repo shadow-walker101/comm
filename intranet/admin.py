@@ -28,3 +28,4 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ('groups', 'user_permissions',)
     
 admin.site.register(User, UserAdmin)
+admin.site.site_header='Pawame'
