@@ -1,6 +1,12 @@
 from django import forms
 from .models import *
-from django.auth.forms import UserCreationForm
+
+
+
+class Post(forms.ModelForm):
+    class Meta:
+        model=Updates
+
 
 class UserRegistrationForm(UserCreationForm)
 username=forms.CharField(max_length=30)

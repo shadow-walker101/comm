@@ -85,7 +85,7 @@ class Updates(models.Model):
     title =  models.CharField(max_length=50)
     update = models.TextField()
     time_stamp = models.DateTimeField(auto_now=True)
-    update_type = models.PositiveSmallIntegerField(choices=update_types) 
+    update_type = models.PositiveSmallIntegerField(choices=update_types,null=True) 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
