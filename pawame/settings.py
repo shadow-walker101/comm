@@ -30,26 +30,12 @@ if config('MODE')=="dev":
            'PASSWORD': config('DB_PASSWORD'),
            'HOST': config('DB_HOST'),
            'PORT': '',
-           ''
-
-
-
-
-
-
-# development
-
-
-
-
-
-
-
-
            
-          
+       }
+   }
    
-# production
+   #production
+
 else:
    DATABASES = {
        'default': dj_database_url.config(
@@ -71,7 +57,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-
+DEBUG = True
 ALLOWED_HOSTS = []
 
 
@@ -85,7 +71,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
-
     'crispy_forms',
     'django_registration'
 
