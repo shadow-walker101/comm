@@ -16,22 +16,32 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY='WEDDGasdfghj+hgdsasd'
 
 
+SECRET_KEY='lkjhgfdsdftyuio'
+DEBUG = True
 
 # development
+
+
+
+
+
+
 DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql',
            'NAME': 'pawame',
-           'USER': 'moringa',
-           'PASSWORD': '5678',
+            'USER': 'moringa',
            
-           
+           'PASSWORD':'pawame',
        }
        
    }
+
+           
+          
+   
 # production
 
 
@@ -44,7 +54,7 @@ DATABASES = {
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = []
 
@@ -60,9 +70,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
-    
-    
-    
 
 ]
 
@@ -96,7 +103,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pawame.wsgi.application'
+WSGI_APPLICATION='pawame.wsgi.application'
 
 
 # Database
