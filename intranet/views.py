@@ -76,5 +76,9 @@ def employeeProfile(request):
     template='notifications.html'
     return render(request, template)
 
+def postUpdate(request):
+    
+    return render(request, 'postUpdate.html')
+
 
 
