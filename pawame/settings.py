@@ -16,22 +16,22 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY='WEDDGasdfghj+hgdsasd'
 
 
+SECRET_KEY='lkjhgfdsdftyuio'
+DEBUG = True
 
 # development
-DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'pawame',
-           'USER': 'moringa',
-           'PASSWORD': '5678',
+
+
+
+
+
+
+
            
-           
-       }
-       
-   }
+          
+   
 # production
 
 
@@ -44,7 +44,7 @@ DATABASES = {
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = []
 
@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
+    'crispy_forms',
 
 ]
 
@@ -93,7 +94,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pawame.wsgi.application'
+WSGI_APPLICATION='pawame.wsgi.application'
 
 
 # Database
@@ -102,6 +103,7 @@ WSGI_APPLICATION = 'pawame.wsgi.application'
 
 DATABASES = {
     'default': {
+
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'pawame',
         'USER':'moringa',
@@ -149,8 +151,10 @@ USE_TZ = True
 
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
+LOGIN_REDIRECT_URL='updates'
+
 # Static files (CSS, JavaScript, Images)
-AUTH_USER_MODEL = 'intranet.User'
+
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -164,6 +168,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 

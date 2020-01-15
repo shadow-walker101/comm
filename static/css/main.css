@@ -30,3 +30,8 @@
   font-size: 35px;
 }
 
+#bg{
+  background-image: url(https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?cs=srgb&dl=person-s-left-hand-holding-green-leaf-plant-886521.jpg&fm=jpg);
+  background-size: cover;
+
+}
