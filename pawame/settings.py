@@ -49,7 +49,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
+]
+
 ]
 
 MIDDLEWARE = [
@@ -94,6 +96,20 @@ WSGI_APPLICATION='pawame.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pawame',
+        'USER':'moringa',
+        'PASSWORD':'pawame',
+
+
+       
+
+    }
+}
 
 
 
