@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<div class="row d-flex justify-content-center" id="login">
+    <div class="col-md-3 text-center mt-4" id="bg">
+        <div class="mt-5 pb-5">
+        <h3>PAWAME</h3>
+        <p>Delivering more than just energy</p>
+        </div>
+        <div class="mt-5">
+        <h5>OUR PURPOSE</h5>
+        <p>To provide energy access as a gateway to financial empowerment and limitless opportunity in Sub-Saharan
+            Africa.</p>
+    </div>
+    </div>
+    <div class="col-md-3">
+        <form class="text-center  p-5" action="#!">
+
+
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" height="90px" width="90px"
+                alt="avatar mx-auto white" class="rounded-circle img-fluid">
+
+            <div class="md-form">
+                <input type="email" id="materialLoginFormEmail" class="form-control">
+                <label for="materialLoginFormEmail">E-mail</label>
+            </div>
+
+            <div class="md-form">
+                <input type="password" id="materialLoginFormPassword" class="form-control">
+                <label for="materialLoginFormPassword">Password</label>
+            </div>
+
+            <button type="button" class="btn btn-green btn-rounded">Log in</button>
+
+
+        </form>
+
+    </div>
+
+</div>
+</div>
+{% endblock %}
