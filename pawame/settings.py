@@ -17,20 +17,33 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+
 SECRET_KEY='lkjhgfdsdftyuio'
 DEBUG = True
 
 # development
 
+
+
+
+
+
 DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql',
            'NAME': 'pawame',
-           'USER': 'moringaschool',
+            'USER': 'moringa',
+           
            'PASSWORD':'pawame',
        }
        
    }
+
+           
+          
+   
+# production
+
 
 
 # SITE_ID=1
@@ -49,7 +62,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,6 +70,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -96,6 +110,21 @@ WSGI_APPLICATION='pawame.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
+DATABASES = {
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pawame',
+        'USER':'moringa',
+        'PASSWORD':'pawame',
+
+
+       
+
+    }
+}
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -132,7 +161,7 @@ USE_TZ = True
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
 # Static files (CSS, JavaScript, Images)
-AUTH_USER_MODEL = 'intranet.User'
+
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -146,6 +175,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
