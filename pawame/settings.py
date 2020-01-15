@@ -33,9 +33,8 @@ if config('MODE')=="dev":
            
        }
    }
-   
-   #production
 
+   #production
 else:
    DATABASES = {
        'default': dj_database_url.config(
@@ -152,6 +151,8 @@ USE_TZ = True
 
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
+LOGIN_REDIRECT_URL='updates'
+
 # Static files (CSS, JavaScript, Images)
 AUTH_USER_MODEL = 'intranet.User'
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
