@@ -25,7 +25,7 @@ def marketing(request):
     template='marketing.html'
     return render(request, template)
 
-@user_passes_test(lambda u: u.is_active and u.department==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
+# @user_passes_test(lambda u: u.is_active and u.department==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
 def human_resource(request):
     template='human_resource.html'
     return render(request,template)
@@ -42,31 +42,21 @@ def inventory(request):
 
 @user_passes_test(lambda u:u.is_active and u.department==5,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
 def information_technology(request):
-    template='information_technology.html'
+    template='information_technology'
     return render(request,template)
-    
-    
-
-
-
-def departments(request):
-    return render(request, 'human_resource.html')
-
 def updates(request):
-
-    return render(request, 'updates.html')
+    template='updates.html'
+    return render(request,template)
 
 
 @login_required(login_url='accounts/login')
 def employees(request):
-
-    template="employees.html"
-    return render(request,template)
-    
-    return render(request, 'employees.html')
+    template='employees.html'
+    return render(request, template)
 
 def notifications(request):
-    return render(request, 'notifications.html')
+    template='notifications.html'
+    return render(request, template)
 
 
 def login(request):
@@ -75,5 +65,6 @@ def login(request):
    
 @login_required(login_url='accounts/login')
 def employeeProfile(request):
-    return render(request, 'employeeProfile.html')
+    template='employeeProfile.html'
+    return render(request, template)
 
