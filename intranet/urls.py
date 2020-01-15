@@ -14,7 +14,7 @@ urlpatterns = [
     path('marketing', views.marketing, name='marketing'),
     path('information', views.information_technology, name='information'),
     path('employeeProfile', views.employeeProfile, name='employeeProfile'),
-    path('human_resource',views.human_resource,name='human_resource')
+    path('human_resource',views.human_resource,name='human_resource'),
     path('employeeProfile', views.employeeProfile, name='employeeProfile')
 ]
 
