@@ -71,8 +71,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
     'crispy_forms',
-
-    'crispy_forms',
     'django_registration'
 
 ]
