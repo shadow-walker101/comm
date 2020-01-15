@@ -57,12 +57,6 @@ def employees(request):
 def notifications(request):
     template='notifications.html'
     return render(request, template)
-
-
-def login(request):
-    return render(request, 'login.html')
-
-   
 @login_required(login_url='accounts/login')
 def employeeProfile(request):
     template='employeeProfile.html'
