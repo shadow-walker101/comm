@@ -52,6 +52,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,10 +60,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
+    
+    
+    
+
 ]
 
 MIDDLEWARE = [
-    
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -97,6 +101,21 @@ WSGI_APPLICATION = 'pawame.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
+
+DATABASES = {
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pawame',
+        'USER':'moringa',
+        'PASSWORD':'pawame',
+
+
+       
+
+    }
+}
 
 
 
@@ -135,7 +154,7 @@ USE_TZ = True
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
 # Static files (CSS, JavaScript, Images)
-AUTH_USER_MODEL = 'intranet.User'
+
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -149,6 +168,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
