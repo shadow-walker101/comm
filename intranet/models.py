@@ -72,10 +72,20 @@ class Profile(models.Model):
         return self.first_name
     
 class Updates(models.Model):
+    
+    UPDATE_TYPES = (
+        (1, 'General'),
+        (2, 'Human Resource'),
+        (3, 'Information_technology'),
+        (4, 'Inventory'),
+        (5, 'Marketing'),
+        (6, 'Finance'),
+    )
     title =  models.CharField(max_length=50)
     update = models.TextField()
     time_stamp = models.DateTimeField(auto_now=True) 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    department =  models.PositiveSmallIntegerField(choices=UPDATE_TYPES, null=True)  
     
 
 class Comments(models.Model):

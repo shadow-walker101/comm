@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import REDIRECT_FIELD_NAME
+from . forms import *
 
 
 def login (request):
@@ -71,8 +72,22 @@ def employeeProfile(request):
     return render(request, template)
 
 def postUpdate(request):
-    
-    return render(request, 'postUpdate.html')
+    current_user =  request.user
+    if current_user.user_type == 1 or current_user.user_type==2:
+        if request.method == 'POST':
+            form = PostUpdateForm(request.POST, request.FILES)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.user = current_user
+                post.save()
+            return redirect('updates')
+        else:
+            form = PostUpdateForm()
+            return render(request, 'postUpdate.html', {"form":form})
+    return redirect('updates')
 
+            
+        
+    
 
 
