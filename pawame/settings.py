@@ -11,42 +11,40 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import dj_database_url
-from decouple import config, Csv
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MODE=config("MODE", default="dev")
-SECRET_KEY=config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+
+
+SECRET_KEY='lkjhgfdsdftyuio'
+DEBUG = True
 
 # development
-if config('MODE')=="dev":
-   DATABASES = {
+
+
+
+
+
+
+DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql',
-           'NAME': config('DB_NAME'),
-           'USER': config('DB_USER'),
-           'PASSWORD': config('DB_PASSWORD'),
-           'HOST': config('DB_HOST'),
-           'PORT': '',
+           'NAME': 'pawame',
+            'USER': 'moringa',
+           
+           'PASSWORD':'pawame',
        }
        
    }
+
+           
+          
+   
 # production
-else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # SITE_ID=1
 # Quick-start development settings - unsuitable for production
@@ -56,7 +54,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = []
 
@@ -72,6 +70,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
+]
+
 ]
 
 MIDDLEWARE = [
@@ -105,11 +105,26 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pawame.wsgi.application'
+WSGI_APPLICATION='pawame.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
+
+DATABASES = {
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pawame',
+        'USER':'moringa',
+        'PASSWORD':'pawame',
+
+
+       
+
+    }
+}
 
 
 
@@ -148,7 +163,7 @@ USE_TZ = True
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
 # Static files (CSS, JavaScript, Images)
-AUTH_USER_MODEL = 'intranet.User'
+
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -162,6 +177,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
