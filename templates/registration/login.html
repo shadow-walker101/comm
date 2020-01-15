@@ -2,7 +2,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +16,6 @@
     <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static '/css/main.css' %}">
 </head>
-
 <body>
     <div class="container">
         <div class="row d-flex justify-content-center" id="login">
@@ -35,30 +33,19 @@
             </div>
             <div class="col-md-3">
                 <form class="text-center  p-5" method="post">
+                    <a href="/admin">Admin</a>
                     <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" height="90px" width="90px"
                         alt="avatar mx-auto white" class="rounded-circle img-fluid">
-
                     <div class="md-form">
                         {%csrf_token%}
                         {{form.username|as_crispy_field}}
-
-
-
                     </div>
-
                     <div class="md-form">
-
                         {{form.password|as_crispy_field}}
-
                     </div>
-
                     <button type="submit" class="btn btn-green btn-rounded">Log in</button>
-
-
                 </form>
-
             </div>
-
         </div>
     </div>
     <!-- JQuery -->
@@ -73,5 +60,4 @@
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 </body>
-
 </html>
