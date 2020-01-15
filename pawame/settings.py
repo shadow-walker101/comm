@@ -29,10 +29,7 @@ DATABASES = {
            'USER': 'moringaschool',
            'PASSWORD':'pawame',
        }
-       
    }
-
-
 # SITE_ID=1
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -57,9 +54,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
-    
-    
-    
 
 ]
 
