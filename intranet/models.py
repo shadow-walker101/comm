@@ -1,35 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import(BaseUserManager, AbstractBaseUser, PermissionsMixin)
-
 class MyUserManager(BaseUserManager):
-
     def create_user(self, email, user_type, department,username, password=None):
-
-    
         if not email:
             raise ValueError('Users must have an email address')
-        
-
         user = self.model(
-
             email=self.normalize_email(email),
             username=username,
             user_type=user_type,
             department=department,
         )
-        
         user.set_password(password)
         user.save(using=self._db)
         return user
-    
 
-   
-    
     def create_superuser(self, email, user_type, username, password=None):
 
-
         user = self.create_user(
-            
             email,
             user_type=user_type,
             department=None,
@@ -39,17 +26,12 @@ class MyUserManager(BaseUserManager):
         user.is_admin = True
         user.save(using=self._db)
         return user
-    
-
 class User(AbstractBaseUser, PermissionsMixin):
     USER_TYPES_CHOICES = (
-        
         (1, 'SuperAdmin'),
         (2, 'Admin'),
         (3, 'Employee'),
-        
     )
-    
     DEPARTMENTS = (
         (1, 'Human Resource'),
         (2, 'Inventory' ),
@@ -66,10 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     department = models.PositiveSmallIntegerField(choices=DEPARTMENTS, null=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'user_type']
-
     objects = MyUserManager()
-
-    
     def __str__(self):
         return self.username
     def has_perm(self, perm, obj=None):
@@ -78,7 +57,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         return True
     @property
     def is_staff(self):
-
         return self.is_admin
 
 class Profile(models.Model):
@@ -86,7 +64,7 @@ class Profile(models.Model):
     first_name =  models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     user =  models.OneToOneField(User, on_delete=models.CASCADE)
-    
+
     def save_profile(self):
         self.save()
     
@@ -99,20 +77,21 @@ class Updates(models.Model):
     time_stamp = models.DateTimeField(auto_now=True) 
     user = models.ForeignKey(User, on_delete=models.CASCADE)  
     
+
 class Comments(models.Model):
     comment = models.CharField(max_length=100,blank=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     update = models.ForeignKey(Updates,on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
-    
-    
+
     @classmethod
     def get_comments(cls,id):
         comments = cls.objects.filter(update__id=id)
         return comments
-    
+
     def save_comment(self):
         self.save()
-    
     def __str__(self):
       return self.comment
+
+
