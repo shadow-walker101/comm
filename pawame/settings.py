@@ -33,9 +33,8 @@ if config('MODE')=="dev":
            
        }
    }
-   
-   #production
 
+   #production
 else:
    DATABASES = {
        'default': dj_database_url.config(
@@ -71,6 +70,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
+    'crispy_forms',
 
     'crispy_forms',
     'django_registration'
@@ -153,6 +153,8 @@ USE_TZ = True
 
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
+LOGIN_REDIRECT_URL='updates'
+
 # Static files (CSS, JavaScript, Images)
 AUTH_USER_MODEL = 'intranet.User'
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
