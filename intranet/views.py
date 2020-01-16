@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 98906828a74134ddffde3fa5eb2d7d94312c74b6
 from django.shortcuts import render , redirect, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from . models import * 
@@ -10,7 +5,10 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import REDIRECT_FIELD_NAME
+from datetime import timedelta
+import online_users.models
 from .forms import *
+
 
 
 
@@ -66,8 +64,15 @@ def information_technology(request):
     return render(request,template,{'update':updates})
 
 @login_required(login_url='accounts/login')
-
 def employees(request):
+    user_status = online_users.models.OnlineUserActivity.get_user_activities(timedelta(minutes=60))
+    users = (user for user in user_status)
+    context = {"online_users"}
+
+    if request.user.user_type == 1 or request.user.user_type == 2:
+        return render(request, 'employees.html')
+    else:
+        return render(request, 'employeeProfile.html')
 
 
 def notifications(request):
@@ -77,6 +82,9 @@ def notifications(request):
 
 def employeeProfile(request):
     return render(request, 'employeeProfile.html')
+  
+def searchResults(request):
+    return render(request, 'searchResults.html')
 
 @login_required(login_url='accounts/login')
 def postUpdate(request):
@@ -93,3 +101,4 @@ def postUpdate(request):
             form = PostUpdateForm()
             return render(request, 'postUpdate.html', {"form":form})
     return redirect('updates')
+
