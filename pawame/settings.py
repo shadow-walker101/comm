@@ -16,19 +16,37 @@ from decouple import config, Csv
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-SECRET_KEY='lkjhgfdsdftyuio'
-DEBUG = True
+MODE=config("MODE", default="dev")
+SECRET_KEY=config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # development
-
-DATABASES = {
+if config('MODE')=="dev":
+   DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'pawame',
-           'USER': 'moringaschool',
-           'PASSWORD':'pawame',
+           'NAME': config('DB_NAME'),
+           'USER': config('DB_USER'),
+           'PASSWORD': config('DB_PASSWORD'),
+           'HOST': config('DB_HOST'),
+           'PORT': '',
+           
        }
    }
+
+   #production
+else:
+   DATABASES = {
+       'default': dj_database_url.config(
+           default=config('DATABASE_URL')
+       )
+   }
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+
 # SITE_ID=1
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -52,8 +70,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
+    'django.contrib.humanize',
     'crispy_forms',
-    'django_registration'
+    'django_registration',
+    
 
 ]
 
@@ -71,6 +91,20 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+MIDDLEWARE_CLASSES = (
+    'middleware.activeuser_middleware.ActiveUserMiddleware',
+)
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': '127.0.0.1:8000'
+    }
+}
+
+USER_ONLINE_TIMEOUT = 300
+USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
 
 ROOT_URLCONF = 'pawame.urls'
 
@@ -96,6 +130,7 @@ WSGI_APPLICATION='pawame.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
 
 
 # Password validation
@@ -132,6 +167,8 @@ USE_TZ = True
 
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
+LOGIN_REDIRECT_URL='updates'
+
 # Static files (CSS, JavaScript, Images)
 AUTH_USER_MODEL = 'intranet.User'
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
