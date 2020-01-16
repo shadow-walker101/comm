@@ -64,8 +64,6 @@ def information_technology(request):
     updates = Updates.objects.filter(department=3).all()
     return render(request,template,{'update':updates})
 
-<<<<<<< HEAD
-=======
 @login_required(login_url='accounts/login')
 def employees(request):
     user_status = online_users.models.OnlineUserActivity.get_user_activities(timedelta(minutes=60))
@@ -77,7 +75,6 @@ def employees(request):
     else:
         return render(request, 'employeeProfile.html')
 
->>>>>>> 5272bce94527d53d1a5de99678f0848c2e266491
 
 def notifications(request):
     template='notifications.html'
