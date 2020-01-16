@@ -1,5 +1,3 @@
-
-
 from django.shortcuts import render , redirect, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from . models import * 
@@ -83,9 +81,3 @@ def postUpdate(request):
             form = PostUpdateForm()
             return render(request, 'postUpdate.html', {"form":form})
     return redirect('updates')
-
-            
-        
-    
-
-

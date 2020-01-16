@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import(BaseUserManager, AbstractBaseUser, PermissionsMixin)
+from django.shortcuts import get_object_or_404
 class MyUserManager(BaseUserManager):
     def create_user(self, email, user_type, department,username, password=None):
         if not email:
@@ -85,11 +86,15 @@ class Updates(models.Model):
     update = models.TextField()
     time_stamp = models.DateTimeField(auto_now=True) 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    department =  models.PositiveSmallIntegerField(choices=UPDATE_TYPES, null=True)  
+    department =  models.PositiveSmallIntegerField(choices=UPDATE_TYPES, null=True)
+    
+    @classmethod
+    def get_update(cls,id):
+        update = get_object_or_404(cls, pk=id) 
     
 
 class Comments(models.Model):
-    comment = models.CharField(max_length=100,blank=True)
+    comment = models.TextField()
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     update = models.ForeignKey(Updates,on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
