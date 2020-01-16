@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import REDIRECT_FIELD_NAME
+from datetime import timedelta
+import online_users.models
 from .forms import *
 
 
@@ -62,6 +64,20 @@ def information_technology(request):
     updates = Updates.objects.filter(department=3).all()
     return render(request,template,{'update':updates})
 
+<<<<<<< HEAD
+=======
+@login_required(login_url='accounts/login')
+def employees(request):
+    user_status = online_users.models.OnlineUserActivity.get_user_activities(timedelta(minutes=60))
+    users = (user for user in user_status)
+    context = {"online_users"}
+
+    if request.user.user_type == 1 or request.user.user_type == 2:
+        return render(request, 'employees.html')
+    else:
+        return render(request, 'employeeProfile.html')
+
+>>>>>>> 5272bce94527d53d1a5de99678f0848c2e266491
 
 def notifications(request):
     template='notifications.html'
@@ -72,6 +88,7 @@ def employeeProfile(request):
     current_user = request.user
     profile = Profile.objects.filter(user=current_user)
     return render(request, 'employeeProfile.html', {'profile':profile})
+
 
 @login_required(login_url='accounts/login')
 def postUpdate(request):
@@ -88,3 +105,6 @@ def postUpdate(request):
             form = PostUpdateForm()
             return render(request, 'postUpdate.html', {"form":form})
     return redirect('updates')
+  
+def searchResults(request):
+    return render(request, 'searchResults.html')
