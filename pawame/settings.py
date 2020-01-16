@@ -71,15 +71,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
     'crispy_forms',
-    'django_registration'
-
+    'django_registration',
+    'online_users'
 ]
 
 
-
-
 MIDDLEWARE = [
-
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -88,6 +85,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'online_users.middleware.OnlineNowMiddleware',
 ]
 
 ROOT_URLCONF = 'pawame.urls'

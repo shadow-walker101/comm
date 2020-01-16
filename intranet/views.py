@@ -1,5 +1,3 @@
-
-
 from django.shortcuts import render , redirect, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from . models import * 
@@ -7,6 +5,9 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import REDIRECT_FIELD_NAME
+from datetime import timedelta
+import online_users.models
+
 
 
 def login (request):
@@ -57,11 +58,16 @@ def updates(request):
     return render(request,template)
 
 
-
 @login_required(login_url='accounts/login')
 def employees(request):
-   tempalate='employees.html'
-   return render(request, templates)
+    user_status = online_users.models.OnlineUserActivity.get_user_activities(timedelta(minutes=60))
+    users = (user for user in user_status)
+    context = {"online_users"}
+
+    if request.user.user_type == 1 or request.user.user_type == 2:
+        return render(request, 'employees.html')
+    else:
+        return render(request, 'employeeProfile.html')
 
 def notifications(request):
     template='notifications.html'
@@ -76,5 +82,6 @@ def postUpdate(request):
     
     return render(request, 'postUpdate.html')
 
-
-
+def searchResults(request):
+    
+    return render(request, 'searchResults.html')
