@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import REDIRECT_FIELD_NAME
+from .forms import *
 
 
 def login (request):
@@ -18,16 +19,27 @@ def login (request):
         if user is not None:
             login(request, user)
             return redirect('updates')
-        
 
-def departments(request):
-    return render(request, 'department.html')
-@user_passes_test(lambda u: u.is_active and u.department==4,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
+# @user_passes_test(lambda u: u.is_active and u.department==4,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
 def marketing(request):
-    template='marketing.html'
-    return render(request, template)
+    current_user=request.user
+    if current_user.user_type == 1 or  current_user.user_type == 2 and current_user.department==4:
+        if request=='POST':
+            form = Posting(request.POST,request.FILES)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.user=current_user
+                post.save()
+            return redirect('updates')
+        else:
+            form=Posting()
+            template='marketing.html'
+            return render(request, template,{'form':form})
+    else:
+        return redirect('updates')
 
-# @user_passes_test(lambda u: u.is_active and u.department==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
+          
+@user_passes_test(lambda u: u.is_active and u.department==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
 def human_resource(request):
     template='human_resource.html'
     return render(request,template)

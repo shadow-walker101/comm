@@ -27,6 +27,8 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 class User(AbstractBaseUser, PermissionsMixin):
+   
+
     USER_TYPES_CHOICES = (
         (1, 'SuperAdmin'),
         (2, 'Admin'),
@@ -55,6 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return True
     def has_module_perms(self, app_label):
         return True
+    
     @property
     def is_staff(self):
         return self.is_admin
@@ -72,10 +75,23 @@ class Profile(models.Model):
         return self.first_name
     
 class Updates(models.Model):
+    update_types=(
+        (1,'Human Resource'),
+        (2,'Marketing'),
+        (3,'Information Technology'),
+        (4,'Finance'),
+        (5,'Marketing'),
+        (6,'General'),
+
+    )
+
     title =  models.CharField(max_length=50)
     update = models.TextField()
-    time_stamp = models.DateTimeField(auto_now=True) 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  
+    time_stamp = models.DateTimeField(auto_now=True)
+    update_type = models.PositiveSmallIntegerField(choices=update_types,null=True) 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
     
 
 class Comments(models.Model):

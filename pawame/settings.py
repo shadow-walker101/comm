@@ -71,12 +71,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
     'crispy_forms',
-
-    'crispy_forms',
-    'django_registration'
+    'django_registration',
+    'django.contrib.humanize',
+    'admincolors',
 
 ]
-
+ADMIN_COLORS_BASE_THEME = 'Black'
+ADMIN_COLORS=[
+    ('Default',[]),
+    ('Lite','admincolors/css/lite.css'),
+    ('Dark Blue','admincolors/css/dark-blue.css'),
+    ('Gray','admincolors/css/gray.css'),
+    ('Black',('admincolors/css/gray.css','static/css/theme.css')),
+]
 
 
 
@@ -95,7 +102,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'pawame.urls'
 
 TEMPLATES = [
-    {
+    {   
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
@@ -106,6 +113,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'admincolors.context_processors.admin_theme',
             ],
         },
     },
@@ -164,6 +172,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+CRISPY_TEMPLATE_PACK='bootstrap4'
 
 
 MEDIA_URL = '/media/'
