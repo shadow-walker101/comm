@@ -2,7 +2,10 @@ from django.db import models
 from django.contrib.auth.models import(BaseUserManager, AbstractBaseUser, PermissionsMixin)
 import online_users.models
 from datetime import timedelta
-
+from django.shortcuts import get_object_or_404
+from django.core.cache import cache 
+import datetime
+from pawame import settings
 
 
 class MyUserManager(BaseUserManager):
@@ -33,6 +36,8 @@ class MyUserManager(BaseUserManager):
         return user
     
 class User(AbstractBaseUser, PermissionsMixin):
+   
+
     USER_TYPES_CHOICES = (
         (1, 'SuperAdmin'),
         (2, 'Admin'),
@@ -66,6 +71,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return True
     def has_module_perms(self, app_label):
         return True
+    
     @property
     def is_staff(self):
         return self.is_admin
@@ -82,15 +88,45 @@ class Profile(models.Model):
     def __str__(self):
         return self.first_name
     
+    def last_seen(self):
+        return cache.get('seen_%s' % self.user.username)
+    
+    def online(self):
+        if self.last_seen():
+            now = datetime.datetime.now()
+            if now > self.last_seen() + datetime.timedelta(
+                         seconds=settings.USER_ONLINE_TIMEOUT):
+                return False
+            else:
+                return True
+        else:
+            return False
+    
 class Updates(models.Model):
+
+    
+    UPDATE_TYPES = (
+        (1, 'General'),
+        (2, 'Human Resource'),
+        (3, 'Information_technology'),
+        (4, 'Inventory'),
+        (5, 'Marketing'),
+        (6, 'Finance'),
+    )
     title =  models.CharField(max_length=50)
     update = models.TextField()
     time_stamp = models.DateTimeField(auto_now=True) 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    department =  models.PositiveSmallIntegerField(choices=UPDATE_TYPES, null=True)
+    
+    @classmethod
+    def get_update(cls,id):
+        update = get_object_or_404(cls, pk=id) 
+
     
 
 class Comments(models.Model):
-    comment = models.CharField(max_length=100,blank=True)
+    comment = models.TextField()
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     update = models.ForeignKey(Updates,on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)

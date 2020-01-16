@@ -73,6 +73,25 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_registration',
     'online_users'
+    'django.contrib.humanize',
+    'admincolors',
+
+  
+]
+
+
+
+    
+
+
+]
+ADMIN_COLORS_BASE_THEME = 'Black'
+ADMIN_COLORS=[
+    ('Default',[]),
+    ('Lite','admincolors/css/lite.css'),
+    ('Dark Blue','admincolors/css/dark-blue.css'),
+    ('Gray','admincolors/css/gray.css'),
+    ('Black',('admincolors/css/gray.css','static/css/theme.css')),
 ]
 
 
@@ -88,10 +107,24 @@ MIDDLEWARE = [
     'online_users.middleware.OnlineNowMiddleware',
 ]
 
+MIDDLEWARE_CLASSES = (
+    'middleware.activeuser_middleware.ActiveUserMiddleware',
+)
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'default-cache'
+    }
+}
+
+USER_ONLINE_TIMEOUT = 300
+USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
+
 ROOT_URLCONF = 'pawame.urls'
 
 TEMPLATES = [
-    {
+    {   
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
@@ -102,6 +135,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'admincolors.context_processors.admin_theme',
             ],
         },
     },
@@ -112,9 +146,6 @@ WSGI_APPLICATION='pawame.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -161,10 +192,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+CRISPY_TEMPLATE_PACK='bootstrap4'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'updates'
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
