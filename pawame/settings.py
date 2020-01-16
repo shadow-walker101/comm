@@ -30,8 +30,7 @@ if config('MODE')=="dev":
            'PASSWORD': config('DB_PASSWORD'),
            'HOST': config('DB_HOST'),
            'PORT': '',
-           
-       }
+        }
    }
 
    #production
@@ -74,7 +73,7 @@ INSTALLED_APPS = [
     'django_registration',
     'online_users',
     'django.contrib.humanize',
-    'admincolors',  
+    'admincolors'
 ]
 
 
@@ -97,12 +96,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'online_users.middleware.OnlineNowMiddleware',
 ]
 
-MIDDLEWARE_CLASSES = (
-    'middleware.activeuser_middleware.ActiveUserMiddleware',
-)
 
 CACHES = {
     'default': {
