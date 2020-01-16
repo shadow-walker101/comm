@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 98906828a74134ddffde3fa5eb2d7d94312c74b6
 from django.shortcuts import render , redirect, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from . models import * 
@@ -39,7 +44,11 @@ def human_resource(request):
     updates = Updates.objects.filter(department=2).all()
     return render(request,template, {'updates':updates})
 
-# @user_passes_test(lambda u:u.is_active and u.department==3,redirect_field_name=REDIRECT_FIELD_NAME,login_url='accounts/login')
+
+def updates(request):
+    return render(request, 'updates.html')
+
+# @user_passes_test(lambda u:u.is_active and u.department==3,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
 def finance(request):
     template='finance.html'
     updates = Updates.objects.filter(department=6).all()
@@ -59,9 +68,8 @@ def information_technology(request):
     return render(request,template,{'update':updates})
 
 @login_required(login_url='accounts/login')
+
 def employees(request):
-    template='employees.html'
-    return render(request, template)
 
 
 def notifications(request):

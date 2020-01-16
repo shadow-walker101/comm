@@ -72,9 +72,13 @@ INSTALLED_APPS = [
     'intranet.apps.IntranetConfig',
     'django.contrib.humanize',
     'crispy_forms',
+<<<<<<< HEAD
+    'django_registration'
+=======
     'django_registration',
     'django.contrib.humanize',
     'admincolors',
+>>>>>>> 98906828a74134ddffde3fa5eb2d7d94312c74b6
 
 
 ]
@@ -89,6 +93,10 @@ ADMIN_COLORS=[
 
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 98906828a74134ddffde3fa5eb2d7d94312c74b6
 MIDDLEWARE = [
 
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -142,7 +150,10 @@ WSGI_APPLICATION='pawame.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 98906828a74134ddffde3fa5eb2d7d94312c74b6
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -177,8 +188,11 @@ USE_TZ = True
 
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
+<<<<<<< HEAD
+=======
 LOGIN_REDIRECT_URL='updates'
 
+>>>>>>> 98906828a74134ddffde3fa5eb2d7d94312c74b6
 # Static files (CSS, JavaScript, Images)
 AUTH_USER_MODEL = 'intranet.User'
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

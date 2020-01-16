@@ -30,8 +30,27 @@
   font-size: 35px;
 }
 
-#bg{
+#bgimage{
+ 
   background-image: url(https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?cs=srgb&dl=person-s-left-hand-holding-green-leaf-plant-886521.jpg&fm=jpg);
   background-size: cover;
-
 }
+
+.bgcolor{
+  background-color: #E7E6E2;
+}
+
+#purpose{
+  padding-top: 10px;
+}
+
+.textgrn{
+  color: #0B920D;
+}
+
+
+
+<<<<<<< HEAD
+=======
+}
+>>>>>>> 98906828a74134ddffde3fa5eb2d7d94312c74b6
