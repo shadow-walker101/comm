@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import REDIRECT_FIELD_NAME
+from datetime import timedelta
+import online_users.models
 from .forms import *
 
 
@@ -39,7 +41,11 @@ def human_resource(request):
     updates = Updates.objects.filter(department=2).all()
     return render(request,template, {'updates':updates})
 
-# @user_passes_test(lambda u:u.is_active and u.department==3,redirect_field_name=REDIRECT_FIELD_NAME,login_url='accounts/login')
+
+def updates(request):
+    return render(request, 'updates.html')
+
+# @user_passes_test(lambda u:u.is_active and u.department==3,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
 def finance(request):
     template='finance.html'
     updates = Updates.objects.filter(department=6).all()
@@ -60,8 +66,14 @@ def information_technology(request):
 
 @login_required(login_url='accounts/login')
 def employees(request):
-    template='employees.html'
-    return render(request, template)
+    user_status = online_users.models.OnlineUserActivity.get_user_activities(timedelta(minutes=60))
+    users = (user for user in user_status)
+    context = {"online_users"}
+
+    if request.user.user_type == 1 or request.user.user_type == 2:
+        return render(request, 'employees.html')
+    else:
+        return render(request, 'employeeProfile.html')
 
 
 def notifications(request):
@@ -73,6 +85,7 @@ def employeeProfile(request):
     current_user = request.user
     profile = Profile.objects.filter(user=current_user)
     return render(request, 'employeeProfile.html', {'profile':profile})
+
 
 @login_required(login_url='accounts/login')
 def postUpdate(request):
@@ -89,3 +102,6 @@ def postUpdate(request):
             form = PostUpdateForm()
             return render(request, 'postUpdate.html', {"form":form})
     return redirect('updates')
+  
+def searchResults(request):
+    return render(request, 'searchResults.html')
