@@ -72,19 +72,12 @@ INSTALLED_APPS = [
     'intranet.apps.IntranetConfig',
     'crispy_forms',
     'django_registration',
-    'online_users'
+    'online_users',
     'django.contrib.humanize',
-    'admincolors',
-
-  
+    'admincolors',  
 ]
 
 
-
-    
-
-
-]
 ADMIN_COLORS_BASE_THEME = 'Black'
 ADMIN_COLORS=[
     ('Default',[]),
