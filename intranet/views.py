@@ -26,7 +26,8 @@ def login (request):
         
 def updates(request):
     updates = Updates.objects.filter(department=1).all()
-    return render(request, 'updates.html' ,{'updates':updates})
+    users = User.objects.order_by('-last_login')
+    return render(request, 'updates.html' ,{'updates':updates, 'users':users})
 
 def marketing(request):
     template='marketing.html'
@@ -81,10 +82,10 @@ def notifications(request):
     
 
 def employeeProfile(request):
-    return render(request, 'employeeProfile.html')
-  
-def searchResults(request):
-    return render(request, 'searchResults.html')
+    current_user = request.user
+    profile = Profile.objects.filter(user=current_user)
+    return render(request, 'employeeProfile.html', {'profile':profile})
+
 
 @login_required(login_url='accounts/login')
 def postUpdate(request):
@@ -101,4 +102,6 @@ def postUpdate(request):
             form = PostUpdateForm()
             return render(request, 'postUpdate.html', {"form":form})
     return redirect('updates')
-
+  
+def searchResults(request):
+    return render(request, 'searchResults.html')

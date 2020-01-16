@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
+    'django.contrib.humanize',
     'crispy_forms',
     'django_registration',
     'online_users'
@@ -106,6 +107,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'online_users.middleware.OnlineNowMiddleware',
 ]
+
+MIDDLEWARE_CLASSES = (
+    'middleware.activeuser_middleware.ActiveUserMiddleware',
+)
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'default-cache'
+    }
+}
+
+USER_ONLINE_TIMEOUT = 300
+USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
 
 ROOT_URLCONF = 'pawame.urls'
 
