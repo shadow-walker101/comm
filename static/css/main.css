@@ -1,8 +1,8 @@
 .pawame {
-    font-family: 'Sniglet', cursive;
-    font-size: 23px;
-    color: #0B920D;
-  }
+  font-family: 'Sniglet', cursive;
+  font-size: 23px;
+  color: #0B920D;
+}
 
 .links a {
   color: black;
@@ -24,10 +24,9 @@
   font-size: 35px;
 }
 
-#bg{
+#bg {
   background-image: url(https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?cs=srgb&dl=person-s-left-hand-holding-green-leaf-plant-886521.jpg&fm=jpg);
   background-size: cover;
-
 }
 
 .postTo {
@@ -37,4 +36,22 @@
   border-radius: 0;
   outline: none;
   box-shadow: none;
+}
+
+/* Working method */
+
+.tinted-image {
+  background: /* top, transparent red, faked with gradient */
+  linear-gradient( rgba(116, 116, 116, 0.712), rgba(116, 116, 116, 0.74)), /* bottom, image */
+  url(https://c4.wallpaperflare.com/wallpaper/696/827/787/green-nature-light-bulb-green-energy-wallpaper-preview.jpg);
+  height: 100vh;
+  background-size: cover;
+}
+
+.search {
+  font-size: 40px;
+}
+
+.search-link a{
+  color: black;
 }
