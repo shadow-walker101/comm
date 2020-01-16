@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 98906828a74134ddffde3fa5eb2d7d94312c74b6
 from django.shortcuts import render , redirect, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from . models import * 
@@ -26,7 +21,7 @@ def login (request):
             return redirect('updates')
 
 
-        
+@login_required(login_url='accounts/login')      
 def updates(request):
     updates = Updates.objects.filter(department=1).all()
     users = User.objects.order_by('-last_login')
@@ -66,10 +61,6 @@ def information_technology(request):
     template='information_technology.html'
     updates = Updates.objects.filter(department=3).all()
     return render(request,template,{'update':updates})
-
-@login_required(login_url='accounts/login')
-
-def employees(request):
 
 
 def notifications(request):
