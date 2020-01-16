@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from . models import * 
+from online_users.models import OnlineUserActivity
 
 
 class UserAdmin(BaseUserAdmin):
@@ -28,3 +29,6 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ('groups', 'user_permissions',)
     
 admin.site.register(User, UserAdmin)
+admin.site.register(Profile)
+admin.site.register(Updates)
+admin.site.register(Comments)
