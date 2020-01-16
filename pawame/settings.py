@@ -81,7 +81,8 @@ ADMIN_COLORS=[
     ('Default',[]),
     ('Lite','admincolors/css/lite.css'),
     ('Dark Blue','admincolors/css/dark-blue.css'),
-    ('Gray','admincolors/css/gray.css')
+    ('Gray','admincolors/css/gray.css'),
+    ('Black',('admincolors/css/gray.css','static/css/theme.css')),
 ]
 
 
