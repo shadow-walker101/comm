@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import(BaseUserManager, AbstractBaseUser, PermissionsMixin)
 from django.shortcuts import get_object_or_404
+from django.core.cache import cache 
+import datetime
+from pawame import settings
+
 class MyUserManager(BaseUserManager):
     def create_user(self, email, user_type, department,username, password=None):
         if not email:
@@ -71,6 +75,20 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.first_name
+    
+    def last_seen(self):
+        return cache.get('seen_%s' % self.user.username)
+    
+    def online(self):
+        if self.last_seen():
+            now = datetime.datetime.now()
+            if now > self.last_seen() + datetime.timedelta(
+                         seconds=settings.USER_ONLINE_TIMEOUT):
+                return False
+            else:
+                return True
+        else:
+            return False
     
 class Updates(models.Model):
     

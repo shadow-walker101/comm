@@ -2,6 +2,10 @@
 
 {% block content %}
 
+{%for u in users%}
+    {{u.username}} - {{u.last_login}}<br />
+{% endfor %}
+
 <div class="container">
   <h3 class="text-center font-weight-bolder pt-3 pb-3">
     General Updates
