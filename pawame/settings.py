@@ -73,6 +73,25 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_registration',
     'online_users'
+    'django.contrib.humanize',
+    'admincolors',
+
+  
+]
+
+
+
+    
+
+
+]
+ADMIN_COLORS_BASE_THEME = 'Black'
+ADMIN_COLORS=[
+    ('Default',[]),
+    ('Lite','admincolors/css/lite.css'),
+    ('Dark Blue','admincolors/css/dark-blue.css'),
+    ('Gray','admincolors/css/gray.css'),
+    ('Black',('admincolors/css/gray.css','static/css/theme.css')),
 ]
 
 
@@ -91,7 +110,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'pawame.urls'
 
 TEMPLATES = [
-    {
+    {   
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
@@ -102,6 +121,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'admincolors.context_processors.admin_theme',
             ],
         },
     },
@@ -112,9 +132,6 @@ WSGI_APPLICATION='pawame.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -149,7 +166,10 @@ USE_TZ = True
 
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
+
+
 LOGIN_REDIRECT_URL='updates'
+
 
 # Static files (CSS, JavaScript, Images)
 AUTH_USER_MODEL = 'intranet.User'
@@ -160,6 +180,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+CRISPY_TEMPLATE_PACK='bootstrap4'
 
 
 MEDIA_URL = '/media/'
