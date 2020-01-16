@@ -84,7 +84,22 @@ def postUpdate(request):
             return render(request, 'postUpdate.html', {"form":form})
     return redirect('updates')
 
-            
+def add_comment(request,id):
+    current_user = request.user
+    post = Updates.get_update(id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        print(form)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = current_user
+            comment.update = post
+            comment.save()
+        return redirect('updates')
+
+    else:
+        form = CommentForm()
+        return render(request,'new_comment.html',{"form":form})  
         
     
 
