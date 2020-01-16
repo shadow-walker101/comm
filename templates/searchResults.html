@@ -1,0 +1,42 @@
+ {% extends 'base.html'%}
+
+ {% block content %}
+
+ <div class='contaner'>
+    <div class="row justify-content-center pt-4">
+
+
+    <!-- insert search results if statement then start loop -->
+
+        <!-- If online users, show the following -->
+            {% if user.is_authenticated %}
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="avatar mx-auto white text-center">
+                    <img src="{{ user.profile.image.url }}" height="120px" width="120px"
+                    alt="avatar mx-auto white" class="rounded-circle img-fluid onlineUser">
+                    <a href="#">
+                    <h6 class="font-weight-light pt-1"> {{ user.username}} <br> <b> {{user.user_type}}</b> </h6>
+                    </a>
+                </div>
+            </div>    
+            {% endif %}
+        <!-- end of list of online users-->
+
+        <!-- if not online, show the following -->
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="avatar mx-auto white text-center">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(22).jpg" height="120px" width="120px"
+                alt="avatar mx-auto white" class="rounded-circle img-fluid">
+                <a href="#">
+                <h6 class="font-weight-light pt-1">Samantha <br> <b>Admin</b> </h6>
+                </a>
+            </div>
+        </div>
+
+        <!-- end of list of not-online users -->
+
+
+    </div>
+</div>
+
+ {% endblock %}
