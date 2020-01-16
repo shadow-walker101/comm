@@ -27,6 +27,8 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 class User(AbstractBaseUser, PermissionsMixin):
+   
+
     USER_TYPES_CHOICES = (
         (1, 'SuperAdmin'),
         (2, 'Admin'),
@@ -55,6 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return True
     def has_module_perms(self, app_label):
         return True
+    
     @property
     def is_staff(self):
         return self.is_admin
