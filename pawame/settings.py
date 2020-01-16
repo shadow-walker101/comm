@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'admincolors',
 
+
 ]
 ADMIN_COLORS_BASE_THEME = 'Black'
 ADMIN_COLORS=[
