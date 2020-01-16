@@ -46,12 +46,14 @@
   url(https://c4.wallpaperflare.com/wallpaper/696/827/787/green-nature-light-bulb-green-energy-wallpaper-preview.jpg);
   height: 100vh;
   background-size: cover;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .search {
   font-size: 40px;
 }
 
-.search-link a{
+.search-link a {
   color: black;
 }
