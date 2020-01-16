@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from . forms import *
+from .forms import *
+
 
 
 
@@ -18,6 +19,8 @@ def login (request):
         if user is not None:
             login(request, user)
             return redirect('updates')
+
+
         
 def updates(request):
     updates = Updates.objects.filter(department=1).all()
@@ -30,6 +33,7 @@ def marketing(request):
     return render(request, template,{'updates':updates})
 
 # @user_passes_test(lambda u: u.is_active and u.department==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='accounts/login')
+
 def human_resource(request):
     template='human_resource.html'
     updates = Updates.objects.filter(department=2).all()
