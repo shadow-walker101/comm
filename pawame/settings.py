@@ -72,7 +72,7 @@ INSTALLED_APPS = [
     'intranet.apps.IntranetConfig',
     'crispy_forms',
     'django_registration',
-    'online_users'
+    'online_users',
     'django.contrib.humanize',
     'admincolors',
 
@@ -80,11 +80,6 @@ INSTALLED_APPS = [
 ]
 
 
-
-    
-
-
-]
 ADMIN_COLORS_BASE_THEME = 'Black'
 ADMIN_COLORS=[
     ('Default',[]),
@@ -104,12 +99,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'online_users.middleware.OnlineNowMiddleware',
+  
+    
 ]
 
-MIDDLEWARE_CLASSES = (
-    'middleware.activeuser_middleware.ActiveUserMiddleware',
-)
 
 CACHES = {
     'default': {

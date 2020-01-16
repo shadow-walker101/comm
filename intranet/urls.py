@@ -7,38 +7,20 @@ from .import views
 
 
 urlpatterns = [
-<<<<<<< HEAD
-    
-    path('', views.updates,name='updates'),
-    path('notifications/.0.', views.notifications, name='notifications'),
-    path('login/', views.login, name='login'),
-    path('inventory/', views.inventory, name='inventory'),
-    path('finance/', views.finance, name='finance'),
-    path('marketing/', views.marketing, name='marketing'),
-    path('information/', views.information_technology, name='information'),
-    path('employeeProfile/', views.employeeProfile, name='employeeProfile'),
+    path('', views.updates, name='updates'),
+    path('notifications/',views.notifications, name='notifications'),
+    path('employees/',views.employees, name='employees'),
+    path('login/',views.login, name='login'),
+    path('inventory/',views.inventory, name='inventory'),
+    path('finance/',views.finance, name='finance'),
+    path('marketing/',views.marketing, name='marketing'),
+    path('information/',views.information_technology, name='information'),
+    path('employeeProfile/',views.employeeProfile, name='employeeProfile'),
     path('human_resource/',views.human_resource,name='human_resource'),
     path('postUpdate/',views.postUpdate,name='postUpdate'),
-
-]
-
-=======
-    path('', views.updates, name='updates'),
-
-    path('notifications', views.notifications, name='notifications'),
-    path('employees', views.employees, name='employees'),
-    path('login', views.login, name='login'),
-    path('inventory', views.inventory, name='inventory'),
-    path('finance', views.finance, name='finance'),
-    path('marketing', views.marketing, name='marketing'),
-    path('information', views.information_technology, name='information'),
-    path('employeeProfile', views.employeeProfile, name='employeeProfile'),
-    path('human_resource',views.human_resource,name='human_resource'),
-    path('postUpdate',views.postUpdate,name='postUpdate'),
-    path('searchResults',views.searchResults,name='searchResults'),
+    path('searchResults/',views.searchResults,name='searchResults'),
 
 ]
 
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
->>>>>>> 5272bce94527d53d1a5de99678f0848c2e266491
