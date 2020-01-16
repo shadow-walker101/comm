@@ -28,6 +28,8 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 class User(AbstractBaseUser, PermissionsMixin):
+   
+
     USER_TYPES_CHOICES = (
         (1, 'SuperAdmin'),
         (2, 'Admin'),
@@ -56,6 +58,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return True
     def has_module_perms(self, app_label):
         return True
+    
     @property
     def is_staff(self):
         return self.is_admin
@@ -73,6 +76,7 @@ class Profile(models.Model):
         return self.first_name
     
 class Updates(models.Model):
+
     
     UPDATE_TYPES = (
         (1, 'General'),
@@ -91,6 +95,7 @@ class Updates(models.Model):
     @classmethod
     def get_update(cls,id):
         update = get_object_or_404(cls, pk=id) 
+
     
 
 class Comments(models.Model):
