@@ -1,6 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import(BaseUserManager, AbstractBaseUser, PermissionsMixin)
+import online_users.models
+from datetime import timedelta
 from django.shortcuts import get_object_or_404
+from django.core.cache import cache 
+import datetime
+from pawame import settings
+
+
 class MyUserManager(BaseUserManager):
     def create_user(self, email, user_type, department,username, password=None):
         if not email:
@@ -27,6 +34,7 @@ class MyUserManager(BaseUserManager):
         user.is_admin = True
         user.save(using=self._db)
         return user
+    
 class User(AbstractBaseUser, PermissionsMixin):
    
 
@@ -49,9 +57,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     department = models.PositiveSmallIntegerField(choices=DEPARTMENTS, null=True)
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'user_type']
+    
     objects = MyUserManager()
+    
+
+
     def __str__(self):
         return self.username
     def has_perm(self, perm, obj=None):
@@ -74,6 +87,20 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.first_name
+    
+    def last_seen(self):
+        return cache.get('seen_%s' % self.user.username)
+    
+    def online(self):
+        if self.last_seen():
+            now = datetime.datetime.now()
+            if now > self.last_seen() + datetime.timedelta(
+                         seconds=settings.USER_ONLINE_TIMEOUT):
+                return False
+            else:
+                return True
+        else:
+            return False
     
 class Updates(models.Model):
 
@@ -113,5 +140,3 @@ class Comments(models.Model):
         self.save()
     def __str__(self):
       return self.comment
-
-

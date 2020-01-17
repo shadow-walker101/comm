@@ -1,11 +1,15 @@
 from django.shortcuts import render , redirect, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate
-from . models import * 
+from. models import * 
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import REDIRECT_FIELD_NAME
+from datetime import timedelta
+import online_users.models
 from .forms import *
+from .filters import UserFilter
+
 
 
 
@@ -20,10 +24,11 @@ def login (request):
             return redirect('updates')
 
 
-        
+# @login_required(login_url='accounts/login')      
 def updates(request):
     updates = Updates.objects.filter(department=1).all()
-    return render(request, 'updates.html' ,{'updates':updates})
+    users = User.objects.order_by('-last_login')
+    return render(request, 'updates.html' ,{'updates':updates, 'users':users})
 
 def marketing(request):
     template='marketing.html'
@@ -37,7 +42,11 @@ def human_resource(request):
     updates = Updates.objects.filter(department=2).all()
     return render(request,template, {'updates':updates})
 
-# @user_passes_test(lambda u:u.is_active and u.department==3,redirect_field_name=REDIRECT_FIELD_NAME,login_url='accounts/login')
+
+def updates(request):
+    return render(request, 'updates.html')
+
+# @user_passes_test(lambda u:u.is_active and u.department==3,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
 def finance(request):
     template='finance.html'
     updates = Updates.objects.filter(department=6).all()
@@ -56,10 +65,16 @@ def information_technology(request):
     updates = Updates.objects.filter(department=3).all()
     return render(request,template,{'update':updates})
 
-@login_required(login_url='accounts/login')
+# @login_required(login_url='accounts/login')
 def employees(request):
-    template='employees.html'
-    return render(request, template)
+    user_status = online_users.models.OnlineUserActivity.get_user_activities(timedelta(minutes=60))
+    users = (user for user in user_status)
+    context = {"online_users"}
+
+    if request.user.user_type == 1 or request.user.user_type == 2:
+        return render(request, 'employees.html')
+    else:
+        return render(request, 'employeeProfile.html')
 
 
 def notifications(request):
@@ -68,9 +83,12 @@ def notifications(request):
     
 
 def employeeProfile(request):
-    return render(request, 'employeeProfile.html')
+    current_user = request.user
+    profile = Profile.objects.filter(user= current_user)
+    return render(request, 'employeeProfile.html', {'profile':profile})
 
-@login_required(login_url='accounts/login')
+
+# @login_required(login_url='accounts/login')
 def postUpdate(request):
     current_user =  request.user
     if current_user.user_type == 1 or current_user.user_type==2:
@@ -85,3 +103,9 @@ def postUpdate(request):
             form = PostUpdateForm()
             return render(request, 'postUpdate.html', {"form":form})
     return redirect('updates')
+  
+def searchResults(request):
+    users=User.objects.all()
+    user_filter=UserFilter(request.GET,queryset=users) 
+    return render(request,'searchResults.html',{'filter':user_filter})
+
