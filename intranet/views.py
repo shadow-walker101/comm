@@ -88,7 +88,7 @@ def employeeProfile(request):
 
 
 @login_required(login_url='accounts/login')
-def postUpdate(request, update_id):
+def postUpdate(request):
     current_user =  request.user
     if current_user.user_type == 1 or current_user.user_type==2:
         if request.method == 'POST':

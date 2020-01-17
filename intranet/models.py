@@ -103,7 +103,6 @@ class Profile(models.Model):
             return False
     
 class Updates(models.Model):
-
     
     UPDATE_TYPES = (
         (1, 'General'),
