@@ -33,9 +33,8 @@ if config('MODE')=="dev":
            
        }
    }
-   
-   #production
 
+   #production
 else:
    DATABASES = {
        'default': dj_database_url.config(
@@ -72,15 +71,26 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
     'crispy_forms',
-    'django_registration'
+    'django_registration',
+    'online_users',
+    'django.contrib.humanize',
+    'admincolors',
 
+  
 ]
 
 
+ADMIN_COLORS_BASE_THEME = 'Black'
+ADMIN_COLORS=[
+    ('Default',[]),
+    ('Lite','admincolors/css/lite.css'),
+    ('Dark Blue','admincolors/css/dark-blue.css'),
+    ('Gray','admincolors/css/gray.css'),
+    ('Black',('admincolors/css/gray.css','static/css/theme.css')),
+]
 
 
 MIDDLEWARE = [
-
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -89,12 +99,25 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+  
+    
 ]
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'default-cache'
+    }
+}
+
+USER_ONLINE_TIMEOUT = 300
+USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
 
 ROOT_URLCONF = 'pawame.urls'
 
 TEMPLATES = [
-    {
+    {   
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
@@ -105,6 +128,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'admincolors.context_processors.admin_theme',
             ],
         },
     },
@@ -115,9 +139,6 @@ WSGI_APPLICATION='pawame.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -152,6 +173,8 @@ USE_TZ = True
 
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
+LOGIN_REDIRECT_URL='updates'
+
 # Static files (CSS, JavaScript, Images)
 AUTH_USER_MODEL = 'intranet.User'
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -162,10 +185,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+CRISPY_TEMPLATE_PACK='bootstrap4'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'updates'
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
