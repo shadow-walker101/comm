@@ -8,6 +8,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from datetime import timedelta
 import online_users.models
 from .forms import *
+from .filters import UserFilter
 
 
 
@@ -103,8 +104,8 @@ def postUpdate(request):
             return render(request, 'postUpdate.html', {"form":form})
     return redirect('updates')
   
-def search(request):
- 
+def searchResults(request):
+    users=User.objects.all()
+    user_filter=UserFilter(request.GET,queryset=users) 
+    return render(request,'searchResults.html',{'filter':user_filter})
 
-
-    return render(request,'searchResults.html')

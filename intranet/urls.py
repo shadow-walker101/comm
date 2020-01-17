@@ -18,7 +18,7 @@ urlpatterns = [
     path('employeeProfile/',views.employeeProfile, name='employeeProfile'),
     path('human_resource/',views.human_resource,name='human_resource'),
     path('postUpdate/',views.postUpdate,name='postUpdate'),
-    path('search/',views.search,name='search'),
+    path('searchResults/',views.searchResults,name='searchResults'),
 
 ]
 
