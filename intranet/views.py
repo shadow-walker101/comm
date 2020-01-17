@@ -5,7 +5,10 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import REDIRECT_FIELD_NAME
+from datetime import timedelta
+import online_users.models
 from .forms import *
+
 
 
 
@@ -20,10 +23,11 @@ def login (request):
             return redirect('updates')
 
 
-        
+@login_required(login_url='accounts/login')      
 def updates(request):
     updates = Updates.objects.filter(department=1).all()
-    return render(request, 'updates.html' ,{'updates':updates})
+    users = User.objects.order_by('-last_login')
+    return render(request, 'updates.html' ,{'updates':updates, 'users':users})
 
 def marketing(request):
     template='marketing.html'
@@ -61,6 +65,15 @@ def information_technology(request):
     return render(request,template,{'update':updates})
 
 @login_required(login_url='accounts/login')
+def employees(request):
+    user_status = online_users.models.OnlineUserActivity.get_user_activities(timedelta(minutes=60))
+    users = (user for user in user_status)
+    context = {"online_users"}
+
+    if request.user.user_type == 1 or request.user.user_type == 2:
+        return render(request, 'employees.html')
+    else:
+        return render(request, 'employeeProfile.html')
 
 
 def notifications(request):
@@ -69,7 +82,10 @@ def notifications(request):
     
 
 def employeeProfile(request):
-    return render(request, 'employeeProfile.html')
+    current_user = request.user
+    profile = Profile.objects.filter(user=current_user)
+    return render(request, 'employeeProfile.html', {'profile':profile})
+
 
 @login_required(login_url='accounts/login')
 def postUpdate(request):
@@ -86,3 +102,6 @@ def postUpdate(request):
             form = PostUpdateForm()
             return render(request, 'postUpdate.html', {"form":form})
     return redirect('updates')
+  
+def searchResults(request):
+    return render(request, 'searchResults.html')

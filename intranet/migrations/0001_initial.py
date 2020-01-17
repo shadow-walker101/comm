@@ -42,11 +42,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=50)),
                 ('update', models.TextField()),
                 ('time_stamp', models.DateTimeField(auto_now=True)),
-
-                ('update_type', models.PositiveSmallIntegerField(choices=[(1, 'Human Resource'), (2, 'Marketing'), (3, 'Information Technology'), (4, 'Finance'), (5, 'Marketing'), (6, 'General')], null=True)),
-
                 ('department', models.PositiveSmallIntegerField(choices=[(1, 'General'), (2, 'Human Resource'), (3, 'Information_technology'), (4, 'Inventory'), (5, 'Marketing'), (6, 'Finance')], null=True)),
-
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
