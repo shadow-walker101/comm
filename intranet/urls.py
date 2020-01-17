@@ -17,6 +17,7 @@ urlpatterns = [
     path('human_resource',views.human_resource,name='human_resource'),
     path('postUpdate',views.postUpdate,name='postUpdate'),
     path('searchResults',views.searchResults,name='searchResults'),
+    path('comments/<int:update_id>',views.comments,name='comments'),
 ]
 
 if settings.DEBUG:

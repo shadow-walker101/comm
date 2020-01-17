@@ -73,7 +73,9 @@ INSTALLED_APPS = [
     'django_registration',
     'online_users',
     'django.contrib.humanize',
-    'admincolors'
+    'admincolors',
+    'bootstrapform',
+    'bootstrap4'
 ]
 
 

@@ -122,11 +122,13 @@ class Updates(models.Model):
     @classmethod
     def get_update(cls,id):
         update = get_object_or_404(cls, pk=id) 
-
+        
+    def __str__(self):
+          return self.title
     
 
 class Comments(models.Model):
-    comment = models.TextField()
+    comment = models.CharField(max_length=1000)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     update = models.ForeignKey(Updates,on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
@@ -138,5 +140,6 @@ class Comments(models.Model):
 
     def save_comment(self):
         self.save()
+        
     def __str__(self):
       return self.comment

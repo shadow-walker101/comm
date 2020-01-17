@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
 
 {% block content %}
 
@@ -12,40 +14,115 @@
   </h3>
   <hr>
 
+{% for update in updates %}
+
+
   <div class="media">
     <img class="d-flex rounded-circle avatar z-depth-1-half mr-3"
       src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="Avatar">
     <div class="media-body">
-      <h5 class="mt-0 font-weight-bold dark-text post-content">Monthly Employee Analysis</h5>
-      <p class="post-content">
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
-        odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-        fringilla. Donec lacinia congue felis in faucibus.
+      <h5 class="mt-0 font-weight-bold dark-text post-content">{{ update.title }}</h5>
+      <p class="post-content">  
+       
+        {{ update.update }}
+
       </p>
 
       <h6 class="text-muted pt-2 post-date">
-        <i>Posted by:Super Admin on Jan 12 2020</i>
+        <i>Posted by: {{ update.user }} on {{ update.time_stamp|timesince }} ago </i>
       </h6>
-      <a href="#">view all comments</a>
+
+          <div class="accordion" id="accordionExample275">
+              <div id="headingOne2">
+                <h5 class="mb-0">
+                  <button class="btn btn-sm btn-link" type="button" data-toggle="collapse" data-target="#collapseOne2"
+                    aria-expanded="true" aria-controls="collapseOne2">
+
+                        <a data-toggle="collapse" href="#{{ update.id }}" role="button" aria-expanded="false" aria-controls="collapseExample"> View all {{ update.comments_set.all|length }} comment{{update.comments_set.all|pluralize}} </a>
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseOne2" class="collapse" aria-labelledby="headingOne2"
+                data-parent="#accordionExample275">
+                <div class="card-body">
+                  
+                  {% for comment in update.comments_set.all %}
+                  <p> <img class="rounded" src="/static/images/comentingAvatar3.jpeg" style="width:15px; height:20px;"> <strong> {{ comment.user }}:</strong> <span class="postedOn"> on {{comment.date_posted}} </span> <br> {{ comment.comment }} 
+                  </p>
+                  {% endfor %}
+
+                </div>
+              </div>
+            
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
       <div class="media mt-3 shadow-textarea">
         <img class="d-flex rounded-circle avatar z-depth-1-half mr-3"
           src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" height="80px" width="80px"
           alt="Generic placeholder image">
         <div class="media-body">
-          <div class="form-group basic-textarea rounded-corners">
-            <form action="POST">
-              <textarea class="form-control z-depth-1" id="exampleFormControlTextarea345" rows="3"
-                placeholder="Write your update..."></textarea>
-              <button type="button" class="btn btn-success btn-sm px-2 py-1"><i class="far fa-thumbs-up mr-2"
-                  aria-hidden="true"></i>Comment</button>
+          <div class="form-group basic-textarea rounded-corners commentForm">
 
+            <form action="{% url 'comments' update_id=update.id %}" method="post">
+            {% csrf_token %}
+              
+            {% bootstrap_form commentForm layout='inline '%}
+            
+              <button type="submit" class="btn btn-success btn-sm px-2 py-1"><i class="far fa-thumbs-up mr-2" aria-hidden="true"></i>Comment</button>
             </form>
+
 
           </div>
         </div>
       </div>
     </div>
   </div>
+
+
+{% endfor %}
+
 
 </div>
 
