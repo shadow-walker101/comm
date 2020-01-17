@@ -72,11 +72,14 @@ INSTALLED_APPS = [
     'intranet.apps.IntranetConfig',
     'crispy_forms',
     'django_registration',
+    'online_users',
     'django.contrib.humanize',
     'admincolors',
 
-
+  
 ]
+
+
 ADMIN_COLORS_BASE_THEME = 'Black'
 ADMIN_COLORS=[
     ('Default',[]),
@@ -87,9 +90,7 @@ ADMIN_COLORS=[
 ]
 
 
-
 MIDDLEWARE = [
-
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -98,7 +99,20 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+  
+    
 ]
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'default-cache'
+    }
+}
+
+USER_ONLINE_TIMEOUT = 300
+USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
 
 ROOT_URLCONF = 'pawame.urls'
 
@@ -125,9 +139,6 @@ WSGI_APPLICATION='pawame.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -181,5 +192,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'updates'
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))

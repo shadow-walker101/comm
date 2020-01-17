@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<table>
+  <tr>
+    <th>Last Seen</th>
+    <td>{% if profile.last_seen %}{{ profile.last_seen|timesince }}{% else %}awhile{% endif %} ago</td>
+  </tr>
+  <tr>
+    <th>Online</th>
+    <td>{% if profile.online %}<p style="background-color: green;">online</p>{% endif %}</td>
+  </tr>
+</table>
 
 <div class="container">
   <h4 class="text-center font-weight-bold pt-3"> HUMAN RESOURCE</h4>
@@ -38,5 +48,3 @@
   </div>
 
   {% endblock %}
-
-
