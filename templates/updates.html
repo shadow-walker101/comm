@@ -29,7 +29,7 @@
       </p>
 
       <h6 class="text-muted pt-2 post-date">
-        <i>Posted by: {{ update.user }} on {{ update.time_stamp|timesince }} ago </i>
+        <i>Posted by {{ update.user }}: {{ update.time_stamp|timesince }} ago </i>
       </h6>
 
           <div class="accordion" id="accordionExample275">
@@ -40,7 +40,8 @@
               <div id="collapse{{ update.id }}" class="collapse">
                   
                   {% for comment in update.comments_set.all %}
-                  <p> <img class="rounded" src="/static/images/comentingAvatar3.jpeg" style="width:15px; height:20px;"> <strong> {{ comment.user }}:</strong> <span class="postedOn"> on {{comment.date_posted}} </span> <br> {{ comment.comment }} 
+                  <p> <img class="rounded" src="/static/images/comentingAvatar3.jpeg" style="width:15px; height:20px;"> <strong> {{ comment.user }} said:</strong> {{ comment.comment }} <br>
+                  <span class="text-muted"> {{comment.date_posted|timesince}} ago </span>
                   </p>
                   {% endfor %}
 
