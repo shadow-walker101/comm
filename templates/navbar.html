@@ -12,7 +12,7 @@
         <a class="nav-link mr-2" href="{% url 'updates' %}">Home
         </a>
       </li>
-{% if request.user.user_type == 1 %}
+{% if request.user.user_type == 1 and request.user.is_authenticated %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle mr-2" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">Departments
