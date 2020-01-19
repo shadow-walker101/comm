@@ -11,24 +11,7 @@ from .forms import *
 from .filters import UserFilter
 
 
-<<<<<<< HEAD
 @login_required(login_url='/accounts/login/') 
-=======
-
-
-def login (request):
-    if request.method == "POST":
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = authenticate(request, email=email, password=password)
-        
-        if user is not None:
-            login(request, user)
-            return redirect('updates')
-
-
-# @login_required(login_url='accounts/login')      
->>>>>>> e7f0f67815a5fccdc9b5cbc50760c343587de200
 def updates(request):
     updates = Updates.objects.filter(department=1).all()
     users = User.objects.order_by('-last_login')
