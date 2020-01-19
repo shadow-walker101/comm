@@ -25,7 +25,9 @@
       <h5 class="mt-0 font-weight-bold dark-text post-content">{{ update.title }}</h5>
       <p class="post-content">  
        
-        {{ update.update }}
+      {% autoescape on %}
+        {{ update.update|safe}}
+      {% endautoescape %}
 
       </p>
 

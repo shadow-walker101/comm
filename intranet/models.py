@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.core.cache import cache 
 import datetime
 from pawame import settings
+from tinymce.models import HTMLField
 
 
 class MyUserManager(BaseUserManager):
@@ -112,8 +113,8 @@ class Updates(models.Model):
         (5, 'Marketing'),
         (6, 'Finance'),
     )
-    title =  models.CharField(max_length=50)
-    update = models.TextField()
+    title =  models.CharField(max_length=70)
+    update = HTMLField()
     time_stamp = models.DateTimeField(auto_now=True) 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     department =  models.PositiveSmallIntegerField(choices=UPDATE_TYPES, null=True)

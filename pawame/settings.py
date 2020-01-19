@@ -75,7 +75,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'admincolors',
     'bootstrapform',
-    'bootstrap4'
+    'bootstrap4',
+    'tinymce'
 ]
 
 

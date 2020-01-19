@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect, HttpResponse, HttpResponseRedirect, get_object_or_404
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from . models import * 
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -30,7 +30,7 @@ def updates(request):
     comments = Comments.objects.all()
     commentForm = CommentForm()
     
-    return render(request, 'updates.html' ,locals())
+    return render(request, 'updates.html', locals())
 
 def marketing(request):
     template='marketing.html'
@@ -53,9 +53,11 @@ def finance(request):
 
 # @user_passes_test(lambda u:u.is_active and u.department==2,redirect_field_name=REDIRECT_FIELD_NAME,login_url='accounts/login')
 def inventory(request):
-    template='inventory.html'
     updates = Updates.objects.filter(department=4).all()
-    return render(request,template,{'update':updates})
+    users = User.objects.order_by('-last_login')
+    comments = Comments.objects.all()
+    commentForm = CommentForm()
+    return render(request, 'inventory.html', locals())
 
 
 # @user_passes_test(lambda u:u.is_active and u.department==5,redirect_field_name=REDIRECT_FIELD_NAME,login_url='accounts/login')
