@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'admincolors',
     'online_users',
+    'django_filters',
 
   
 ]

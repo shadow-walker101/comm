@@ -10,39 +10,65 @@ import online_users.models
 from .forms import *
 from .filters import UserFilter
 
-
+def logins(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(email=email, password=password)
+        
+        if user is not None:
+            login(request, user)
+            if  request.user.department == 1 and request.user.is_authenticated:
+                return redirect('human_resource')
+            elif  request.user.department == 2 and request.user.is_authenticated:
+                return redirect('inventory')
+            elif request.user.department == 3 and request.user.is_authenticated:
+                return redirect('finance')
+            elif request.user.department == 4 and request.user.is_authenticated:
+                return redirect('marketing')
+            elif request.user.department == 5 and request.user.is_authenticated:
+                return redirect('information')
+            else :
+                return redirect('updates')
+        else:
+            return render(request,'registration/login.html')
+    else:
+        return render(request,'registration/login.html')
+    
 @login_required(login_url='/accounts/login/') 
 def updates(request):
     updates = Updates.objects.filter(department=1).all()
     users = User.objects.order_by('-last_login')
     return render(request, 'updates.html' ,{'updates':updates, 'users':users})
 
-def marketing(request):
-    template='marketing.html'
-    updates = Updates.objects.filter(department=5).all()
-    return render(request, template,{'updates':updates})
 
-@user_passes_test(lambda u: u.is_active and u.department==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
+@user_passes_test(lambda u: u.is_active and u.department==1 or u.user_type==1 ,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def human_resource(request):
     template='human_resource.html'
     updates = Updates.objects.filter(department=2).all()
     return render(request,template, {'updates':updates})
 
-
-
-def finance(request):
-    template='finance.html'@user_passes_test(lambda u:u.is_active and u.department==3,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
-    updates = Updates.objects.filter(department=6).all()
-    return render(request,template,{'update':updates})
-
-@user_passes_test(lambda u:u.is_active and u.department==2,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
+@user_passes_test(lambda u:u.is_active and u.department==2 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def inventory(request):
     template='inventory.html'
     updates = Updates.objects.filter(department=4).all()
     return render(request,template,{'update':updates})
 
 
-@user_passes_test(lambda u:u.is_active and u.department==5,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
+
+@user_passes_test(lambda u:u.is_active and u.department==3 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
+def finance(request):
+    template='finance.html'
+    updates = Updates.objects.filter(department=6).all()
+    return render(request,template,{'update':updates})
+
+@user_passes_test(lambda u:u.is_active and u.department==4 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
+def marketing(request):
+    template='marketing.html'
+    updates = Updates.objects.filter(department=5).all()
+    return render(request, template,{'updates':updates})
+
+@user_passes_test(lambda u:u.is_active and u.department==5 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def information_technology(request):
     template='information_technology.html'
     updates = Updates.objects.filter(department=3).all()
