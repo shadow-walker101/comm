@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate
-from . models import * 
+from. models import * 
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -8,6 +8,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from datetime import timedelta
 import online_users.models
 from .forms import *
+from .filters import UserFilter
 
 
 
@@ -23,7 +24,7 @@ def login (request):
             return redirect('updates')
 
 
-@login_required(login_url='accounts/login')      
+# @login_required(login_url='accounts/login')      
 def updates(request):
     updates = Updates.objects.filter(department=1).all()
     users = User.objects.order_by('-last_login')
@@ -64,7 +65,7 @@ def information_technology(request):
     updates = Updates.objects.filter(department=3).all()
     return render(request,template,{'update':updates})
 
-@login_required(login_url='accounts/login')
+# @login_required(login_url='accounts/login')
 def employees(request):
     user_status = online_users.models.OnlineUserActivity.get_user_activities(timedelta(minutes=60))
     users = (user for user in user_status)
@@ -83,11 +84,11 @@ def notifications(request):
 
 def employeeProfile(request):
     current_user = request.user
-    profile = Profile.objects.filter(user=current_user)
+    profile = Profile.objects.filter(user= current_user)
     return render(request, 'employeeProfile.html', {'profile':profile})
 
 
-@login_required(login_url='accounts/login')
+# @login_required(login_url='accounts/login')
 def postUpdate(request):
     current_user =  request.user
     if current_user.user_type == 1 or current_user.user_type==2:
@@ -104,4 +105,7 @@ def postUpdate(request):
     return redirect('updates')
   
 def searchResults(request):
-    return render(request, 'searchResults.html')
+    users=User.objects.all()
+    user_filter=UserFilter(request.GET,queryset=users) 
+    return render(request,'searchResults.html',{'filter':user_filter})
+
