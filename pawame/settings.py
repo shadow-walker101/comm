@@ -72,9 +72,9 @@ INSTALLED_APPS = [
     'intranet.apps.IntranetConfig',
     'crispy_forms',
     'django_registration',
-    'online_users',
     'django.contrib.humanize',
     'admincolors',
+    'online_users',
 
   
 ]
@@ -99,6 +99,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
   
     
 ]
