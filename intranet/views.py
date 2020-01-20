@@ -25,7 +25,7 @@ def login (request):
 
 @login_required(login_url='accounts/login')      
 def updates(request):
-    updates = Updates.objects.filter(department=1).all()
+    updates = Updates.objects.filter(department=1).all()[::-1]
     users = User.objects.order_by('-last_login')
     comments = Comments.objects.all()
     commentForm = CommentForm()
