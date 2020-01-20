@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from . models import * 
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -23,10 +23,14 @@ def login (request):
             return redirect('updates')
 
 
-        
+@login_required(login_url='accounts/login')      
 def updates(request):
-    updates = Updates.objects.filter(department=1).all()
-    return render(request, 'updates.html' ,{'updates':updates})
+    updates = Updates.objects.filter(department=1).all()[::-1]
+    users = User.objects.order_by('-last_login')
+    comments = Comments.objects.all()
+    commentForm = CommentForm()
+    
+    return render(request, 'updates.html', locals())
 
 def marketing(request):
     template='marketing.html'
@@ -41,9 +45,6 @@ def human_resource(request):
     return render(request,template, {'updates':updates})
 
 
-def updates(request):
-    return render(request, 'updates.html')
-
 # @user_passes_test(lambda u:u.is_active and u.department==3,redirect_field_name=REDIRECT_FIELD_NAME,login_url='account/login')
 def finance(request):
     template='finance.html'
@@ -52,9 +53,11 @@ def finance(request):
 
 # @user_passes_test(lambda u:u.is_active and u.department==2,redirect_field_name=REDIRECT_FIELD_NAME,login_url='accounts/login')
 def inventory(request):
-    template='inventory.html'
     updates = Updates.objects.filter(department=4).all()
-    return render(request,template,{'update':updates})
+    users = User.objects.order_by('-last_login')
+    comments = Comments.objects.all()
+    commentForm = CommentForm()
+    return render(request, 'inventory.html', locals())
 
 
 # @user_passes_test(lambda u:u.is_active and u.department==5,redirect_field_name=REDIRECT_FIELD_NAME,login_url='accounts/login')
@@ -81,10 +84,10 @@ def notifications(request):
     
 
 def employeeProfile(request):
-    return render(request, 'employeeProfile.html')
-  
-def searchResults(request):
-    return render(request, 'searchResults.html')
+    current_user = request.user
+    profile = Profile.objects.filter(user=current_user)
+    return render(request, 'employeeProfile.html', {'profile':profile})
+
 
 @login_required(login_url='accounts/login')
 def postUpdate(request):
@@ -101,4 +104,23 @@ def postUpdate(request):
             form = PostUpdateForm()
             return render(request, 'postUpdate.html', {"form":form})
     return redirect('updates')
+  
+def searchResults(request):
+    return render(request, 'searchResults.html')
 
+
+#comments
+@login_required(login_url='/accounts/login')
+def comments(request, update_id):
+    commentForm = CommentForm()
+    update = get_object_or_404(Updates,pk=update_id)
+        
+    if request.method == 'POST':
+        commentForm = CommentForm(request.POST)
+        if commentForm.is_valid():            
+            form = commentForm.save(commit=False)
+            form.user=request.user
+            form.update=get_object_or_404(Updates,pk=update_id)
+            form.save()
+        return redirect ('updates')
+    return render (request, 'updates.html', locals())
