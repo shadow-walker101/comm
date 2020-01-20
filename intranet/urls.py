@@ -7,10 +7,11 @@ from .import views
 
 
 urlpatterns = [
+    
     path('', views.updates, name='updates'),
+    path('login', views.logins, name='login'),
     path('notifications/',views.notifications, name='notifications'),
     path('employees/',views.employees, name='employees'),
-    path('login/',views.login, name='login'),
     path('inventory/',views.inventory, name='inventory'),
     path('finance/',views.finance, name='finance'),
     path('marketing/',views.marketing, name='marketing'),
