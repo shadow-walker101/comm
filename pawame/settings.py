@@ -71,7 +71,6 @@ INSTALLED_APPS = [
     'intranet.apps.IntranetConfig',
     'crispy_forms',
     'django_registration',
-    'online_users',
     'django.contrib.humanize',
     'admincolors',
     'bootstrapform',
@@ -79,6 +78,10 @@ INSTALLED_APPS = [
     'tinymce',
     'sorl.thumbnail',
     'django_summernote'
+    'online_users',
+    'django_filters',
+
+ 
 ]
 
 
@@ -187,9 +190,11 @@ USE_TZ = True
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
 LOGIN_REDIRECT_URL='updates'
-
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
 # Static files (CSS, JavaScript, Images)
-AUTH_USER_MODEL = 'intranet.User'
+
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -209,6 +214,5 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 100000000
 FILE_UPLOAD_PERMISSIONS  = 0o644
 
 
-LOGOUT_URL = 'logout'
-LOGOUT_REDIRECT_URL = 'updates'
+
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))

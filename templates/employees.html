@@ -10,6 +10,15 @@
         Welcome to the Super-Admin custom search.
       </p>
     </div>
+    <form method="get">
+      {{filter.form.as_p}}
+      <!-- <button type="submit">Search</button> -->
+    </form>
+    <ul>
+    {% for user in filter.qs %}
+      <li>{{user.username}}</li>
+    {% endfor %}
+    </ul>
     <div class="form-row d-flex justify-content-center">
       <!-- Grid column -->
       <div class="col-7 text-center">
@@ -17,7 +26,7 @@
         <div class="md-form search-link">
           <input type="search" class="form-control" name="search_term" id="search_form"
             placeholder="Who are you looking For?">
-          <a href="#">
+          <a href="searchResults.html"></a>
             <button class="btn btn-sm btn-transparent font-weight-bold mt-4" type="submit">
               Search
             </button>
