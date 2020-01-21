@@ -30,8 +30,7 @@ if config('MODE')=="dev":
            'PASSWORD': config('DB_PASSWORD'),
            'HOST': config('DB_HOST'),
            'PORT': '',
-           
-       }
+        }
    }
 
    #production
@@ -74,10 +73,15 @@ INSTALLED_APPS = [
     'django_registration',
     'django.contrib.humanize',
     'admincolors',
+    'bootstrapform',
+    'bootstrap4',
+    'tinymce',
+    'sorl.thumbnail',
+    'django_summernote'
     'online_users',
     'django_filters',
 
-  
+ 
 ]
 
 
@@ -100,9 +104,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
-  
-    
 ]
 
 
@@ -138,6 +139,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION='pawame.wsgi.application'
 
+TINYMCE_DEFAULT_CONFIG = {
+  'file_browser_callback': 'mce_filebrowser'
+}
+
+SUMMERNOTE_CONFIG = {
+    'iframe': False,
+    'summernote': {
+        'airMode': False,
+        'width': '100%',
+        'height': '480',
+        'lang': None,
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -190,10 +204,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 CRISPY_TEMPLATE_PACK='bootstrap4'
+SUMMERNOTE_THEME = 'bs4'
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 100000000
+FILE_UPLOAD_PERMISSIONS  = 0o644
 
 
 
