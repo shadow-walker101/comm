@@ -2,6 +2,12 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from . models import *
 from online_users.models import OnlineUserActivity
+from django_summernote.admin import SummernoteModelAdmin
+
+# Summernote for all TextField in model.
+class SomeModelAdmin(SummernoteModelAdmin):  
+    summernote_fields = ('update')
+
 
 
 class UserAdmin(BaseUserAdmin):

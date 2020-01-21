@@ -4,11 +4,10 @@ from django.conf.urls.static import static
 from .import views
 
 
-
-
 urlpatterns = [
     
     path('', views.updates, name='updates'),
+
     path('login', views.logins, name='login'),
     path('notifications/',views.notifications, name='notifications'),
     path('employees/',views.employees, name='employees'),
@@ -20,6 +19,7 @@ urlpatterns = [
     path('human_resource/',views.human_resource,name='human_resource'),
     path('postUpdate/',views.postUpdate,name='postUpdate'),
     path('searchResults/',views.searchResults,name='searchResults'),
+    path('comments/<int:update_id>',views.comments,name='comments'),
 
 ]
 
