@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from. models import * 
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -37,30 +37,36 @@ def logins(request):
     
 @login_required(login_url='/accounts/login/') 
 def updates(request):
-    updates = Updates.objects.filter(department=1).all()
+    updates = Updates.objects.filter(department=1).all()[::-1]
     users = User.objects.order_by('-last_login')
-    return render(request, 'updates.html' ,{'updates':updates, 'users':users})
+    comments = Comments.objects.all()
+    commentForm = CommentForm()
+    
+    return render(request, 'updates.html', locals())
 
 
 @user_passes_test(lambda u: u.is_active and u.department==1 or u.user_type==1 ,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def human_resource(request):
     template='human_resource.html'
-    updates = Updates.objects.filter(department=2).all()
+    updates = Updates.objects.filter(department=2).all()[::-1]
     return render(request,template, {'updates':updates})
 
 @user_passes_test(lambda u:u.is_active and u.department==2 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def inventory(request):
-    template='inventory.html'
-    updates = Updates.objects.filter(department=4).all()
-    return render(request,template,{'update':updates})
+   updates = Updates.objects.filter(department=4).all()[::-1]
+    users = User.objects.order_by('-last_login')
+    comments = Comments.objects.all()
+    commentForm = CommentForm()
+    return render(request, 'inventory.html', locals())
 
 
 
 @user_passes_test(lambda u:u.is_active and u.department==3 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def finance(request):
     template='finance.html'
-    updates = Updates.objects.filter(department=6).all()
+    updates = Updates.objects.filter(department=6).all()[::-1]
     return render(request,template,{'update':updates})
+
 
 @user_passes_test(lambda u:u.is_active and u.department==4 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def marketing(request):
@@ -71,7 +77,7 @@ def marketing(request):
 @user_passes_test(lambda u:u.is_active and u.department==5 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def information_technology(request):
     template='information_technology.html'
-    updates = Updates.objects.filter(department=3).all()
+    updates = Updates.objects.filter(department=3).all()[::-1]
     return render(request,template,{'update':updates})
 
 # @login_required(login_url='accounts/login')
@@ -118,3 +124,20 @@ def searchResults(request):
     user_filter=UserFilter(request.GET,queryset=users) 
     return render(request,'searchResults.html',{'filter':user_filter})
 
+
+
+#comments
+@login_required(login_url='/accounts/login')
+def comments(request, update_id):
+    commentForm = CommentForm()
+    update = get_object_or_404(Updates,pk=update_id)
+        
+    if request.method == 'POST':
+        commentForm = CommentForm(request.POST)
+        if commentForm.is_valid():            
+            form = commentForm.save(commit=False)
+            form.user=request.user
+            form.update=get_object_or_404(Updates,pk=update_id)
+            form.save()
+        return redirect ('updates')
+    return render (request, 'updates.html', locals())
