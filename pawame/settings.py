@@ -30,8 +30,7 @@ if config('MODE')=="dev":
            'PASSWORD': config('DB_PASSWORD'),
            'HOST': config('DB_HOST'),
            'PORT': '',
-           
-       }
+        }
    }
 
    #production
@@ -72,11 +71,17 @@ INSTALLED_APPS = [
     'intranet.apps.IntranetConfig',
     'crispy_forms',
     'django_registration',
-    'online_users',
     'django.contrib.humanize',
     'admincolors',
+    'bootstrapform',
+    'bootstrap4',
+    'tinymce',
+    'sorl.thumbnail',
+    'django_summernote'
+    'online_users',
+    'django_filters',
 
-  
+ 
 ]
 
 
@@ -99,8 +104,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-  
-    
 ]
 
 
@@ -136,6 +139,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION='pawame.wsgi.application'
 
+TINYMCE_DEFAULT_CONFIG = {
+  'file_browser_callback': 'mce_filebrowser'
+}
+
+SUMMERNOTE_CONFIG = {
+    'iframe': False,
+    'summernote': {
+        'airMode': False,
+        'width': '100%',
+        'height': '480',
+        'lang': None,
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -174,9 +190,11 @@ USE_TZ = True
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
 LOGIN_REDIRECT_URL='updates'
-
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
 # Static files (CSS, JavaScript, Images)
-AUTH_USER_MODEL = 'intranet.User'
+
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -186,12 +204,15 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 CRISPY_TEMPLATE_PACK='bootstrap4'
+SUMMERNOTE_THEME = 'bs4'
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 100000000
+FILE_UPLOAD_PERMISSIONS  = 0o644
 
 
-LOGOUT_URL = 'logout'
-LOGOUT_REDIRECT_URL = 'updates'
+
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
