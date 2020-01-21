@@ -76,12 +76,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def is_staff(self):
         return self.is_admin
+    
 
 class Profile(models.Model):
     image = models.ImageField(upload_to='photos/')
     first_name =  models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     user =  models.OneToOneField(User, on_delete=models.CASCADE)
+    is_online = models.BooleanField(default=False)
+    
 
     def save_profile(self):
         self.save()
