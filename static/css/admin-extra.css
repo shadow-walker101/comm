@@ -4,6 +4,9 @@
 }
 #header{
 background: black;
+font-weight:bold;
+
+
 }
 div.breadcrumbs{
     background: black;
@@ -16,4 +19,11 @@ a.section:link,a.section:visited{
     text-decoration: green;
     font-weight: bold;
     font-size: small;
+}
+.selector-chosen h2{
+    background:#0b920d!important
+}
+.button,input[type=submit],input[type=button],.submit-row
+input,a.button{
+    background:#0b920d!important
 }
