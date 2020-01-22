@@ -30,8 +30,7 @@ if config('MODE')=="dev":
            'PASSWORD': config('DB_PASSWORD'),
            'HOST': config('DB_HOST'),
            'PORT': '',
-           
-       }
+        }
    }
 
    #production
@@ -71,16 +70,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
     'crispy_forms',
-<<<<<<< HEAD
-    'django_registration'
-=======
     'django_registration',
     'django.contrib.humanize',
     'admincolors',
->>>>>>> 98906828a74134ddffde3fa5eb2d7d94312c74b6
+    'bootstrapform',
+    'bootstrap4',
+    'tinymce',
+    'sorl.thumbnail',
+    'django_summernote',
+    'online_users',
+    'django_filters',
 
-
+ 
 ]
+
+
 ADMIN_COLORS_BASE_THEME = 'Black'
 ADMIN_COLORS=[
     ('Default',[]),
@@ -91,13 +95,7 @@ ADMIN_COLORS=[
 ]
 
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 98906828a74134ddffde3fa5eb2d7d94312c74b6
 MIDDLEWARE = [
-
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -107,6 +105,17 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'default-cache'
+    }
+}
+
+USER_ONLINE_TIMEOUT = 300
+USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
 
 ROOT_URLCONF = 'pawame.urls'
 
@@ -130,15 +139,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION='pawame.wsgi.application'
 
+TINYMCE_DEFAULT_CONFIG = {
+  'file_browser_callback': 'mce_filebrowser'
+}
+
+SUMMERNOTE_CONFIG = {
+    'iframe': False,
+    'summernote': {
+        'airMode': False,
+        'width': '100%',
+        'height': '480',
+        'lang': None,
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 98906828a74134ddffde3fa5eb2d7d94312c74b6
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -173,13 +191,12 @@ USE_TZ = True
 
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
-<<<<<<< HEAD
-=======
 LOGIN_REDIRECT_URL='updates'
-
->>>>>>> 98906828a74134ddffde3fa5eb2d7d94312c74b6
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
 # Static files (CSS, JavaScript, Images)
-AUTH_USER_MODEL = 'intranet.User'
+
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -189,10 +206,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 CRISPY_TEMPLATE_PACK='bootstrap4'
+SUMMERNOTE_THEME = 'bs4'
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 100000000
+FILE_UPLOAD_PERMISSIONS  = 0o644
 
 
 
