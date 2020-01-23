@@ -1,52 +1,106 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
 
 {% block content %}
 
-<div class="container">
-    <h3 class="text-center font-weight-bolder pt-3 pb-3">
-      INVENTORY<hr>
-    </h3>
-    
-    <form class="mx-auto form-inline md-form form-sm mt-0">
-      <i class="fas fas fa-pencil-alt" aria-hidden="true"></i>
-      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Post an update/notification" aria-label="Post">
-      <a class="dropdown-toggle mr-2" id="navbarDropdownMenuLink-555" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">Post to
-      </a>
-      <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
-        <a class="dropdown-item" href="#">Human Resource</a>
-        <a class="dropdown-item" href="#">Finance</a>
-        <a class="dropdown-item" href="#">Inventory</a>
-        <a class="dropdown-item" href="#">Marketing</a>
-        <a class="dropdown-item" href="#">IT</a>
-      </div>
-    </form>
-    <div class="media">
-      <img class="d-flex rounded-circle avatar z-depth-1-half mr-3"
-        src="https://mdbootstrap.com/img/Photos/Avatars/avatar-9.jpg" alt="Avatar">
-      <div class="media-body">
-        <h5 class="mt-0 font-weight-bold dark-text">Monthly Allowances</h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
-        odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-        fringilla. Donec lacinia congue felis in faucibus.
-        <h6 class="font-weight-bold pt-2">
-          <i>Posted by:HOD on Jan 13 2020</i>
-        </h6>
+{%for u in users%}
+    {{u.username}} - {{u.last_login}}<br />
+{% endfor %}
 
-        <a href="#">view all comments</a>
-        <div class="media mt-3 shadow-textarea">
-          <img class="d-flex rounded-circle avatar z-depth-1-half mr-3"
-            src="https://mdbootstrap.com/img/Photos/Avatars/avatar-1.jpg" alt="Generic placeholder image">
-          <div class="media-body">
-            <div class="form-group basic-textarea rounded-corners">
-              <textarea class="form-control z-depth-1" id="exampleFormControlTextarea345" rows="3"
-                placeholder="Write your comment..."></textarea>
-            </div>
+<div class="container">
+  <h3 class="text-center font-weight-bolder pt-3 pb-3 " style="color: #0B920D;">
+    Inventory
+  </h3>
+  <hr>
+
+
+{% for update in updates %}
+
+
+  <div class="media">
+    <img class="d-flex rounded-circle avatar z-depth-1-half mr-3"
+      src="{{update.user.profile.image.url}}" height="100px" width="100px" alt="Avatar">
+    <div class="media-body">
+      <h5 class="mt-0 font-weight-bold dark-text post-content">{{ update.title }}</h5>
+      <p class="post-content">  
+       
+      {% autoescape on %}
+        {{ update.update|safe }}
+      {% endautoescape %}
+
+      </p>
+
+      <h6 class="text-muted pt-2 post-date">
+        <i>Posted by {{ update.user }}: {{ update.time_stamp|timesince }} ago </i>
+      </h6>
+
+          <div class="accordion" id="accordionExample275">
+                  <button class="btn btn-sm btn-link" type="button" data-toggle="collapse" href="#collapse{{ update.id}}"
+                    aria-expanded="false" aria-controls="collapseOne2">
+                    View all {{ update.comments_set.all|length }} comment{{update.comments_set.all|pluralize}}
+                  </button>
+              <div id="collapse{{ update.id }}" class="collapse">
+                  
+                  {% for comment in update.comments_set.all %}
+
+                  <p> 
+
+                  {% if comment.user.profile.image %}
+
+                  
+                  <img class="rounded-circle avatar z-depth-1-half mr-1" src="{{comment.user.profile.image.url}}" style="width:30px; height:30px;"> 
+
+                  {% else %}
+
+                   <img class="rounded-circle avatar z-depth-1-half mr-1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmgQLi9YIA2uiwnuZ_LU_K-nOVMvilA2A5M2dNNescwKKBm6EI&s" style="width:30px; height:30px;"> 
+
+                  {% endif %}
+                  
+                  <strong> {{ comment.user }}</strong> said: {{ comment.comment }} <br>
+                  <span class="text-muted"> {{comment.date_posted|timesince}} ago </span>
+                  </p>
+
+                  {% endfor %}
+
+              </div>
+            
+          </div>
+      
+      <div class="media mt-3 shadow-textarea">
+
+        {% if request.user.profile.image %}
+
+        <img class="d-flex rounded-circle avatar z-depth-1-half mr-3"
+          src="{{request.user.profile.image.url}}" height="70px" width="70px"
+          alt="Generic placeholder image">
+        
+        {% else %}
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmgQLi9YIA2uiwnuZ_LU_K-nOVMvilA2A5M2dNNescwKKBm6EI&s" height="70px" width="70px" alt="avatar mx-auto white" class="rounded-circle img-fluid avatar z-depth-1-half mr-3">
+
+        {% endif %}
+
+
+        <div class="media-body">
+          <div class="form-group basic-textarea rounded-corners commentForm">
+
+            <form action="{% url 'comments' update_id=update.id %}" method="post">
+            {% csrf_token %}
+              
+            {% bootstrap_form commentForm layout='inline '%}
+            
+              <button type="submit" class="btn btn-success btn-sm px-2 py-1"><i class="far fa-thumbs-up mr-2" aria-hidden="true"></i>Comment</button>
+            </form>
+
+
           </div>
         </div>
       </div>
     </div>
-  
   </div>
+
+{% endfor %}
+
+</div>
 
 {% endblock %}

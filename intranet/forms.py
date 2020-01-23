@@ -1,13 +1,30 @@
 from django import forms
 from .models import *
-from django.auth.forms import UserCreationForm
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
-class UserRegistrationForm(UserCreationForm)
-username=forms.CharField(max_length=30)
-email=forms.EmailField(max_length=200)
 
-class meta:
-    model=User
-    fields=('username','email','user_type','departments','employee_id')
+class Posting(forms.ModelForm):
+    class Meta:
+        model=Updates
+        exclude=['user','time_stamp']
 
-class LoginForm()
+
+
+class PostUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Updates
+        exclude = ['user', 'time_stamp']
+        widgets = {
+            'update': SummernoteWidget(),
+        }
+        
+
+        
+class CommentForm(forms.ModelForm):
+    class Meta:
+        
+        model = Comments
+        fields = ['comment']
+        widgets = {
+            'comment': forms.TextInput(attrs={'placeholder':'Write a comment...'})
+        }
