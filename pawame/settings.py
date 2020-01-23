@@ -62,13 +62,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'intranet.apps.IntranetConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'intranet.apps.IntranetConfig',
     'crispy_forms',
     'django_registration',
     'django.contrib.humanize',
@@ -80,7 +80,6 @@ INSTALLED_APPS = [
     'django_summernote'
     'online_users',
     'django_filters',
-
  
 ]
 
