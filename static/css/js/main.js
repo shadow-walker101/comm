@@ -1,5 +1,5 @@
 $('#my-summernote').summernote({
-  minHeight: 200,
+  minHeight: 100,
   placeholder: 'Write here ...',
   focus: false,
   airMode: false,
@@ -124,3 +124,4 @@ function autocomplete(inp, arr) {
     closeAllLists(e.target);
   });
 }
+

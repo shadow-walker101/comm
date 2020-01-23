@@ -6,6 +6,9 @@ from django.shortcuts import get_object_or_404
 from django.core.cache import cache 
 import datetime
 from pawame import settings
+from tinymce.models import HTMLField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class MyUserManager(BaseUserManager):
@@ -72,15 +75,23 @@ class User(AbstractBaseUser, PermissionsMixin):
     def has_module_perms(self, app_label):
         return True
     
+    @classmethod
+    def search_employees(cls,employee):
+        employee = cls.objects.filter(username__icontains = employee)
+        return employee
+    
     @property
     def is_staff(self):
         return self.is_admin
+    
 
 class Profile(models.Model):
     image = models.ImageField(upload_to='photos/')
     first_name =  models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     user =  models.OneToOneField(User, on_delete=models.CASCADE)
+    is_online = models.BooleanField(default=False)
+    
 
     def save_profile(self):
         self.save()
@@ -101,9 +112,17 @@ class Profile(models.Model):
                 return True
         else:
             return False
+    @receiver(post_save, sender=User)
+    def create_profile(sender, instance,created,**kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+    
+    @receiver(post_save, sender=User)
+    def save_profile(sender, instance, **kwargs):
+        instance.profile.save()
+    
     
 class Updates(models.Model):
-
     
     UPDATE_TYPES = (
         (1, 'General'),
@@ -113,20 +132,25 @@ class Updates(models.Model):
         (5, 'Marketing'),
         (6, 'Finance'),
     )
-    title =  models.CharField(max_length=50)
-    update = models.TextField()
+    title =  models.CharField(max_length=70)
+    update = HTMLField()
     time_stamp = models.DateTimeField(auto_now=True) 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     department =  models.PositiveSmallIntegerField(choices=UPDATE_TYPES, null=True)
+    status = models.BooleanField(default=False)
     
     @classmethod
     def get_update(cls,id):
         update = get_object_or_404(cls, pk=id) 
-
+    
+    
+        
+    def __str__(self):
+          return self.title
     
 
 class Comments(models.Model):
-    comment = models.TextField()
+    comment = models.CharField(max_length=1000)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     update = models.ForeignKey(Updates,on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
@@ -138,5 +162,6 @@ class Comments(models.Model):
 
     def save_comment(self):
         self.save()
+        
     def __str__(self):
       return self.comment
