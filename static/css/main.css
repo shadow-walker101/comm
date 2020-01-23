@@ -40,10 +40,6 @@
   box-shadow: none;
 }
 
-.onlineUser {
-  border: solid 7px green;
-}
-
 .onlineUsers {
   position: fixed;
   bottom: 0;
