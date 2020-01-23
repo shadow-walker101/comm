@@ -77,7 +77,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'tinymce',
     'sorl.thumbnail',
-    'django_summernote'
+    'django_summernote',
     'online_users',
     'django_filters',
  
@@ -154,6 +154,8 @@ SUMMERNOTE_CONFIG = {
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
+
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
