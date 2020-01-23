@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
-    <div class="row" id="notification" data-toggle="modal" data-target="#notificationModal">
-        <div class="col-2">
-            <img class="rounded-circle avatar z-depth-1-half " src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg">
-        </div>
-        <div class="col-8">
-            <p style="list-style: height 4px;">Daisy posted n update that needs approval</p>
-        </div>
-        <div class="col-2">
-            <p>3 minutes ago</p>
+<div class="container mt-3">
+    <h3 class="text-center font-weight-bolder pt-3 pb-3" style="color: #0B920D;">Notifications</h3>
+    <div class="media mt-4 px-1" id="notification" data-toggle="modal" data-target="#notificationModal">
+        <img class="card-img-100 d-flex z-depth-1 mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg"
+            alt="Generic placeholder image">
+        <div class="media-body">
+            <h5 class="font-weight-bold mt-0">
+                <a href="">Daisy</a>
+            </h5>
+            <h6>Meeting</h6>
+           <p> A meeting has been scheduled for 30th January 2019.......</p>
         </div>
 
     </div>
@@ -18,27 +19,27 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title font-weight-bold dark-text post-content text-center" id="notificationModalTittle">Monthly Employee Analysis</h5>
+                    <h5 class="modal-title font-weight-bold dark-text post-content text-center"
+                        id="notificationModalTittle">Meeting</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                        <p class="post-content">
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
-                                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-                                fringilla. Donec lacinia congue felis in faucibus.
-                              </p>
-                        
-                              <h6 class="text-muted pt-2 post-date">
-                                <i>Posted by:HR admin on Jan 12 2020</i>
-                              </h6>
+                    <p class="post-content">
+                        A meeting has been scheduled for 30th January 2019. The meeting is meant to discuss the months
+                        activities.<br> All members are asked to attend.
+                    </p>
+
+                    <h6 class="text-muted pt-2 post-date">
+                        <i>Posted by:HR admin on Jan 12 2020</i>
+                    </h6>
 
                 </div>
                 <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-success btn-sm">Approve</button>
-                        <button type="button" class="btn btn-danger btn-sm">Disapprove</button>
-                      </div>
+                    <button type="button" class="btn btn-success btn-sm">Approve</button>
+                    <button type="button" class="btn btn-danger btn-sm">Disapprove</button>
+                </div>
             </div>
         </div>
 
