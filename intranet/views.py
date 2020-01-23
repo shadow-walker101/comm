@@ -75,6 +75,7 @@ def inventory(request):
 
 
 
+
 @user_passes_test(lambda u:u.is_active and u.department==3 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def finance(request):
     template='finance.html'
