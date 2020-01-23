@@ -62,13 +62,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'intranet.apps.IntranetConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'intranet.apps.IntranetConfig',
     'crispy_forms',
     'django_registration',
     'django.contrib.humanize',
@@ -76,7 +76,6 @@ INSTALLED_APPS = [
     'bootstrapform',
     'bootstrap4',
     'tinymce',
-    'sorl.thumbnail',
     'django_summernote',
     'online_users',
     'django_filters',
@@ -157,6 +156,8 @@ SUMMERNOTE_CONFIG = {
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
+
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
