@@ -71,14 +71,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intranet.apps.IntranetConfig',
-
     'crispy_forms',
     'django_registration'
 
 ]
-
-
-
 
 MIDDLEWARE = [
 
