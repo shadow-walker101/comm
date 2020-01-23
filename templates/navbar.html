@@ -64,10 +64,10 @@
       {% endif %}
     </ul>
 
-    <ul class="navbar-nav ml-auto nav-flex-icons">
+    <ul class="navbar-nav mr-0 nav-flex-icons">
       {% if request.user.user_type == 1 and request.user.is_authenticated %}
       <li class="nav-item">
-        <a href="/notifications" class="nav-link waves-effect waves-light mt-1">
+        <a href="/notifications" class="nav-link waves-effect waves-light">
           <i class="far fa-bell"></i> (12)
         </a>
       </li>
