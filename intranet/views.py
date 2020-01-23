@@ -24,11 +24,8 @@ def got_offline(sender, user, request, **kwargs):
     user.profile.save()
 
 
-def login (request):
+def logins (request):
     if request.method == "POST":
-
-def logins(request):
-    if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(email=email, password=password)
@@ -70,7 +67,7 @@ def human_resource(request):
 
 @user_passes_test(lambda u:u.is_active and u.department==2 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def inventory(request):
-   updates = Updates.objects.filter(department=4).all()[::-1]
+    updates = Updates.objects.filter(department=4).all()[::-1]
     users = User.objects.order_by('-last_login')
     comments = Comments.objects.all()
     commentForm = CommentForm()

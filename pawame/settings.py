@@ -77,11 +77,10 @@ INSTALLED_APPS = [
     'bootstrap4',
     'tinymce',
     'sorl.thumbnail',
-    'django_summernote'
+    'django_summernote',
     'online_users',
     'django_filters',
 
- 
 ]
 
 
@@ -148,9 +147,12 @@ SUMMERNOTE_CONFIG = {
     'summernote': {
         'airMode': False,
         'width': '100%',
-        'height': '480',
+        'height': '400',
         'lang': None,
-    }
+    },
+        'print': {
+        'stylesheetUrl': 'static/css/main.css',
+    },
 }
 
 # Database
@@ -210,9 +212,8 @@ SUMMERNOTE_THEME = 'bs4'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-FILE_UPLOAD_MAX_MEMORY_SIZE = 100000000
-FILE_UPLOAD_PERMISSIONS  = 0o644
-
+# FILE_UPLOAD_MAX_MEMORY_SIZE = 100000000
+# FILE_UPLOAD_PERMISSIONS  = 0o644
 
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
