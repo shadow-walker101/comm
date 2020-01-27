@@ -147,6 +147,7 @@ class Updates(models.Model):
     def approved(cls, id):
         update =  get_object_or_404(cls, pk=id)
         update.status = True
+        update.save()
         return update.status
     
     @classmethod
