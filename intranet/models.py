@@ -141,7 +141,20 @@ class Updates(models.Model):
     
     @classmethod
     def get_update(cls,id):
-        update = get_object_or_404(cls, pk=id) 
+        update = get_object_or_404(cls, pk=id)
+         
+    @classmethod
+    def approved(cls, id):
+        update =  get_object_or_404(cls, pk=id)
+        update.status = True
+        return update.status
+    
+    @classmethod
+    def dissaprove(cls,id):
+        update = get_object_or_404(cls, pk=id).delete()
+        return None
+        
+        
     
     
         
