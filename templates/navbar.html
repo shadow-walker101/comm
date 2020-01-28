@@ -68,7 +68,7 @@
       {% if request.user.user_type == 1 and request.user.is_authenticated %}
       <li class="nav-item">
         <a href="/notifications" class="nav-link waves-effect waves-light mt-1">
-      <i class="far fa-bell"></i> (12)
+      <i class="far fa-bell"></i>({{num}})
       </a>
       </li>
       {% endif %}
