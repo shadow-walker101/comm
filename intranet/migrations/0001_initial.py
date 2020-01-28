@@ -44,6 +44,7 @@ class Migration(migrations.Migration):
                 ('update', tinymce.models.HTMLField()),
                 ('time_stamp', models.DateTimeField(auto_now=True)),
                 ('department', models.PositiveSmallIntegerField(choices=[(1, 'General'), (2, 'Human Resource'), (3, 'Information_technology'), (4, 'Inventory'), (5, 'Marketing'), (6, 'Finance')], null=True)),
+                ('status', models.BooleanField(default=False)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
