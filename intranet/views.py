@@ -160,5 +160,5 @@ def comments(request, update_id):
             form.user=request.user
             form.update=get_object_or_404(Updates,pk=update_id)
             form.save()
-        return redirect ('update')
+        return HttpResponseRedirect(reverse('updates'))
     return render (request, 'updates.html', locals())
