@@ -23,17 +23,17 @@
         <div class="row d-flex justify-content-center" id="login">
             <div class="col-md-3 text-center mt-4" id="bgimage">
                 <div class="mt-5 pb-5">
-                    <h3>PAWAME</h3>
-                    <p>Delivering more than just energy</p>
+                    <h2 style="color: #034724ec;" class="font-weight-bold">PAWAME</h2>
+                    <hr>
+                    <p class="font-weight-bold">Delivering more than just energy</p>
                 </div>
-                <div class="mt-5">
-                    <h5>OUR PURPOSE</h5>
-                    <p>To provide energy access as a gateway to financial empowerment and limitless opportunity in
-                        Sub-Saharan
-                        Africa.</p>
+                <div class="mt-4">
+                    <h2 style="color:#034724ec;" class="font-weight-bold">OUR PURPOSE</h2>
+                    <hr>
+                    <p class="font-weight-bold">To provide energy access as a gateway to financial empowerment and limitless opportunity in Sub-Saharan Africa.</p>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-5">
                 <form class="text-center  p-5" method="post" action="{% url 'login' %}">
                     {% csrf_token %}
 
@@ -49,7 +49,7 @@
                         <label for="passwd" class="mb-5">Password</label>
                         <input type="password" required name="password" id="passwd" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-sm btn-dark-green btn-rounded">Log in</button>
+                    <button type="submit" class="btn btn-sm btn-dark-green btn-rounded font-weight-bold">Log in</button>
                 </form>
             </div>
         </div>
