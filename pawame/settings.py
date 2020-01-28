@@ -144,7 +144,7 @@ SUMMERNOTE_CONFIG = {
     'iframe': False,
     'summernote': {
         'airMode': False,
-        'width': '100vw',
+        'width': '100%',
         'height': '400',
         'lang': None,
     },
