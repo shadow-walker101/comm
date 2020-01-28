@@ -30,7 +30,6 @@ if config('MODE')=="dev":
            'PASSWORD': config('DB_PASSWORD'),
            'HOST': config('DB_HOST'),
            'PORT': '',
-<<<<<<< HEAD
         }
    }
 
@@ -42,20 +41,6 @@ else:
        )
    }
 
-=======
-           
-       }
-   }
-
-   #production
-else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
-
->>>>>>> Development
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
@@ -117,21 +102,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-<<<<<<< HEAD
-=======
-MIDDLEWARE_CLASSES = (
-    'middleware.activeuser_middleware.ActiveUserMiddleware',
-)
->>>>>>> Development
 
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-<<<<<<< HEAD
         'LOCATION': 'default-cache'
-=======
-        'LOCATION': '127.0.0.1:8000'
->>>>>>> Development
     }
 }
 
@@ -225,13 +200,9 @@ EMAIL_HOST_PASSWORD='kiriu300'
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
 LOGIN_REDIRECT_URL='updates'
-<<<<<<< HEAD
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'login'
-=======
-
->>>>>>> Development
 # Static files (CSS, JavaScript, Images)
 
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
