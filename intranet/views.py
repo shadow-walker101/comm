@@ -155,7 +155,7 @@ def searchResults(request):
         message = f"{search_term}"
         return render(request, 'searchResults.html', {"message": message, "Employees": searched_employees})
     else:
-        message = "You haven't searched for any term "
+        message = "You haven't searched for any term"
         return render(request, 'searchResults.html', {"message": message, "num":num})
      
 
