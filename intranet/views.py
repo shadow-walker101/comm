@@ -32,6 +32,7 @@ def logins (request):
         
         if user is not None:
             login(request, user)
+            print(request.user.user_type)
             if  request.user.department == 1 and request.user.is_authenticated:
                 return redirect('human_resource')
             elif  request.user.department == 2 and request.user.is_authenticated:
@@ -56,7 +57,7 @@ def updates(request):
     comments = Comments.objects.all()
     commentForm = CommentForm()
     
-    return render(request, 'updates.html', locals())
+    return render(request,'updates.html',locals())
 
 
 @user_passes_test(lambda u: u.is_active and u.department==1 or u.user_type==1 ,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
