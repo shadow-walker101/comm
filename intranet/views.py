@@ -113,7 +113,7 @@ def employees(request):
     else:
         return render(request, 'employeeProfile.html' , locals())
 
-
+@login_required(login_url='/accounts/login/') 
 def notifications(request):
     template='notifications.html'
     updates=Updates.objects.filter(status=False).all()[::-1]
