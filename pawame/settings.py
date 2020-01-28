@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import dj_database_url
-from decouple import config, Csv
+from decouple import config,Csv
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -30,6 +30,7 @@ if config('MODE')=="dev":
            'PASSWORD': config('DB_PASSWORD'),
            'HOST': config('DB_HOST'),
            'PORT': '',
+<<<<<<< HEAD
         }
    }
 
@@ -41,6 +42,20 @@ else:
        )
    }
 
+=======
+           
+       }
+   }
+
+   #production
+else:
+   DATABASES = {
+       'default': dj_database_url.config(
+           default=config('DATABASE_URL')
+       )
+   }
+
+>>>>>>> Development
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
@@ -102,11 +117,21 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+<<<<<<< HEAD
+=======
+MIDDLEWARE_CLASSES = (
+    'middleware.activeuser_middleware.ActiveUserMiddleware',
+)
+>>>>>>> Development
 
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+<<<<<<< HEAD
         'LOCATION': 'default-cache'
+=======
+        'LOCATION': '127.0.0.1:8000'
+>>>>>>> Development
     }
 }
 
@@ -156,6 +181,7 @@ SUMMERNOTE_CONFIG = {
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -187,13 +213,25 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+#Email settings
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_USE_TLS=True
+EMAIL_PORT=587
+EMAIL_HOST_USER='dicksonkariuki4@gmail.com'
+EMAIL_HOST_PASSWORD='kiriu300'
+
 
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
 LOGIN_REDIRECT_URL='updates'
+<<<<<<< HEAD
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'login'
+=======
+
+>>>>>>> Development
 # Static files (CSS, JavaScript, Images)
 
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
