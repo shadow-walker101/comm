@@ -11,6 +11,9 @@ from .forms import *
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.dispatch import receiver
 from .filters import UserFilter
+from django.utils.http import is_safe_url
+from django.http import JsonResponse
+
 
 
 @receiver(user_logged_in)
@@ -87,7 +90,7 @@ def finance(request):
 def marketing(request):
     template='marketing.html'
     updates = Updates.objects.filter(department=5).all()
-    return render(request, template,{'updates':updates})
+    return render(request, template,{'update':updates})
 
 @user_passes_test(lambda u:u.is_active and u.department==5 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def information_technology(request):
@@ -128,12 +131,13 @@ def postUpdate(request):
                 post = form.save(commit=False)
                 post.user = current_user
                 post.save()
-            return redirect('updates')
+                dep = ['', 'human_resource', 'information', 'inventory', 'marketing', 'finance']
+                return redirect(dep[post.department-1])
         else:
             form = PostUpdateForm()
             return render(request, 'postUpdate.html', {"form":form})
     return redirect('updates')
-  
+
 def searchResults(request):
     
     if 'employee' in request.GET and request.GET["employee"]:
@@ -152,6 +156,7 @@ def searchResults(request):
 def comments(request, update_id):
     commentForm = CommentForm()
     update = get_object_or_404(Updates,pk=update_id)
+    dynamic_path = request.get_full_path
         
     if request.method == 'POST':
         commentForm = CommentForm(request.POST)
@@ -160,5 +165,12 @@ def comments(request, update_id):
             form.user=request.user
             form.update=get_object_or_404(Updates,pk=update_id)
             form.save()
-        return HttpResponseRedirect(reverse('updates'))
+            # import pdb; pdb.set_trace()
+            
+            next_url = request.POST.get('next')
+            if not next_url or not is_safe_url(url=next_url, allowed_hosts=request.get_host()):
+                next_url = reverse('updates')
+            return HttpResponseRedirect(next_url)    
+        # return redirect('comments', update_id)                   
     return render (request, 'updates.html', locals())
+        # return JsonResponse(form.comment, safe=False)

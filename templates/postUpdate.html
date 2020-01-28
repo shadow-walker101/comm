@@ -11,6 +11,7 @@
     <div class="col pt-3">
 
       <form action="{% url 'postUpdate' %}" method="post" enctype="multipart/form-data">
+
             {% csrf_token %}
             {% bootstrap_form form layout='inline' %}
 

@@ -89,6 +89,8 @@ General Updates  </h3>
           <div class="form-group basic-textarea rounded-corners commentForm">
 
             <form action="{% url 'comments' update_id=update.id %}" method="post">
+            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
             {% csrf_token %}
               
             {% bootstrap_form commentForm layout='inline '%}
