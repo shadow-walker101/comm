@@ -82,7 +82,6 @@ INSTALLED_APPS = [
 
 ]
 
-
 ADMIN_COLORS_BASE_THEME = 'Black'
 ADMIN_COLORS=[
     ('Default',[]),
@@ -91,7 +90,6 @@ ADMIN_COLORS=[
     ('Gray','admincolors/css/gray.css'),
     ('Black',('admincolors/css/gray.css','static/css/theme.css')),
 ]
-
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
