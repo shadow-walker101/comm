@@ -152,19 +152,23 @@ class Updates(models.Model):
     
     @classmethod
     def get_update(cls,id):
-        update = get_object_or_404(cls, pk=id) 
+        update = get_object_or_404(cls, pk=id)
+         
+    @classmethod
+    def approved(cls, id):
+        update =  get_object_or_404(cls, pk=id)
+        update.status = True
+        update.save()
+        return update.status
     
-    
+    @classmethod
+    def dissaprove(cls,id):
+        update = get_object_or_404(cls, pk=id).delete()
+        return None
+        
         
     def __str__(self):
           return self.title
-    
-        
-class Updates(models.Model):
-    title =  models.CharField(max_length=50)
-    update = models.TextField()
-    time_stamp = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Comments(models.Model):
     comment = models.CharField(max_length=1000)
