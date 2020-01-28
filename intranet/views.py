@@ -67,37 +67,43 @@ def updates(request):
 def human_resource(request):
     template='human_resource.html'
     updates = Updates.objects.filter(department=2).all()[::-1]
-    return render(request,template, {'updates':updates})
+    commentForm = CommentForm()
+    users = User.objects.order_by('-last_login')
+    return render(request, 'human_resource.html', locals())
 
 @user_passes_test(lambda u:u.is_active and u.department==2 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def inventory(request):
     updates = Updates.objects.filter(department=4).all()[::-1]
     users = User.objects.order_by('-last_login')
-    comments = Comments.objects.all()
     commentForm = CommentForm()
+    users = User.objects.order_by('-last_login')
     return render(request, 'inventory.html', locals())
-
-
 
 
 @user_passes_test(lambda u:u.is_active and u.department==3 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def finance(request):
     template='finance.html'
     updates = Updates.objects.filter(department=6).all()[::-1]
-    return render(request,template,{'update':updates})
+    commentForm = CommentForm()
+    users = User.objects.order_by('-last_login')
+    return render(request, 'finance.html', locals())
 
 
 @user_passes_test(lambda u:u.is_active and u.department==4 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def marketing(request):
     template='marketing.html'
     updates = Updates.objects.filter(department=5).all()
-    return render(request, template,{'update':updates})
+    commentForm = CommentForm()
+    users = User.objects.order_by('-last_login')
+    return render(request, 'marketing.html', locals())
 
 @user_passes_test(lambda u:u.is_active and u.department==5 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def information_technology(request):
     template='information_technology.html'
     updates = Updates.objects.filter(department=3).all()[::-1]
-    return render(request,template,{'update':updates})
+    commentForm = CommentForm()
+    users = User.objects.order_by('-last_login')
+    return render(request, 'information_technology.html', locals())
 
 # @login_required(login_url='accounts/login')
 def employees(request):
