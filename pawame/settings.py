@@ -30,12 +30,10 @@ if config('MODE')=="dev":
            'PASSWORD': config('DB_PASSWORD'),
            'HOST': config('DB_HOST'),
            'PORT': '',
-           
-       }
+        }
    }
-   
-   #production
 
+   #production
 else:
    DATABASES = {
        'default': dj_database_url.config(
@@ -64,20 +62,36 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'intranet.apps.IntranetConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'intranet.apps.IntranetConfig',
     'crispy_forms',
-    'django_registration'
+    'django_registration',
+    'django.contrib.humanize',
+    'admincolors',
+    'bootstrapform',
+    'bootstrap4',
+    'tinymce',
+    'django_summernote',
+    'online_users',
+    'django_filters',
 
 ]
 
-MIDDLEWARE = [
+ADMIN_COLORS_BASE_THEME = 'Black'
+ADMIN_COLORS=[
+    ('Default',[]),
+    ('Lite','admincolors/css/lite.css'),
+    ('Dark Blue','admincolors/css/dark-blue.css'),
+    ('Gray','admincolors/css/gray.css'),
+    ('Black',('admincolors/css/gray.css','static/css/theme.css')),
+]
 
+MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -88,10 +102,21 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'default-cache'
+    }
+}
+
+USER_ONLINE_TIMEOUT = 300
+USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
+
 ROOT_URLCONF = 'pawame.urls'
 
 TEMPLATES = [
-    {
+    {   
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
@@ -102,6 +127,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'admincolors.context_processors.admin_theme',
             ],
         },
     },
@@ -109,10 +135,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION='pawame.wsgi.application'
 
+TINYMCE_DEFAULT_CONFIG = {
+  'file_browser_callback': 'mce_filebrowser'
+}
+
+SUMMERNOTE_CONFIG = {
+    'iframe': False,
+    'summernote': {
+        'airMode': False,
+        'width': '100%',
+        'height': '400',
+        'lang': None,
+    },
+        'print': {
+        'stylesheetUrl': 'static/css/main.css',
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 
 
 # Password validation
@@ -149,8 +190,12 @@ USE_TZ = True
 
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
+LOGIN_REDIRECT_URL='updates'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
 # Static files (CSS, JavaScript, Images)
-AUTH_USER_MODEL = 'intranet.User'
+
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -159,10 +204,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+CRISPY_TEMPLATE_PACK='bootstrap4'
+SUMMERNOTE_THEME = 'bs4'
+
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+# FILE_UPLOAD_MAX_MEMORY_SIZE = 100000000
+# FILE_UPLOAD_PERMISSIONS  = 0o644
 
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
