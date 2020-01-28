@@ -76,7 +76,6 @@ INSTALLED_APPS = [
     'bootstrapform',
     'bootstrap4',
     'tinymce',
-    'sorl.thumbnail',
     'django_summernote',
     'online_users',
     'django_filters',
@@ -146,7 +145,7 @@ SUMMERNOTE_CONFIG = {
     'iframe': False,
     'summernote': {
         'airMode': False,
-        'width': '100%',
+        'width': '100vw',
         'height': '400',
         'lang': None,
     },
