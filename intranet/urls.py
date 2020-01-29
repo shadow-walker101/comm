@@ -1,14 +1,12 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from .import views
+from . import views
 
 
 urlpatterns = [
-    
-    path('', views.updates, name='updates'),
-
-    path('login', views.logins, name='login'),
+    path('',views.updates,name='updates'),
+    path('login',views.logins, name='login'),
     path('notifications/',views.notifications, name='notifications'),
     path('employees/',views.employees, name='employees'),
     path('inventory/',views.inventory, name='inventory'),
@@ -20,6 +18,8 @@ urlpatterns = [
     path('postUpdate/',views.postUpdate,name='postUpdate'),
     path('searchResults/',views.searchResults,name='searchResults'),
     path('comments/<int:update_id>',views.comments,name='comments'),
+    path('approve/<int:id>', views.approved, name='approve'),
+    path('disapprove/<int:id>', views.disapproved, name='disapprove')
 
 ]
 
