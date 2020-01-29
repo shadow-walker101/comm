@@ -18,7 +18,8 @@ urlpatterns = [
     path('postUpdate/',views.postUpdate,name='postUpdate'),
     path('searchResults/',views.searchResults,name='searchResults'),
     path('comments/<int:update_id>',views.comments,name='comments'),
-    path('approve/<int:id>', views.approved, name='approve')
+    path('approve/<int:id>', views.approved, name='approve'),
+    path('disapprove/<int:id>', views.disapproved, name='disapprove')
 
 ]
 

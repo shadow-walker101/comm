@@ -41,7 +41,7 @@
                 </div>
                 <div class="modal-footer justify-content-center">
                     <a href="{% url 'approve' update.id%}" class="btn btn-success btn-sm">Approve</a>
-                    <button type="button" class="btn btn-danger btn-sm">Disapprove</button>
+                    <a href="{% url 'disapprove' update.id%}" class="btn btn-danger btn-sm">Disapprove</a>
                 </div>
             </div>
         </div>
