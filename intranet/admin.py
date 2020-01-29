@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from . models import *
 from online_users.models import OnlineUserActivity
 from django_summernote.admin import SummernoteModelAdmin
+from . forms import *
 
 # Summernote for all TextField in model.
 class SomeModelAdmin(SummernoteModelAdmin):  
@@ -11,7 +12,7 @@ class SomeModelAdmin(SummernoteModelAdmin):
 
 
 class UserAdmin(BaseUserAdmin):
-
+    
     list_display = ('email', 'user_type', 'department', 'username', 'is_admin')
     list_filter = ('is_admin', 'groups', 'is_active')
 
