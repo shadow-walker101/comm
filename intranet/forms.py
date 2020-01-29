@@ -3,6 +3,7 @@ from .models import *
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
+
 class Posting(forms.ModelForm):
     class Meta:
         model=Updates
