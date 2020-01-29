@@ -137,7 +137,7 @@ def postUpdate(request):
                 post = form.save(commit=False)
                 post.user = current_user
                 post.save()
-                dep = ['', 'human_resource', 'information', 'inventory', 'marketing', 'finance']
+                dep = ['updates', 'human_resource', 'information', 'inventory', 'marketing', 'finance']
                 return redirect(dep[post.department-1])
         else:
             form = PostUpdateForm()
@@ -163,6 +163,7 @@ def comments(request, update_id):
     commentForm = CommentForm()
     update = get_object_or_404(Updates,pk=update_id)
     dynamic_path = request.get_full_path
+    # comment=[comment]
         
     if request.method == 'POST':
         commentForm = CommentForm(request.POST)
@@ -173,10 +174,11 @@ def comments(request, update_id):
             form.save()
             # import pdb; pdb.set_trace()
             
-            next_url = request.POST.get('next')
-            if not next_url or not is_safe_url(url=next_url, allowed_hosts=request.get_host()):
-                next_url = reverse('updates')
-            return HttpResponseRedirect(next_url)    
+            # next_url = request.POST.get('next')
+            # if not next_url or not is_safe_url(url=next_url, allowed_hosts=request.get_host()):
+            #     next_url = reverse('updates')
+            # return HttpResponseRedirect(next_url)    
         # return redirect('comments', update_id)                   
-    return render (request, 'updates.html', locals())
-        # return JsonResponse(form.comment, safe=False)
+    # return render (request, 'updates.html', locals())
+    return HttpResponse(,content_type='application/json')
+
