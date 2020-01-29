@@ -28,3 +28,6 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'comment': forms.TextInput(attrs={'placeholder':'Write a comment...'})
         }
+        
+class UserCreationForm(forms.ModelForm): 
+    pass
