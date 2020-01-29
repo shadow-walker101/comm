@@ -12,6 +12,7 @@ class SomeModelAdmin(SummernoteModelAdmin):
 
 
 class UserAdmin(BaseUserAdmin):
+    add_form = UserCreationForm
     
     list_display = ('email', 'user_type', 'department', 'username', 'is_admin')
     list_filter = ('is_admin', 'groups', 'is_active')
