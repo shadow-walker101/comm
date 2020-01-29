@@ -163,7 +163,8 @@ class Updates(models.Model):
     
     @classmethod
     def dissaprove(cls,id):
-        update = get_object_or_404(cls, pk=id).delete()
+        update = get_object_or_404(cls, pk=id)
+        update.delete()
         return None
         
         
