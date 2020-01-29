@@ -35,6 +35,7 @@ def logins (request):
         
         if user is not None:
             login(request, user)
+            print(request.user.user_type)
             if  request.user.department == 1 and request.user.is_authenticated:
                 return redirect('human_resource')
             elif  request.user.department == 2 and request.user.is_authenticated:
@@ -60,7 +61,7 @@ def updates(request):
     comments = Comments.objects.all()
     commentForm = CommentForm()
     
-    return render(request, 'updates.html', locals())
+    return render(request,'updates.html',locals())
 
 
 @user_passes_test(lambda u: u.is_active and u.department==1 or u.user_type==1 ,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
@@ -69,11 +70,14 @@ def human_resource(request):
     updates = Updates.objects.filter(department=2).all()[::-1]
     commentForm = CommentForm()
     users = User.objects.order_by('-last_login')
-    return render(request, 'human_resource.html', locals())
+    num  = Updates.objects.filter(status=False).all().count()
+    return render(request,template, locals())
+
 
 @user_passes_test(lambda u:u.is_active and u.department==2 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def inventory(request):
     updates = Updates.objects.filter(department=4).all()[::-1]
+    num = Updates.objects.filter(status=False).all().count()
     users = User.objects.order_by('-last_login')
     commentForm = CommentForm()
     users = User.objects.order_by('-last_login')
@@ -86,7 +90,9 @@ def finance(request):
     updates = Updates.objects.filter(department=6).all()[::-1]
     commentForm = CommentForm()
     users = User.objects.order_by('-last_login')
-    return render(request, 'finance.html', locals())
+    num  = Updates.objects.filter(status=False).all().count()
+    return render(request,template, locals())
+
 
 
 @user_passes_test(lambda u:u.is_active and u.department==4 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
@@ -95,7 +101,9 @@ def marketing(request):
     updates = Updates.objects.filter(department=5).all()
     commentForm = CommentForm()
     users = User.objects.order_by('-last_login')
-    return render(request, 'marketing.html', locals())
+    num  = Updates.objects.filter(status=False).all().count()
+    return render(request, template, locals())
+
 
 @user_passes_test(lambda u:u.is_active and u.department==5 or u.user_type==1,redirect_field_name=REDIRECT_FIELD_NAME,login_url='login')
 def information_technology(request):
@@ -103,23 +111,27 @@ def information_technology(request):
     updates = Updates.objects.filter(department=3).all()[::-1]
     commentForm = CommentForm()
     users = User.objects.order_by('-last_login')
-    return render(request, 'information_technology.html', locals())
+    num  = Updates.objects.filter(status=False).all().count()
+    return render(request,template, locals())
+
 
 # @login_required(login_url='accounts/login')
 def employees(request):
     user_status = online_users.models.OnlineUserActivity.get_user_activities(timedelta(minutes=60))
     users = (user for user in user_status)
+    num  = Updates.objects.filter(status=False).all().count()
     context = {"online_users"}
 
     if request.user.user_type == 1 or request.user.user_type == 2:
-        return render(request, 'employees.html')
+        return render(request, 'employees.html', locals())
     else:
-        return render(request, 'employeeProfile.html')
+        return render(request, 'employeeProfile.html' , locals())
 
-
+@login_required(login_url='/accounts/login/') 
 def notifications(request):
     template='notifications.html'
     updates=Updates.objects.filter(status=False).all()[::-1]
+    users = User.objects.order_by('-last_login')
     num  = Updates.objects.filter(status=False).all().count()
     return render(request, template, locals())
     
@@ -127,12 +139,14 @@ def notifications(request):
 def employeeProfile(request):
     current_user = request.user
     profile = Profile.objects.filter(user= current_user)
-    return render(request, 'employeeProfile.html', {'profile':profile})
+    num  = Updates.objects.filter(status=False).all().count()
+    return render(request, 'employeeProfile.html', locals())
 
 
 # @login_required(login_url='accounts/login')
 def postUpdate(request):
     current_user =  request.user
+    num  = Updates.objects.filter(status=False).all().count()
     if current_user.user_type == 1 or current_user.user_type==2:
         if request.method == 'POST':
             form = PostUpdateForm(request.POST, request.FILES)
@@ -144,11 +158,11 @@ def postUpdate(request):
                 return redirect(dep[post.department-1])
         else:
             form = PostUpdateForm()
-            return render(request, 'postUpdate.html', {"form":form})
+            return render(request, 'postUpdate.html',locals())
     return redirect('updates')
 
 def searchResults(request):
-    
+    num  = Updates.objects.filter(status=False).all().count()
     if 'employee' in request.GET and request.GET["employee"]:
 
         search_term = request.GET.get("employee")
@@ -156,8 +170,8 @@ def searchResults(request):
         message = f"{search_term}"
         return render(request, 'searchResults.html', {"message": message, "Employees": searched_employees})
     else:
-        message = "You haven't searched for any term "
-        return render(request, 'searchResults.html', {"message": message})
+        message = "You haven't searched for any term"
+        return render(request, 'searchResults.html', {"message": message, "num":num})
      
 
 #comments
@@ -165,7 +179,11 @@ def searchResults(request):
 def comments(request, update_id):
     commentForm = CommentForm()
     update = get_object_or_404(Updates,pk=update_id)
+
     dynamic_path = request.get_full_path
+
+    num  = Updates.objects.filter(status=False).all().count()
+
         
     if request.method == 'POST':
         commentForm = CommentForm(request.POST)
