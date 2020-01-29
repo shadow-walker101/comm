@@ -212,3 +212,7 @@ def comments(request, update_id):
 def approved(request, id):
     Updates.approved(id)
     return redirect('notifications')
+
+def disapproved(request, id):
+    Updates.dissaprove(id)
+    return redirect('notifications')
