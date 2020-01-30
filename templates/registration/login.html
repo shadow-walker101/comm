@@ -36,9 +36,6 @@
             <div class="col-md-3 mt-5">
                 <form class="text-center  p-5" method="post" action="{% url 'login' %}">
                     {% csrf_token %}
-
-                    <a href="/admin" class="btn btn-blue btn-rounded">Admin</a>
-
                     <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" height="90px" width="90px"
                         alt="avatar mx-auto white" class="rounded-circle img-fluid">
                     <div class="md-form">
@@ -49,7 +46,8 @@
                         <label for="passwd" class="mb-5">Password</label>
                         <input type="password" required name="password" id="passwd" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-sm btn-dark-green btn-rounded font-weight-bold">Log in</button>
+                    <button type="submit" class="btn btn-sm btn-dark-green btn-rounded font-weight-bold mb-3">Log in</button>
+                    <p style="font-style:italic;"> <a href="/admin" class="font-weight-bold green-text">Log in as Admin</a></p>
                 </form>
             </div>
         </div>
