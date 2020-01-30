@@ -28,6 +28,7 @@ def got_offline(sender, user, request, **kwargs):
 
 
 def logins(request):
+    
     if request.method == "POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
