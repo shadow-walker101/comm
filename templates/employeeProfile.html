@@ -14,11 +14,12 @@
                    <img class="rounded-circle avatar z-depth-1-half mr-1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmgQLi9YIA2uiwnuZ_LU_K-nOVMvilA2A5M2dNNescwKKBm6EI&s" style="width:150px; height:150px;"> 
                   {% endif %}
       </div>
-      
-      <p> {{user.username}}</p>
-    
-      <a href="{% url 'editProfile' %}"> Edit my profile </a>
 
+      <div class="text-center">
+        <p> {{user.username}}</p>
+      
+        <a href="{% url 'editProfile' %}"> Edit my profile </a>
+      </div>
       
       
     </div>

@@ -159,13 +159,9 @@ def editProfile(request):
 def updateProfilePic(request):
   
     editProfileForm = EditProfileForm(instance=request.user)
-    print(editProfileForm)
-    print('=================================================')
  
     if request.method == 'POST':
         editProfileForm = EditProfileForm(request.POST,request.FILES,instance=request.user)
-        print(editProfileForm)
-        print('=================================================')
 
         if editProfileForm.is_valid():
             editProfileForm.save()
