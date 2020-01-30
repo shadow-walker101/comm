@@ -15,10 +15,18 @@
             <h6>{{update.title}}</h6>
             <p>{{update.update |truncatechars:200 | safe}}</p>
 
-            {% if update.department == 4 %}
-            <p> To be published on the Inventory Dashboard </p>
-            {% else %}
-            <p> To be pushlised on the {{ update.department }} Dashboard </p>
+            {% if update.department == 1 %}
+            <p class="text-info"> To be published on the <mark>General Dashboard</mark> </p>
+            {% elif update.department == 2 %}
+            <p class="text-info"> To be pushlised on the <mark>Human Resource Dashboard</mark> </p>
+            {% elif update.department == 3 %}
+            <p class="text-info"> To be published on the <mark>Information Technology Dashboard</mark></p>
+            {% elif update.department == 4 %}
+            <p class="text-info"> To be published on the <mark>Inventory Department</mark> </p>
+            {% elif update.department == 5 %}
+            <p class="text-info"> To be published on the <mark>Marketing Dashboard</mark> </p>
+            {% elif update.department == 6 %}
+            <p class="text-info"> To be published on the <mark>Finance Dashboard</mark> </p>
             {% endif %}
 
         </div>
@@ -56,7 +64,7 @@
     {% endfor %}
     {% else %}
 
-    <p class="text-center" style="color: #0B920D;">There are no notification now</p>
+    <p class="text-center" style="color: #0B920D;">There are no notifications now</p>
 
     {% endif %}
 
