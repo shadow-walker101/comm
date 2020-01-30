@@ -15,9 +15,16 @@
 .post-content {
   font-family: 'Open Sans', sans-serif;
 }
-
-.updateimg {
-  display: none;
+.noUpdates {
+  display: flex;
+  justify-content: center;
+  border: 1px solid;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 14px 10px #59f25b;
+  padding-top: 20px;
+  margin: auto;
+  margin-top: 50px;
 }
 
 .post-date {
@@ -104,7 +111,31 @@
   }
 }
 
+
+/* Snackbar on commenting */
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #0B920D;
+  color: #fff;
+  text-align: center;
+  border-radius: 21px;
+  padding: 7px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 14px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 2.5s 2.5s;
+
 #try{
   font-size: 10px;
   font-style: italic;
+
 }
