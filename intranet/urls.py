@@ -21,7 +21,7 @@ urlpatterns = [
     path('commenting/<int:update_id>',views.commenting,name='commenting'),
     path('approve/<int:id>', views.approved, name='approve'),
     path('disapprove/<int:id>', views.disapproved, name='disapprove'),
-    path('editprofile/', views.editprofile, name ='editprofile')
+    
 
 ]
 
