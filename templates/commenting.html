@@ -6,14 +6,25 @@
 
 
 <div class="container">
-  <h3 class="text-center font-weight-bolder pt-3 pb-3 " style="color: #0B920D;">
-Inventory Department  </h3>
+{{ request.update }}
+
+    {% if update.department == 1 %}
+        <h3 class="text-center font-weight-bolder pt-3 pb-3 " style="color: #0B920D;"> General: {{update.title}} </h3>
+        {% elif update.department == 2 %}
+        <h3 class="text-center font-weight-bolder pt-3 pb-3 " style="color: #0B920D;"> Human Resource Department: {{update.title}} </h3>
+        {% elif update.department == 3 %}
+        <h3 class="text-center font-weight-bolder pt-3 pb-3 " style="color: #0B920D;"> Information Technology Department: {{update.title}} </h3>
+        {% elif update.department == 4 %}
+        <h3 class="text-center font-weight-bolder pt-3 pb-3 " style="color: #0B920D;"> Inventory Department: {{update.title}} </h3>
+        {% elif update.department == 5 %}
+        <h3 class="text-center font-weight-bolder pt-3 pb-3 " style="color: #0B920D;"> Marketing Department: {{update.title}}  </h3>
+        {% elif update.department == 6 %}
+        <h3 class="text-center font-weight-bolder pt-3 pb-3 " style="color: #0B920D;"> Finance Department: {{update.title}} </h3>
+    {% endif %}
   <hr>
 
 
-{% for update in updates %}
-
-  <div id="{{update.id}}" class="row mt-5">
+  <div id="{{update.id}}" class="row">
 
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
       {% if update.user.profile.image %}
@@ -73,7 +84,7 @@ Inventory Department  </h3>
       
       <div class="row mt-3 shadow-textarea">
 
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 d-flex">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
             {% if request.user.profile.image %}
 
             <img class="d-flex rounded-circle avatar z-depth-1-half"
@@ -83,19 +94,33 @@ Inventory Department  </h3>
             {% else %}
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmgQLi9YIA2uiwnuZ_LU_K-nOVMvilA2A5M2dNNescwKKBm6EI&s" height="40px" width="40px" alt="avatar mx-auto white" class="rounded-circle img-fluid avatar z-depth-1-half">
             {% endif %}
-
-
-            <a href="{% url 'commenting' update.id%}" style="color: #0B920D"><i class="far fa-comment fa-lg ml-3" aria-hidden="true"></i> Add Comment </a> 
-
         </div>
 
-  
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 pl-0">
+          <div class="form-group basic-textarea rounded-corners commentForm">
+
+            <form action="{% url 'comments' update_id=update.id %}" method="post" onsubmit="myFunction()" id="commentForm">
+
+            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
+            {% csrf_token %}
+              
+            {% bootstrap_form commentForm layout='inline '%}
+            
+              <button type="submit" class="btn btn-success btn-sm px-2 py-1"><i class="far fa-thumbs-up mr-2" aria-hidden="true"></i>Post Comment</button>
+
+            </form>
+
+          <!-- snackbar -->
+            <div id="snackbar" class="btn btn-sm btn-green ml-auto">Your comment has been published</div>
+          <!-- end of snackbar -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
 
-{% endfor %}
     <div class="row onlineUsers">
           <button id="popover" class="btn btn-sm btn-green ml-auto" title="Employee Online Status" data-toggle="popover"  data-placement="top" data-trigger="focus"> Who's online? </button>
 
