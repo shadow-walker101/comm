@@ -12,24 +12,20 @@ class SomeModelAdmin(SummernoteModelAdmin):
 
 
 class UserAdmin(BaseUserAdmin):
-        
+    add_form = UserCreationForm
     list_display = ('email', 'user_type', 'department', 'username', 'is_admin')
     list_filter = ('is_admin', 'groups', 'is_active')
-
     fieldsets = (
-
         (None, {'fields': ('email',)}),
         ('Personal info', {'fields': ('user_type', 'department')}),
         ('Permissions', {'fields': ('is_admin','is_superuser', 'groups', 'user_permissions', 'is_active')}),
     )
-
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'user_type', 'department', 'username', 'password1', 'password2'),
+            'fields': ('email', 'user_type', 'department', 'username', 'password1'),
         }),
     )
-
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions',)
