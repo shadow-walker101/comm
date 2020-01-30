@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from. models import *
+from django.contrib import messages
 
 
 @receiver(user_logged_in)
@@ -182,6 +183,8 @@ def postUpdate(request):
                 post.user = current_user
                 post.save()
                 dep = ['updates', 'human_resource', 'information', 'inventory', 'marketing', 'finance']
+                messages.success(request, 'Submission successful. Update awaiting approval before being published')
+                print(messages, '================================')
                 return redirect(dep[post.department-1])
         else:
             form = PostUpdateForm()
