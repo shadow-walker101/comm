@@ -15,6 +15,12 @@
             <h6>{{update.title}}</h6>
             <p>{{update.update |truncatechars:200 | safe}}</p>
 
+            {% if update.department == 4 %}
+            <p> To be published on the Inventory Dashboard </p>
+            {% else %}
+            <p> To be pushlised on the {{ update.department }} Dashboard </p>
+            {% endif %}
+
         </div>
 
     </div>
@@ -41,7 +47,7 @@
                 </div>
                 <div class="modal-footer justify-content-center">
                     <a href="{% url 'approve' update.id%}" class="btn btn-success btn-sm">Approve</a>
-                    <button type="button" class="btn btn-danger btn-sm">Disapprove</button>
+                    <a href="{% url 'disapprove' update.id%}" class="btn btn-danger btn-sm">Disapprove</a>
                 </div>
             </div>
         </div>
