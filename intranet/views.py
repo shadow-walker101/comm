@@ -74,7 +74,6 @@ def human_resource(request):
     num = Updates.objects.filter(status=False).all().count()
     return render(request, template, locals())
 
-
 @user_passes_test(lambda u: u.is_active and u.department == 2 or u.user_type == 1, redirect_field_name=REDIRECT_FIELD_NAME, login_url='login')
 def inventory(request):
     updates = Updates.objects.filter(department=4 , status=True).all()[::-1]
@@ -92,7 +91,7 @@ def finance(request):
     commentForm = CommentForm()
     users = User.objects.order_by('-last_login')
     num = Updates.objects.filter(status=False).all().count()
-    return render(request, template, locals())
+    return render(request, 'finance.html', locals())
 
 
 @user_passes_test(lambda u: u.is_active and u.department == 4 or u.user_type == 1, redirect_field_name=REDIRECT_FIELD_NAME, login_url='login')
@@ -102,7 +101,7 @@ def marketing(request):
     commentForm = CommentForm()
     users = User.objects.order_by('-last_login')
     num = Updates.objects.filter(status=False).all().count()
-    return render(request, template, locals())
+    return render(request, 'marketing.html', locals())
 
 
 @user_passes_test(lambda u: u.is_active and u.department == 5 or u.user_type == 1, redirect_field_name=REDIRECT_FIELD_NAME, login_url='login')
@@ -112,7 +111,7 @@ def information_technology(request):
     commentForm = CommentForm()
     users = User.objects.order_by('-last_login')
     num = Updates.objects.filter(status=False).all().count()
-    return render(request, template, locals())
+    return render(request, 'information_technology.html', locals())
 
 
 # @login_required(login_url='accounts/login')
@@ -156,8 +155,7 @@ def postUpdate(request):
                 post = form.save(commit=False)
                 post.user = current_user
                 post.save()
-                dep = ['updates', 'human_resource', 'information',
-                       'inventory', 'marketing', 'finance']
+                dep = ['updates', 'human_resource', 'information', 'inventory', 'marketing', 'finance']
                 return redirect(dep[post.department-1])
         else:
             form = PostUpdateForm()
@@ -183,9 +181,7 @@ def searchResults(request):
 def comments(request, update_id):
     commentForm = CommentForm()
     update = get_object_or_404(Updates, pk=update_id)
-
-    dynamic_path = request.get_full_path
-
+    dynamic_path = request.get_full_path        
     num = Updates.objects.filter(status=False).all().count()
 
     if request.method == 'POST':
@@ -194,20 +190,35 @@ def comments(request, update_id):
             form = commentForm.save(commit=False)
             form.user = request.user
             form.update = get_object_or_404(Updates, pk=update_id)
-            form.save()
-            # import pdb; pdb.set_trace()
-
+            form.save()            
             next_url = request.POST.get('next')
             if not next_url or not is_safe_url(url=next_url, allowed_hosts=request.get_host()):
                 next_url = reverse('updates')
-            return HttpResponseRedirect(next_url)
-        # return redirect('comments', update_id)
-    return render(request, 'updates.html', locals())
-    # return JsonResponse(form.comment, safe=False)
-
-    return redirect('updates')
-    return render(request, 'updates.html', locals())
-
+            return HttpResponseRedirect(next_url) 
+    
+#commenting per update
+@login_required(login_url='/accounts/login')
+def commenting (request, update_id):
+    commentForm = CommentForm()
+    update = get_object_or_404(Updates, pk=update_id)
+    num = Updates.objects.filter(status=False).all().count()
+    users = User.objects.order_by('-last_login')
+    
+    if request.method == 'POST':
+        commentForm = CommentForm(request.POST)
+        if commentForm.is_valid():
+            form = commentForm.save(commit=False)
+            form.user = request.user
+            form.update = get_object_or_404(Updates, pk=update_id)
+            form.save()            
+            next_url = request.POST.get('next')
+            if not next_url or not is_safe_url(url=next_url, allowed_hosts=request.get_host()):
+                next_url = reverse('updates')
+            return HttpResponseRedirect(next_url)  
+    else:
+        commentForm = CommentForm()
+        return render(request, 'commenting.html', locals())
+    
 
 def approved(request, id):
     Updates.approved(id)
