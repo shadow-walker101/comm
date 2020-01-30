@@ -31,7 +31,7 @@ def logins(request):
     if request.method == "POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
-        print('password')
+        print(email)
         user = authenticate(email=email, password=password)
 
         if user is not None:
