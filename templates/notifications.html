@@ -13,7 +13,7 @@
             </h5>
 
             <h6>{{update.title}}</h6>
-            <p>{{update.update | safe}}</p>
+            <p>{{update.update |truncatechars:200 | safe}}</p>
 
         </div>
 
@@ -31,18 +31,17 @@
                 </div>
                 <div class="modal-body">
                     <p class="post-content">
-                        A meeting has been scheduled for 30th January 2019. The meeting is meant to discuss the months
-                        activities.<br> All members are asked to attend.
+                        {{update.update| safe}}
                     </p>
 
                     <h6 class="text-muted pt-2 post-date">
-                        <i>Posted by:HR admin on Jan 12 2020</i>
+                        <i>Posted by: {{user.username}} {{update.time_stamp|timesince}} ago</i>
                     </h6>
 
                 </div>
                 <div class="modal-footer justify-content-center">
                     <a href="{% url 'approve' update.id%}" class="btn btn-success btn-sm">Approve</a>
-                    <button type="button" class="btn btn-danger btn-sm">Disapprove</button>
+                    <a href="{% url 'disapprove' update.id%}" class="btn btn-danger btn-sm">Disapprove</a>
                 </div>
             </div>
         </div>
