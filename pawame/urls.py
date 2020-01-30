@@ -47,5 +47,4 @@ urlpatterns = [
     path('', include('intranet.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('summernote/', include('django_summernote.urls')),
-    path('accounts/',include('authtools.urls')),
 ]

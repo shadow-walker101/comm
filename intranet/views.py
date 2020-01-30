@@ -227,3 +227,6 @@ def approved(request, id):
 def disapproved(request, id):
     Updates.dissaprove(id)
     return redirect('notifications')
+def editprofile(request):
+    Profile.editprofile
+    return redirect('employee')
