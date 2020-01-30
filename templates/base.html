@@ -83,7 +83,14 @@
         }
         </script>
 
-  
+    <!-- awaiting approval snackbar -->
+        <script>
+        function awaitingApproval() {
+        var x = document.getElementById("approvalsnackbar");
+        x.className = "show";
+          setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+        }
+        </script>
 
     {% endblock %}
 </body>

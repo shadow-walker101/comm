@@ -17,7 +17,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('is_admin', 'groups', 'is_active')
     fieldsets = (
         (None, {'fields': ('email',)}),
-        ('Personal info', {'fields': ('user_type', 'department')}),
+        ('Personal info', {'fields': ('user_type', 'department','image')}),
         ('Permissions', {'fields': ('is_admin','is_superuser', 'groups', 'user_permissions', 'is_active')}),
     )
     add_fieldsets = (
@@ -32,7 +32,7 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
-admin.site.register(Profile)
+# admin.site.register(Profile)
 admin.site.register(Updates)
 admin.site.register(Comments)
 admin.site.site_header = 'Pawame Administration'

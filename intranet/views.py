@@ -140,9 +140,40 @@ def notifications(request):
 
 def employeeProfile(request):
     current_user = request.user
-    profile = Profile.objects.filter(user=current_user)
+    profile = Profile.objects.filter(user=request.user)
     num = Updates.objects.filter(status=False).all().count()
     return render(request, 'employeeProfile.html', locals())
+
+
+def editProfile(request):
+    editProfileForm = EditProfileForm()
+    current_user = request.user
+    profile = Profile.objects.filter(user=current_user)
+    num = Updates.objects.filter(status=False).all().count()
+    
+    return render(request, 'editProfile.html', locals())
+    
+
+#updatePic
+@login_required(login_url='/accounts/login')
+def updateProfilePic(request):
+  
+    editProfileForm = EditProfileForm(instance=request.user)
+    print(editProfileForm)
+    print('=================================================')
+ 
+    if request.method == 'POST':
+        editProfileForm = EditProfileForm(request.POST,request.FILES,instance=request.user)
+        print(editProfileForm)
+        print('=================================================')
+
+        if editProfileForm.is_valid():
+            editProfileForm.save()
+            return redirect('employeeProfile')
+    else:
+        editProfileForm = EditProfileForm(instance=request.user)
+
+    return render(request,'editProfile.html', locals())
 
 
 # @login_required(login_url='accounts/login')

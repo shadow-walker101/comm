@@ -17,9 +17,9 @@ General Dashboard </h3>
   <div id="{{update.id}}" class="row mt-5">
 
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-      {% if update.user.profile.image %}
+      {% if update.user.image %}
         <img class="d-flex rounded-circle avatar z-depth-1-quater mr-3"
-          src="{{update.user.profile.image.url}}" height="100px" width="100px" alt="Avatar">
+          src="{{update.user.image.url}}" height="100px" width="100px" alt="Avatar">
       {% else %}
           <img class="d-flex rounded-circle avatar z-depth-1-half mr-3"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmgQLi9YIA2uiwnuZ_LU_K-nOVMvilA2A5M2dNNescwKKBm6EI&s" height="100px" width="100px" alt="Avatar">

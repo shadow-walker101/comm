@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
 {% block content %}
 
 <div class="container">
@@ -14,13 +16,16 @@
                    <img class="rounded-circle avatar z-depth-1-half mr-1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmgQLi9YIA2uiwnuZ_LU_K-nOVMvilA2A5M2dNNescwKKBm6EI&s" style="width:150px; height:150px;"> 
                   {% endif %}
       </div>
-      
-      <p> {{user.username}}</p>
     
-      <a href="{% url 'editProfile' %}"> Edit my profile </a>
+            <form action="{% url 'updateProfilePic' %}" method="post" enctype='multipart/form-data'>
+            {% csrf_token %}
+              
+            {% bootstrap_form editProfileForm layout='inline '%}
+            <div class="form-group">
+              <button type="submit" class="btn btn-success btn-sm px-2 py-1"><i class="far fa-edit mr-2" aria-hidden="true"></i> Edit </button>
+            </div>
+            </form>
 
-      
-      
     </div>
   </div>
 
