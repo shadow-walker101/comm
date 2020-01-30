@@ -72,15 +72,18 @@
             },
             placement:'top'
         });            
-        </script>    
+        </script> 
+        
+        <!-- snackbar on commenting  -->   
+        <script>
+        function myFunction() {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+          setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+        }
+        </script>
 
-        <!-- summernote image upload -->
-        <!--<script>
-            $('#summernote').summernote('insertImage', url, function ($image) {
-                $image.css('width', $image.width() / 3);
-                $image.attr('data-filename', 'retriever');
-            });
-        </script>  -->
+  
 
     {% endblock %}
 </body>

@@ -15,6 +15,12 @@
             <h6>{{update.title}}</h6>
             <p>{{update.update |truncatechars:200 | safe}}</p>
 
+            {% if update.department == 4 %}
+            <p> To be published on the Inventory Dashboard </p>
+            {% else %}
+            <p> To be pushlised on the {{ update.department }} Dashboard </p>
+            {% endif %}
+
         </div>
 
     </div>
