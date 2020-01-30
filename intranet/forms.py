@@ -4,6 +4,7 @@ from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 from . email import send_credentials
 
 
+
 class Posting(forms.ModelForm):
     class Meta:
         model = Updates
