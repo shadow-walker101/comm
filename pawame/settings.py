@@ -192,7 +192,7 @@ USE_TZ = True
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
 LOGIN_REDIRECT_URL = 'updates'
-LOGIN_URL = 'login'
+# LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'login'
 # Static files (CSS, JavaScript, Images)
