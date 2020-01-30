@@ -27,3 +27,7 @@ a.section:link,a.section:visited{
 input,a.button{
     background:#0b920d!important
 }
+#content.colMS{
+    margin-left: 15%!important
+}
+
