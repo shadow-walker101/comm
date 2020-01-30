@@ -3,6 +3,7 @@ from .models import *
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
+
 class Posting(forms.ModelForm):
     class Meta:
         model=Updates
@@ -13,7 +14,7 @@ class Posting(forms.ModelForm):
 class PostUpdateForm(forms.ModelForm):
     class Meta:
         model = Updates
-        exclude = ['user', 'time_stamp',]
+        exclude = ['user', 'time_stamp','status']
         widgets = {
             'update': SummernoteWidget(),
         }
@@ -28,3 +29,6 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'comment': forms.TextInput(attrs={'placeholder':'Write a comment...'})
         }
+        
+class UserCreationForm(forms.ModelForm): 
+    pass
