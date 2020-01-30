@@ -30,7 +30,7 @@ urlpatterns = [
     ),
     path(
          'admin/password_reset/done/',
-      auth_views.PasswordResetDoneView.as_view(),
+      auth_views.PasswordResetDoneView.as_view(),{"success_url":""},
        name='password_reset_done',
      ),
     path(
