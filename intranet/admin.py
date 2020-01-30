@@ -32,7 +32,7 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
-# admin.site.register(Profile)
+admin.site.register(Profile)
 admin.site.register(Updates)
 admin.site.register(Comments)
 admin.site.site_header = 'Pawame Administration'

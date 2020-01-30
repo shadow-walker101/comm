@@ -157,9 +157,7 @@ def editProfile(request):
 #updatePic
 @login_required(login_url='/accounts/login')
 def updateProfilePic(request):
-  
     editProfileForm = EditProfileForm(instance=request.user)
- 
     if request.method == 'POST':
         editProfileForm = EditProfileForm(request.POST,request.FILES,instance=request.user)
 
