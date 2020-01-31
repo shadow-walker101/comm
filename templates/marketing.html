@@ -106,10 +106,10 @@ Marketing Department  </h3>
 
           <div id="popover-content" style="display:none;">
           {% for user in users %}
-            {% if user.profile.is_online %}
+            {% if user.is_online %}
               <p>
-                  {% if user.profile.image %}                 
-                  <img class="rounded-circle avatar z-depth-1-half mr-1" src="{{user.profile.image.url}}" style="width:30px; height:30px;"> 
+                  {% if user.image %}                 
+                  <img class="rounded-circle avatar z-depth-1-half mr-1" src="{{user.image.url}}" style="width:30px; height:30px;"> 
                   {% else %}
                    <img class="rounded-circle avatar z-depth-1-half mr-1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmgQLi9YIA2uiwnuZ_LU_K-nOVMvilA2A5M2dNNescwKKBm6EI&s" style="width:30px; height:30px;"> 
                   {% endif %}
@@ -119,7 +119,7 @@ Marketing Department  </h3>
             {% else %}
               <p>
                   {% if user.profile.image %}                 
-                  <img class="rounded-circle avatar z-depth-1-half mr-1" src="{{user.profile.image.url}}" style="width:30px; height:30px;"> 
+                  <img class="rounded-circle avatar z-depth-1-half mr-1" src="{{user.image.url}}" style="width:30px; height:30px;"> 
                   {% else %}
                    <img class="rounded-circle avatar z-depth-1-half mr-1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmgQLi9YIA2uiwnuZ_LU_K-nOVMvilA2A5M2dNNescwKKBm6EI&s" style="width:30px; height:30px;"> 
                   {% endif %}
