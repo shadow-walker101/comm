@@ -24,8 +24,7 @@ class PostUpdateForm(forms.ModelForm):
         widgets = {
             'update': SummernoteWidget(),
         }
-
-
+        
 class CommentForm(forms.ModelForm):
     class Meta:
 
@@ -34,6 +33,7 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'comment': forms.TextInput(attrs={'placeholder': 'Write a comment...'})
         }
+
 
 
 class UserCreationForm(forms.ModelForm):
@@ -60,6 +60,7 @@ class UserCreationForm(forms.ModelForm):
         email = user.email
         username = user.username
         send_credentials(credential, username, email)
+
 
 
 class EditProfileForm(forms.ModelForm):
