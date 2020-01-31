@@ -18,17 +18,17 @@ from django.contrib import messages
 
 @receiver(user_logged_in)
 def got_online(sender, user, request, **kwargs):
-    user.profile.is_online = True
-    user.profile.save()
-
+    user.is_online = True
+    user.save()
 
 @receiver(user_logged_out)
 def got_offline(sender, user, request, **kwargs):
-    user.profile.is_online = False
-    user.profile.save()
+    user.is_online = False
+    user.save()
 
 
 def logins(request):
+    
     if request.method == "POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -199,7 +199,8 @@ def searchResults(request):
         search_term = request.GET.get("employee")
         searched_employees = User.search_employees(search_term)
         message = f"{search_term}"
-        return render(request, 'searchResults.html', {"message": message, "Employees": searched_employees})
+        num = Updates.objects.filter(status=False).all().count()
+        return render(request, 'searchResults.html', {"message": message, "Employees": searched_employees , "num": num})
     else:
         message = "You haven't searched for any term"
         return render(request, 'searchResults.html', {"message": message, "num": num})
@@ -256,3 +257,9 @@ def approved(request, id):
 def disapproved(request, id):
     Updates.dissaprove(id)
     return redirect('notifications')
+
+def delete_employee(request,id):
+    query = User.objects.get(pk=id)
+    query.delete()
+    return redirect("searchResults")
+

@@ -6,7 +6,7 @@ from . import views
 
 urlpatterns = [
     path('',views.updates,name='updates'),
-    path('login',views.logins, name='login'),
+    path('login/',views.logins, name='login'),
     path('notifications/',views.notifications, name='notifications'),
     path('employees/',views.employees, name='employees'),
     path('inventory/',views.inventory, name='inventory'),
@@ -22,7 +22,8 @@ urlpatterns = [
     path('comments/<int:update_id>',views.comments,name='comments'),
     path('commenting/<int:update_id>',views.commenting,name='commenting'),
     path('approve/<int:id>', views.approved, name='approve'),
-    path('disapprove/<int:id>', views.disapproved, name='disapprove')
+    path('disapprove/<int:id>', views.disapproved, name='disapprove'),
+    path('delete_employee/<int:id>',views.delete_employee, name='delete_employee')
 
 ]
 
