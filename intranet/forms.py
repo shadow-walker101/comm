@@ -23,8 +23,7 @@ class PostUpdateForm(forms.ModelForm):
         widgets = {
             'update': SummernoteWidget(),
         }
-
-
+        
 class CommentForm(forms.ModelForm):
     class Meta:
 
