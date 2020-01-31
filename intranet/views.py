@@ -231,7 +231,7 @@ def disapproved(request, id):
     return redirect('notifications')
 
 def delete_employee(request,id):
-    query = employee.objects.get(pk=id)
+    query = User.objects.get(pk=id)
     query.delete()
     return redirect("searchResults")
 
