@@ -29,19 +29,19 @@
             <div class="card-body card-body-cascade text-center text-muted">
 
                 <!-- Label -->
-                <h5 class="pb-2 pt-1"><span class="green-text">Name: </span>{{employee.username}} </h5>
+                <h5 class="pb-2 pt-1">{{employee.username}} </h5>
                 {%if employee.department == None %}
-                <h5 class="pb-2 pt-1"><span class="green-text">Super Admin </h5>
+                <h5 class="pb-2 pt-1">Super Admin </h5>
                 {% elif employee.department == 1 %}
-                <h5 class="pb-2 pt-1"><span class="green-text">Department: </span>Human Resource</h5>
+                <h5 class="pb-2 pt-1"><span class="text-muted"></span>Human Resource</h5>
                 {% elif employee.department == 2 %}
-                <h5 class="pb-2 pt-1"><span class="green-text">Department: </span>Inventory</h5>
+                <h5 class="pb-2 pt-1"><span class="text-muted"></span>Inventory</h5>
                 {% elif employee.department == 3 %}
-                <h5 class="pb-2 pt-1"><span class="green-text">Department: </span>Finance</h5>
+                <h5 class="pb-2 pt-1"><span class="text-muted"></span>Finance</h5>
                 {% elif employee.department == 4 %}
-                <h5 class="pb-2 pt-1"><span class="green-text">Department: </span>Marketing</h5>
+                <h5 class="pb-2 pt-1"><span class="text-muted"></span>Marketing</h5>
                 {% else %}
-                <h5 class="pb-2 pt-1"><span class="green-text">Department: </span>Information Technology</h5>
+                <h5 class="pb-2 pt-1"><span class="text-muted"></span>Information Technology</h5>
                 {% endif %}
                 <!-- Title -->
                 <a class="btn btn-sm btn-outline-dark-green ml-0" data-toggle="modal" data-target="#modalLoginAvatar">
