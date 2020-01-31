@@ -30,7 +30,7 @@ urlpatterns = [
     ),
     path(
          'admin/password_reset/done/',
-      auth_views.PasswordResetDoneView.as_view(),
+      auth_views.PasswordResetDoneView.as_view(),{"success_url":""},
        name='password_reset_done',
      ),
     path(
@@ -47,4 +47,5 @@ urlpatterns = [
     path('', include('intranet.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('summernote/', include('django_summernote.urls')),
+    path('accounts/',include('authtools.urls')),
 ]

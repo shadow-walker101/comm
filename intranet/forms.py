@@ -12,6 +12,7 @@ def randomPassword(stringLength=10):
 
 
 
+
 class Posting(forms.ModelForm):
     class Meta:
         model = Updates

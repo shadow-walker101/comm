@@ -256,3 +256,9 @@ def approved(request, id):
 def disapproved(request, id):
     Updates.dissaprove(id)
     return redirect('notifications')
+
+def delete_employee(request,id):
+    query = employee.objects.get(pk=id)
+    query.delete()
+    return redirect("searchResults")
+
