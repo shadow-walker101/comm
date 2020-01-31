@@ -200,7 +200,8 @@ def searchResults(request):
         search_term = request.GET.get("employee")
         searched_employees = User.search_employees(search_term)
         message = f"{search_term}"
-        return render(request, 'searchResults.html', {"message": message, "Employees": searched_employees})
+        num = Updates.objects.filter(status=False).all().count()
+        return render(request, 'searchResults.html', {"message": message, "Employees": searched_employees , "num": num})
     else:
         message = "You haven't searched for any term"
         return render(request, 'searchResults.html', {"message": message, "num": num})
