@@ -7,7 +7,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link mr-2" href="{% url 'updates' %}">Home
         </a>
       </li>
@@ -82,6 +82,8 @@
         <a class="dropdown-item" href="/admin/intranet/user/add/"> <i class="far fa-plus-square mx-2"
             style="color:#0B920D;"></i> Add Employee</a>
         {% endif %}
+        <a class="dropdown-item" href="/accounts/password_reset"><i ></i> <i class="fas fa-lock mx-2"
+          style="color:#0B920D;"></i>Change Password</a>
         <a class="dropdown-item" href="{% url 'logout' %}"> <i class="fas fa-sign-out-alt mx-2"
             style="color: rgb(165, 45, 45);"></i> Log out</a>
       </div>

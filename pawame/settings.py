@@ -9,37 +9,37 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import dj_database_url
-from decouple import config,Csv
+from decouple import config, Csv
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-MODE=config("MODE", default="dev")
-SECRET_KEY=config('SECRET_KEY')
+MODE = config("MODE", default="dev")
+SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 # development
-if config('MODE')=="dev":
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': config('DB_NAME'),
-           'USER': config('DB_USER'),
-           'PASSWORD': config('DB_PASSWORD'),
-           'HOST': config('DB_HOST'),
-           'PORT': '',
+if config('MODE') == "dev":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': '',
         }
-   }
+    }
 
-   #production
+    # production
 else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+    }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
@@ -83,12 +83,12 @@ INSTALLED_APPS = [
 ]
 
 ADMIN_COLORS_BASE_THEME = 'Black'
-ADMIN_COLORS=[
-    ('Default',[]),
-    ('Lite','admincolors/css/lite.css'),
-    ('Dark Blue','admincolors/css/dark-blue.css'),
-    ('Gray','admincolors/css/gray.css'),
-    ('Black',('admincolors/css/gray.css','static/css/theme.css')),
+ADMIN_COLORS = [
+    ('Default', []),
+    ('Lite', 'admincolors/css/lite.css'),
+    ('Dark Blue', 'admincolors/css/dark-blue.css'),
+    ('Gray', 'admincolors/css/gray.css'),
+    ('Black', ('admincolors/css/gray.css', 'static/css/theme.css')),
 ]
 
 MIDDLEWARE = [
@@ -116,7 +116,7 @@ USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
 ROOT_URLCONF = 'pawame.urls'
 
 TEMPLATES = [
-    {   
+    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
@@ -133,10 +133,10 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION='pawame.wsgi.application'
+WSGI_APPLICATION = 'pawame.wsgi.application'
 
 TINYMCE_DEFAULT_CONFIG = {
-  'file_browser_callback': 'mce_filebrowser'
+    'file_browser_callback': 'mce_filebrowser'
 }
 
 SUMMERNOTE_CONFIG = {
@@ -147,14 +147,13 @@ SUMMERNOTE_CONFIG = {
         'height': '400',
         'lang': None,
     },
-        'print': {
+    'print': {
         'stylesheetUrl': 'static/css/main.css',
     },
 }
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 
 
 # Password validation
@@ -190,11 +189,10 @@ USE_L10N = True
 USE_TZ = True
 
 
-
 # custom authentications
 AUTH_USER_MODEL = 'intranet.User'
-LOGIN_REDIRECT_URL='updates'
-LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'updates'
+# LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'login'
 # Static files (CSS, JavaScript, Images)
@@ -207,7 +205,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-CRISPY_TEMPLATE_PACK='bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 SUMMERNOTE_THEME = 'bs4'
 
 
@@ -216,6 +214,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 # Email configurations remember to install python-decouple
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')

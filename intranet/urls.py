@@ -18,6 +18,7 @@ urlpatterns = [
     path('postUpdate/',views.postUpdate,name='postUpdate'),
     path('searchResults/',views.searchResults,name='searchResults'),
     path('comments/<int:update_id>',views.comments,name='comments'),
+    path('commenting/<int:update_id>',views.commenting,name='commenting'),
     path('approve/<int:id>', views.approved, name='approve'),
     path('disapprove/<int:id>', views.disapproved, name='disapprove'),
     path('delete_employee/<int:id>',views.delete_employee, name='delete_employee')
