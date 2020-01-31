@@ -64,6 +64,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_admin = models.BooleanField(default=False)
     department = models.PositiveSmallIntegerField(choices=DEPARTMENTS, null=True)
     image = models.ImageField(upload_to='photos/', null=True)
+    is_online = models.BooleanField(default=False)
 
 
     USERNAME_FIELD = 'email'
@@ -95,7 +96,6 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    is_online = models.BooleanField(default=False)
 
     def save_profile(self):
         self.save()

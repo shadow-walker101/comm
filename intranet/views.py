@@ -18,14 +18,13 @@ from django.contrib import messages
 
 @receiver(user_logged_in)
 def got_online(sender, user, request, **kwargs):
-    user.profile.is_online = True
-    user.profile.save()
-
+    user.is_online = True
+    user.save()
 
 @receiver(user_logged_out)
 def got_offline(sender, user, request, **kwargs):
-    user.profile.is_online = False
-    user.profile.save()
+    user.is_online = False
+    user.save()
 
 
 def logins(request):
