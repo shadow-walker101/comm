@@ -35,6 +35,16 @@ class CommentForm(forms.ModelForm):
         }
 
         
+        
+        
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        
+        model = User
+        fields = ['image', 'username']
+       
+        
+        
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput, required=False)
     # password2 = forms.CharField(

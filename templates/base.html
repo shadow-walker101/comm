@@ -83,7 +83,26 @@
         }
         </script>
 
-  
+    <!-- awaiting approval snackbar -->
+        <script>
+        function awaitingApproval() {
+        var x = document.getElementById("approvalsnackbar");
+        x.className = "show";
+          setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+        }
+        </script>
+
+
+    <!-- testing delay redirect after submiting form -->
+       <!-- <script type="text/javascript">
+            window.onload=function(){ 
+                window.setTimeout(document.approvalsnackbar.submit(), 5000);
+            };
+        </script> -->
+    <!-- end of test code -->
+
+
+
 
     {% endblock %}
 </body>
