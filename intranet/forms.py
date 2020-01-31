@@ -21,9 +21,12 @@ class PostUpdateForm(forms.ModelForm):
     class Meta:
         model = Updates
         exclude = ['user', 'time_stamp', 'status']
+
         widgets = {
             'update': SummernoteWidget(),
         }
+        
+        
         
 class CommentForm(forms.ModelForm):
     class Meta:
