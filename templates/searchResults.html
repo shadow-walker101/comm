@@ -10,26 +10,30 @@
         <div class="col-lg-3 card card-cascade narrower mr-3 mb-3">
 
             <!-- Card image -->
-            <div class="view view-cascade overlay mx-auto">
-                {% if employee.user.profile.image %}
-                <img class="card-img-top img-fluid" src="{{employee.user.profile.image.url}}" height="150px" alt="Card image cap">
+
+            <div class="view mx-auto mt-1">
+                {% if user.image %}
+                <img class="card-img-top" style="border-radius: 50%; height: 150px; width: 150px;"
+                    src="{{user.image.url}}" alt="Card image cap">
                 {% else %}
-                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" height="150px"
-                    alt="Card image cap">
+                <img class="card-img-top" style="border-radius: 50%; height: 150px; width: 150px;"
+                    src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" alt="Card image cap">
                 {% endif %}
-                <a>
+                <a href="#!">
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
 
+
             <!-- Card content -->
-            <div class="card-body card-body-cascade">
+            <div class="card-body card-body-cascade text-center text-muted">
 
                 <!-- Label -->
-                <h5 class="pb-2 pt-1"><span class="green-text">Name: </span>{{employee.username}} </h5>
-                <h5 class="pb-2 pt-1"><span class="green-text">Department: </span>{{employee.department}} </h5>
+                <h5 class="pb-2 pt-1">{{employee.username}} </h5>
+                <h5 class="pb-2 pt-1">{{employee.email|slice:":20"}} </h5>
                 <!-- Title -->
-                <a class="btn btn-sm btn-outline-dark-green ml-0" data-toggle="modal" data-target="#modalLoginAvatar"> <span class="black-text font-weight-bold"> View Employee</span></a>
+                <a class="btn btn-sm btn-outline-dark-green ml-0" data-toggle="modal" data-target="#modalLoginAvatar">
+                    <span class="black-text font-weight-bold"> View Employee</span></a>
 
             </div>
 
