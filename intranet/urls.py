@@ -19,7 +19,8 @@ urlpatterns = [
     path('searchResults/',views.searchResults,name='searchResults'),
     path('comments/<int:update_id>',views.comments,name='comments'),
     path('approve/<int:id>', views.approved, name='approve'),
-    path('disapprove/<int:id>', views.disapproved, name='disapprove')
+    path('disapprove/<int:id>', views.disapproved, name='disapprove'),
+    path('delete_employee/<int:id>',views.delete_employee, name='delete_employee')
 
 ]
 
