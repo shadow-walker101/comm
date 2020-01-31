@@ -29,6 +29,7 @@ def got_offline(sender, user, request, **kwargs):
 
 
 def logins(request):
+    
     if request.method == "POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -199,7 +200,8 @@ def searchResults(request):
         search_term = request.GET.get("employee")
         searched_employees = User.search_employees(search_term)
         message = f"{search_term}"
-        return render(request, 'searchResults.html', {"message": message, "Employees": searched_employees})
+        num = Updates.objects.filter(status=False).all().count()
+        return render(request, 'searchResults.html', {"message": message, "Employees": searched_employees , "num": num})
     else:
         message = "You haven't searched for any term"
         return render(request, 'searchResults.html', {"message": message, "num": num})
@@ -258,7 +260,7 @@ def disapproved(request, id):
     return redirect('notifications')
 
 def delete_employee(request,id):
-    query = employee.objects.get(pk=id)
+    query = User.objects.get(pk=id)
     query.delete()
     return redirect("searchResults")
 
