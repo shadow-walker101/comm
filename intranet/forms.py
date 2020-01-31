@@ -26,7 +26,6 @@ class PostUpdateForm(forms.ModelForm):
             'update': SummernoteWidget(),
         }
         
-
         
 class CommentForm(forms.ModelForm):
     class Meta:
