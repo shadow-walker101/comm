@@ -31,6 +31,7 @@ def logins(request):
     if request.method == "POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
+        print(email)
         user = authenticate(email=email, password=password)
 
         if user is not None:
@@ -227,3 +228,9 @@ def approved(request, id):
 def disapproved(request, id):
     Updates.dissaprove(id)
     return redirect('notifications')
+
+def delete_employee(request,id):
+    query = employee.objects.get(pk=id)
+    query.delete()
+    return redirect("searchResults")
+

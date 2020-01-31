@@ -15,9 +15,16 @@
 .post-content {
   font-family: 'Open Sans', sans-serif;
 }
-
-.updateimg {
-  display: none;
+.noUpdates {
+  display: flex;
+  justify-content: center;
+  border: 1px solid;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 14px 10px #59f25b;
+  padding-top: 20px;
+  margin: auto;
+  margin-top: 50px;
 }
 
 .post-date {
