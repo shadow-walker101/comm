@@ -263,4 +263,4 @@ def delete_employee(request,id):
     query.delete()
     return redirect("employees")
 
-z
+
