@@ -82,7 +82,6 @@ def inventory(request):
     num = Updates.objects.filter(status=False).all().count()
     users = User.objects.order_by('-last_login')
     commentForm = CommentForm()
-    users = User.objects.order_by('-last_login')
     return render(request, 'inventory.html', locals())
 
 
@@ -121,6 +120,7 @@ def employees(request):
     user_status = online_users.models.OnlineUserActivity.get_user_activities(
         timedelta(minutes=60))
     users = (user for user in user_status)
+    onusers = User.objects.order_by('-last_login')
     num = Updates.objects.filter(status=False).all().count()
     context = {"online_users"}
 
