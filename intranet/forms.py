@@ -98,3 +98,9 @@ class UserCreationForm(forms.ModelForm):
         username = user.username
         send_credentials(password, username, email)
         return user
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('email', 'user_type', 'department', 'username')
+        
