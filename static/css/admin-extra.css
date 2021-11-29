@@ -1,36 +1,52 @@
-.module h2,.module caption,.inline-group{
-    background: black;
-   
-}
-#header{
-background: black;
-font-weight:bold;
-
-
-}
-div.breadcrumbs{
+.module h2,
+.module caption,
+.inline-group {
     background: black;
 }
-#branding h1,#branding h1 a:link,#branding h1 a:visited{
-    color:#0b920d;
+
+#header {
+    background: black;
+    font-weight: bold;
 }
-a.section:link,a.section:visited{
-    color:#0b920d;
+
+div.breadcrumbs {
+    background: black;
+}
+
+#branding h1,
+#branding h1 a:link,
+#branding h1 a:visited {
+    color: #0b920d !important;
+}
+
+a.section:link,
+a.section:visited {
+    color: #0b920d;
     text-decoration: green;
     font-weight: bold;
     font-size: small;
 }
-.selector-chosen h2{
-    background:#0b920d!important
+
+.selector-chosen h2 {
+    background: #0b920d!important
 }
-.button,input[type=submit],input[type=button],.submit-row
-input,a.button{
-    background:#0b920d!important
+
+.button,
+input[type=submit],
+input[type=button],
+.submit-row input,
+a.button {
+    background: #0b920d!important
 }
-#content.colMS{
+
+#content.colMS {
     margin-left: 15%!important
 }
-#content.colM{
-    margin-left:20%!important
+
+#content.colM {
+    margin-left: 20%!important
 }
-div.help{display:none;}
+
+div.help {
+    display: none;
+}
