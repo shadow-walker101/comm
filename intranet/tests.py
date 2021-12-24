@@ -1,7 +1,7 @@
 from django.test import TestCase
 from .models import *
 
-
+# Testcases for different functions of the application
 class ProfileTestClass(TestCase):
     def setUp(self):
         self.profile_one = Profile(image='images/mine.jpg', first_name='Ikerriz', last_name='Okoth',user_id=1)
