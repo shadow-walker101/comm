@@ -24,7 +24,7 @@ The application dependencies are bound to the virtual environment so the steps t
 
 ## Running Docker Images
 
-#### steps
+#### Steps:
 
 - Run "docker pull otidola101/datacom:web"
 - Run  "docker images" to see if the image has downloaded successfully, this will expose the image ID
