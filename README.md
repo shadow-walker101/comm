@@ -25,11 +25,7 @@ The application dependencies are bound to the virtual environment so the steps t
 
 ## CONTRIBUTORS
 
-DANIEL EVANS KARANI SCII/01374/2018
-ANTONY ODOYO SCII/00839/2019
-MARY MBUTU SCII/00816/2019
-KHADIJAH HASSAN SCII/05037P/2020
-CINDY TALIA SCII/00823/2019
+
 
 | Names                | Registration No |
 | -------------------- | --------------- |
